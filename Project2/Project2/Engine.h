@@ -90,7 +90,7 @@ public:
 		}
 		player->Draw(camera);
 		gui.Draw(player);
-		//textrend.DrawText("The quick brown fox jumped \nover the lazy dog....\n\nHello World", 100, 100);
+		textrend.DrawText("The quick brown fox jumped \nover the lazy dog....\n\nHello World", 100, 100);
 	}
 
 
