@@ -39,7 +39,9 @@ public:
 		entities.push_back(ent);
 		curtime = clock();
 		lastframe = clock();
-
+#ifdef VERSION
+std::cout<<VERSION<<std::endl;
+#endif
 		
 	
 	}

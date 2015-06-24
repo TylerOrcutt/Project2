@@ -50,7 +50,7 @@ public:
 			curtime=clock();
 			//curtime*=1000;
 			long dt =curtime-lastupdate;
-		//std::cout << dt << std::endl;
+		std::cout << dt << std::endl;
 			if ( dt> 20000){
 					
 				Entity::setImgX(Entity::getImgX()+32);
