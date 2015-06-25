@@ -5,7 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <string>
 #include <iostream>
-#include <pango/pangocairo.h>
+//#include <pango/pangocairo.h>
 
 #include <ft2build.h>
 #include FT_FREETYPE_H

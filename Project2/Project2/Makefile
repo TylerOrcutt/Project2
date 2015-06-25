@@ -1,6 +1,6 @@
 all: kal clean
 kal: main.o
-	g++ -std=c++11 main.o -o kal -lGL -lSOIL -lGLU -lglfw3 -lX11 -lXrandr -lpthread -lXi -lXcursor -lXrandr -lm  -lXinerama -lrt -lfreetype 'pkg-config --cflags glib-2.0'    
+	g++ -std=c++11 main.o -o kal -lGL -lSOIL -lGLU -lglfw3 -lX11 -lXrandr -lpthread -lXi -lXcursor -lXrandr -lm  -lXinerama -lrt -lfreetype  
 
  
 main.o: main.cpp
