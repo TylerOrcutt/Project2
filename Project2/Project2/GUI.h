@@ -22,7 +22,7 @@ public:
 
 	GUI(){
 		gmenu_sprite = new SpriteSheet("GUIWindow");
-			gmenu = new GUIWindow(gmenu_sprite,500,200);
+			gmenu = new GUIWindow(gmenu_sprite,350,200);
 			gmenu->setVisible(false);
 			hud_sprite = new SpriteSheet("GUIHud");
 			hud= new GUIObject(hud_sprite, 0, 0,0,0,32,32);

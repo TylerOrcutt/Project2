@@ -107,7 +107,7 @@ int main(int args, char **argv)
 	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-std::string title="Kalantha v:";
+std::string title=" v:";
 	title.append(VERSION);
 	window = glfwCreateWindow(800, 600, title.c_str(), NULL, NULL);
 	//window = glfwCreateWindow(800, 600, "My Title", glfwGetPrimaryMonitor(), NULL);
