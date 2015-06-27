@@ -3,164 +3,122 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
 #include <string>
 #include <iostream>
 #include <pango/pangocairo.h>
-
-#include <ft2build.h>
-#include FT_FREETYPE_H
-#include FT_GLYPH_H
+#include <string>
+#include <stdlib.h>
 
 
 class TextRenderer{
-private:
-	FT_Library  library;
-	FT_Face face;
-	GLuint * textures;
-	GLuint  list_base;
+private: GLuint texture;
+	int width, height;
+float x,y;
 
-public:
-	TextRenderer(){
-		FT_Error error;
-		error = FT_Init_FreeType(&library);
-		if (error)
-		{
-			std::cout << "Error loading freetype\n";
-		}
-
-		error = FT_New_Face(library, "./fonts/Distillated.ttf", 0, &face);
-		if (error){
-			std::cout << "Error loading font\n";
-		}
-		error = FT_Set_Pixel_Sizes(face, 0, 16);
+   public:
+	void initText(std::string text){
+		x=300.f;
+		y=300.f;
+		cairo_t *render_context;
+		cairo_surface_t *temp_surface;
+		cairo_surface_t *surface;
+     		unsigned char * surface_data = NULL;
+		PangoFontDescription *desc;
 		
-	/*	*/
-	error=	FT_Set_Char_Size(
-			face,    /* handle to face object           */
-			0,       /* char_width in 1/64th of points  */
-			12 * 64,   /* char_height in 1/64th of points */
-			300,     /* horizontal device resolution    */
-			300);
+		cairo_t *layout_context = create_layout_context();
+		PangoLayout *layout=pango_cairo_create_layout (layout_context);
+		pango_layout_set_text(layout,text.c_str(),-1);
 		
+		desc = pango_font_description_from_string("Sans Bold 27");
+		pango_layout_set_font_description(layout,desc);
+		pango_font_description_free(desc);	
 		
-			if (error){
-			std::cout << "Error setting char size\n";
-		}
+			
+		//get size 
+		
+		pango_layout_get_size(layout,&width,&height);
+		width/=PANGO_SCALE;
+		height/=PANGO_SCALE;		
+		
+		//create context
+		 surface_data=(unsigned char*)calloc(4*width*height,sizeof(unsigned char));
+		surface =cairo_image_surface_create_for_data(surface_data, CAIRO_FORMAT_ARGB32,width,height,4 * width);
+	
+		render_context=cairo_create(surface);
 
-		textures = new GLuint[128];
-		list_base = glGenLists(128);
-		glGenTextures(128, textures);
-		for (unsigned char i = 0; i < 128; i++){
-			createFontChar(i);
-		}
+		 cairo_set_source_rgba(render_context,1.f,1.f,1.f,1.f);
+
+		
+pango_cairo_update_layout(render_context, layout);
+	pango_cairo_show_layout(render_context, layout);
+		texture=create_texture(width,height,surface_data);
+
+    free (surface_data);
+    g_object_unref (layout);
+    cairo_destroy (layout_context);
+    cairo_destroy (render_context);
+    cairo_surface_destroy (surface);
+	}
+	
 
 
+	cairo_t * create_layout_context(){
+		cairo_surface_t *temp;
+		cairo_t * context;
+	
+		temp = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, 0, 0);
+		context= cairo_create(temp);
+		cairo_surface_destroy(temp);
+	return context;	
 	}
 
 
 
-	void createFontChar(char ch){
-		if (FT_Load_Glyph(face, FT_Get_Char_Index(face, ch), FT_LOAD_DEFAULT)){
-			std::cout << "Failed to load char:" << ch << std::endl;
-		}
-		FT_Glyph glyph;
-		if (FT_Get_Glyph(face->glyph, &glyph)){
+ GLuint create_texture(unsigned int width,unsigned int height, unsigned char *pixels){
+	GLuint texture;
+	
+	glGenTextures(1,&texture);
+	glBindTexture(GL_TEXTURE_2D,texture);
+       glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexImage2D (GL_TEXTURE_2D,
+                  0,
+                  GL_RGBA,
+                  width,
+                  height,
+                  0,
+                  GL_BGRA,
+                  GL_UNSIGNED_BYTE,
+                  pixels);
 
-			std::cout << "Failed to load glyph:" << ch << std::endl;
-		}
+	return texture;
+}
 
-		FT_Glyph_To_Bitmap(&glyph, ft_render_mode_normal, 0, 1);
-		FT_GlyphSlot g=face->glyph;
-		FT_BitmapGlyph bitmap_g = (FT_BitmapGlyph)glyph;
-		FT_Bitmap &bitmap = bitmap_g->bitmap;
+	
 
-		
+	void Draw(){
+		 glBindTexture (GL_TEXTURE_2D, texture);
+                     glColor3f (0.f,0.f,0.f);
 
-		int width = next_p2(bitmap.width);
-		int height = next_p2(bitmap.rows);
+                      glBegin (GL_QUADS);
+                      
+                       glTexCoord2f (0.0f, 0.0f);
+                       glVertex2f (x, y);
+   
+                       glTexCoord2f (1.0f, 0.0f);
+                       glVertex2f (x+width, y);
+  
+                       glTexCoord2f (1.0f, 1.0f);
+                       glVertex2f (x+width , y+height);
+   
+                       glTexCoord2f (0.0f, 1.0f);
+                       glVertex2f (x, y+height);
+                       glEnd ();
 
-		//int width = (bitmap.width)*2;
-		//int height = (bitmap.rows)*2;
-		GLubyte *data = new GLubyte[2*width*height];
-		
-		
-		for (int j = 0; j <height; j++) {
-			for (int i = 0; i < width; i++) {
-				data[2 * (i + j * width)] = 255;
-				data[2 * (i + j * width) + 1] =
-					(i >= bitmap.width || j >= bitmap.rows) ? 0 : bitmap.buffer[i + bitmap.width * j];
-			}
-		}
-		/*
-	  for (int j = 0; j < height; j++){
-			for (int i = 0; i < width; i++){
-				data[i+j] = bitmap.buffer[i+j];
-			}
-		}
-		*/
-		glBindTexture(GL_TEXTURE_2D, textures[ch]);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, data);
-
-
-		delete[] data;
-
-		FT_Done_Glyph(glyph);
-	}
-
-	int next_p2(int a){
-		int rval = 2;
-		while (rval < a){
-			rval <<= 1;
-		}
-		return rval;
-	}
-
-	void DrawText(std::string txt, int x, int y){
-		int basex = x;
-		for (unsigned int i = 0; i < txt.length(); i++){
- 		 if(FT_Load_Char(face, *txt.substr(i,1).c_str(), FT_LOAD_RENDER))
-        		continue;
-
- 		FT_GlyphSlot g = face->glyph;
-			if (txt.substr(i, 1) == "\n"){
-				y += 30;
-				x = basex;
-				continue;
-			}
-				glColor3f(1.f, 0.f, 0.f);
-			glBindTexture(GL_TEXTURE_2D, textures[txt.c_str()[i]]);
-		
-
-
-
-			glBegin(GL_QUADS);
-			glTexCoord2f(0, 0);
-			glVertex2f(x, y);
-
-			glTexCoord2f(0, 1);
-			glVertex2f(x, y +20);
-
-			glTexCoord2f(1, 1);
-			glVertex2f(x + 20, y +20);
-
-//std::cout<<g->bitmap_left<<std::endl;
-//std::cin.get();
-			glTexCoord2f(1, 0);
-			glVertex2f(x +20, y);
-
-			glEnd();
-		//pen_x += slot->advance.x >> 6;
-			x+= 20;
-			y+= g->advance.y >> 6;
-		}
-		/**/
-	}
+	            }
 
 
 };
-
 
 
 #endif

@@ -25,7 +25,7 @@
 #endif
 
 #include "Engine.h"
-#include "TextRenderer.h"
+
 Engine *engine;
 GLFWwindow* window;
 double mouseX, mouseY;

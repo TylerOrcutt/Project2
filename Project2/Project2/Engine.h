@@ -13,8 +13,9 @@
 
 class Engine{
 private:
-
+	//TODO data struct, hash?
 	std::vector<Entity*> entities;
+
 	SpriteSheet * peon;
 	 Map *map;
 	 Entity*player;
@@ -35,12 +36,12 @@ public:
 
 		Entity *ent = new Entity(peon,200,100,0,0,32,64);
 		ent->setName("Test");
-		ent->setHP(35);
+		ent->setHP(50);
 		entities.push_back(ent);
 		curtime = clock();
 		lastframe = clock();
 
-		
+	textrend.initText("Hello worldssss\n  sss sssssssssss");
 	
 	}
 
@@ -91,7 +92,9 @@ public:
 		}
 		player->Draw(camera);
 		gui.Draw(player);
-		textrend.DrawText("The quick brown fox jumped \nover the lazy dog....\n\nHello World", 100, 100);
+		//textrend.DrawText("The quick brown fox jumped \nover the lazy dog....\n\nHello World", 100, 100);
+
+		textrend.Draw();
 
 
 	}
