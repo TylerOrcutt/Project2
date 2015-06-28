@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include<ctime>
+
 #include "TextRenderer.h"
 
 class Engine{
@@ -24,7 +25,7 @@ private:
 	 long frames=0;
 	 int WIDTH = 1024, HEIGHT = 768;
 	 GUI gui;
-	 TextRenderer textrend;
+	TextRenderer *fpsText;
 public:
 
 	Engine(){
@@ -41,7 +42,7 @@ public:
 		curtime = clock();
 		lastframe = clock();
 
-	textrend.initText("Hello worldssss\n  sss sssssssssss");
+	//textrend.initText("Hello worldssss\n  sss sssssssssss");
 	
 	}
 
@@ -92,9 +93,8 @@ public:
 		}
 		player->Draw(camera);
 		gui.Draw(player);
-		//textrend.DrawText("The quick brown fox jumped \nover the lazy dog....\n\nHello World", 100, 100);
-
-		textrend.Draw();
+	
+		//textrend.Draw();
 
 
 	}

@@ -14,12 +14,20 @@
 class TextRenderer{
 private: GLuint texture;
 	int width, height;
-float x,y;
-
+        float x=0,y=0;
+	std::string text;		
+	
    public:
-	void initText(std::string text){
-		x=300.f;
-		y=300.f;
+
+	TextRenderer(float posx,float posy,std::string text_str){
+		text=text_str;
+		x=posx;
+		y=posy;
+		initText();
+	}
+	
+	void initText(){
+		
 		cairo_t *render_context;
 		cairo_surface_t *temp_surface;
 		cairo_surface_t *surface;
@@ -30,7 +38,7 @@ float x,y;
 		PangoLayout *layout=pango_cairo_create_layout (layout_context);
 		pango_layout_set_text(layout,text.c_str(),-1);
 		
-		desc = pango_font_description_from_string("Sans Bold 27");
+		desc = pango_font_description_from_string("Sans 16");
 		pango_layout_set_font_description(layout,desc);
 		pango_font_description_free(desc);	
 		
@@ -47,12 +55,16 @@ float x,y;
 	
 		render_context=cairo_create(surface);
 
-		 cairo_set_source_rgba(render_context,1.f,1.f,1.f,1.f);
+		 cairo_set_source_rgba(render_context,0.f,0.f,0.f,1.f);
 
 		
 pango_cairo_update_layout(render_context, layout);
 	pango_cairo_show_layout(render_context, layout);
-		texture=create_texture(width,height,surface_data);
+
+	unsigned char *data=cairo_image_surface_get_data (surface);
+		 create_texture(data);
+//cairo_surface_write_to_png (surface, "Test.png");
+
 
     free (surface_data);
     g_object_unref (layout);
@@ -75,30 +87,23 @@ pango_cairo_update_layout(render_context, layout);
 
 
 
- GLuint create_texture(unsigned int width,unsigned int height, unsigned char *pixels){
-	GLuint texture;
+   void create_texture(unsigned char *pixels){
+	//glTexImage2D(GL_TEXTURE_2D, 0, 4, width,height, 0,GL_BGRA, GL_UNSIGNED_BYTE, pixels);
 	
 	glGenTextures(1,&texture);
 	glBindTexture(GL_TEXTURE_2D,texture);
-       glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D (GL_TEXTURE_2D,
-                  0,
-                  GL_RGBA,
-                  width,
-                  height,
-                  0,
-                  GL_BGRA,
-                  GL_UNSIGNED_BYTE,
-                  pixels);
+       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexImage2D (GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_BGRA,GL_UNSIGNED_BYTE, pixels);
 
-	return texture;
+	
 }
 
 	
 
 	void Draw(){
 		 glBindTexture (GL_TEXTURE_2D, texture);
-                     glColor3f (0.f,0.f,0.f);
+                     glColor3f (1.f,1.f,1.f);
 
                       glBegin (GL_QUADS);
                       

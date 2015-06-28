@@ -7,6 +7,7 @@
 #include "GUIWindow.h"
 #include "Entity.h"
 #include "Player.h"
+#include "TextRenderer.h"
 class GUI{
 private:
 	GUIWindow * gmenu;
@@ -16,8 +17,12 @@ private:
 
 		GUIObject *hpHud;
 		GUIObject *hpBar;
+
 		GUIObject*  target_hphud;
 		GUIObject * target_hpbar;
+		TextRenderer *textRend;
+				
+
 public:
 
 	GUI(){
@@ -31,6 +36,7 @@ public:
 
 			target_hphud = new GUIObject(hud_sprite, 300, 0, 0, 32, 160, 32);
 			target_hpbar = new GUIObject(hud_sprite, 304, 0, 0, 64, 32, 32);
+			
 	}
 	void Update(){
 
@@ -54,7 +60,9 @@ public:
 
 			hp = (float)player->getTarget()->getHP() / (float)player->getTarget()->getMaxHP();
 			target_hpbar->getSprite()->Draw(304, 0, 0, 64, 32, 32, hp*maxbarlen, 32);
-			
+			textRend = new TextRenderer(350,5,player->getTarget()->getName());
+			textRend->Draw();
+			delete(textRend);
 
 		}
 		
