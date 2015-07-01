@@ -5,12 +5,13 @@
 #include "SpriteSheet.h"
 #include "Map.h"
 #include "Camera.h"
-#include "GUI.h"
+#include "GUI/GUI.h"
+#include "GUI/TextRenderer.h"
+
 #include <vector>
 #include <string>
-#include<ctime>
-
-#include "TextRenderer.h"
+#include <ctime>
+#include <sstream>
 
 class Engine{
 private:
@@ -21,11 +22,13 @@ private:
 	 Map *map;
 	 Entity*player;
 	 Camera camera;
-	 long double curtime=0, lastframe=0;
+	 time_t curtime=0, lastframe=0;
 	 long frames=0;
 	 int WIDTH = 1024, HEIGHT = 768;
+		
 	 GUI gui;
 	TextRenderer *fpsText;
+	std::string fps_str;
 public:
 
 	Engine(){
@@ -34,13 +37,17 @@ public:
 	  peon = new SpriteSheet("weddingguy02");
 	 
 	  player = new Player(peon, 200, 200, 0, 0, 32, 64);
-
+		
+	  fpsText  = new TextRenderer(camera.getWidth()-50,10,"");		
+		
 		Entity *ent = new Entity(peon,200,100,0,0,32,64);
 		ent->setName("Test");
 		ent->setHP(50);
 		entities.push_back(ent);
-		curtime = clock();
-		lastframe = clock();
+		//curtime = clock();
+		time(&curtime);
+		lastframe=curtime;		
+		//lastframe = clock();
 
 	//textrend.initText("Hello worldssss\n  sss sssssssssss");
 	
@@ -78,11 +85,17 @@ public:
 
 	void Draw(){
 		frames++;
-		curtime = clock();
-		long elp = curtime-lastframe;
+		time(&curtime);
+	
+		
+		long elp = curtime - lastframe;
+	
 		//std::cout << elp << std::endl;
-		if (elp>1000.0){
-			//std::cout << (frames / (elp/1000)) << std::endl;
+		if (elp>1){
+			std::stringstream stream;
+			stream<<((frames)/(elp));
+			fpsText->setText(stream.str());
+			//std::cout << (frames / (elp)) << std::endl;
 			lastframe = curtime;
 			frames = 0;
 		}
@@ -93,10 +106,10 @@ public:
 		}
 		player->Draw(camera);
 		gui.Draw(player);
-	
+		fpsText->Draw();
 		//textrend.Draw();
 
-
+          
 	}
 
 

@@ -1,13 +1,14 @@
 #ifndef __GUI_H_
 #define __GUI_H_
 //manage all gui things
-#include "Sprite.h"
-#include "SpriteSheet.h"
+#include "../Sprite.h"
+#include "../SpriteSheet.h"
 #include "GUIObject.h"
 #include "GUIWindow.h"
-#include "Entity.h"
-#include "Player.h"
+#include "../Entity.h"
+#include "../Player.h"
 #include "TextRenderer.h"
+#include "GUIButton.h"
 class GUI{
 private:
 	GUIWindow * gmenu;
@@ -31,7 +32,8 @@ public:
 			gmenu->setVisible(false);
 			hud_sprite = new SpriteSheet("GUIHud");
 			hud= new GUIObject(hud_sprite, 0, 0,0,0,32,32);
-			hpHud = new GUIObject(hud_sprite, 36, 0, 0, 32, 160, 32);
+			
+                        hpHud = new GUIObject(hud_sprite, 36, 0, 0, 32, 160, 32);
 			hpBar= new GUIObject(hud_sprite, 40,20, 0, 64, 32, 32);
 
 			target_hphud = new GUIObject(hud_sprite, 300, 0, 0, 32, 160, 32);
@@ -60,9 +62,9 @@ public:
 
 			hp = (float)player->getTarget()->getHP() / (float)player->getTarget()->getMaxHP();
 			target_hpbar->getSprite()->Draw(304, 0, 0, 64, 32, 32, hp*maxbarlen, 32);
-			textRend = new TextRenderer(350,5,player->getTarget()->getName());
-			textRend->Draw();
-			delete(textRend);
+			//textRend = new TextRenderer(350,3,player->getTarget()->getName());
+			//textRend->Draw();
+			//delete(textRend);
 
 		}
 		

@@ -2,7 +2,7 @@
 #define __CAMERA_H_
 class Camera{
 private:
-	float x=0, y=0,width=1024,height=768;
+	float x=0, y=0,width=800,height=600;
 	bool moving = false;
 	int direction = 0;//0-up  1-right 2-down 3-left
 public:

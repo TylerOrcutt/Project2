@@ -1,19 +1,22 @@
 #ifndef __GUIOBJECT_H_
 #define __GUIOBJECT_H_
 //manage all gui things
-#include "Sprite.h"
-#include "SpriteSheet.h"
+#include "../Sprite.h"
+#include "../SpriteSheet.h"
+#include "TextRenderer.h"
 
 class GUIObject{
 private:
 	Sprite *sprite;
 	float posx = 0, posy = 0, imgx = 0, imgy = 0, imgw = 32, imgh = 32;
 	bool visible = true;
-
+	
+	
 
 public:
 	~GUIObject(){
 		//delete sprite;
+		
 	}
 	GUIObject(SpriteSheet * sp){
 		sprite = new Sprite(sp);

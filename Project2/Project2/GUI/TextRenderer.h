@@ -55,7 +55,7 @@ private: GLuint texture;
 	
 		render_context=cairo_create(surface);
 
-		 cairo_set_source_rgba(render_context,0.f,0.f,0.f,1.f);
+		 cairo_set_source_rgba(render_context,1.0f,1.0f,1.0f,1.0f);
 
 		
 pango_cairo_update_layout(render_context, layout);
@@ -103,7 +103,7 @@ pango_cairo_update_layout(render_context, layout);
 
 	void Draw(){
 		 glBindTexture (GL_TEXTURE_2D, texture);
-                     glColor3f (1.f,1.f,1.f);
+                    // glColor3f (1.f,1.f,1.f);
 
                       glBegin (GL_QUADS);
                       
@@ -121,6 +121,36 @@ pango_cairo_update_layout(render_context, layout);
                        glEnd ();
 
 	            }
+
+
+//getters/setters
+	void setText(std::string _text){
+		text=_text;
+		initText();
+	}
+	std::string getText(){
+		return text;
+	}
+
+	int getWidth(){
+		return width;
+	}
+	int getHeight(){
+		return height;	
+	}
+
+	void setX(float _x){
+		x=_x;
+	}
+	float getX(){
+		return x;
+	}
+	void setY(float _y){
+		y=_y;
+	}
+	float getY(){
+		return y;
+	}
 
 
 };

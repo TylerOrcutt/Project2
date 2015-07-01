@@ -2,12 +2,14 @@
 #define __GUIWINDOW_H_
 //base gui window
 #include "GUIObject.h"
-#include "Sprite.h"
-#include "SpriteSheet.h"
+#include "../Sprite.h"
+#include "../SpriteSheet.h"
+#include <vector>
 class GUIWindow:public GUIObject{
 private:
 	float width=160, height=256;
-
+    
+        std::vector<GUIObject> components;
 public:
 	GUIWindow(SpriteSheet * sp) :GUIObject(sp){}
 	GUIWindow(SpriteSheet * sp, float pos_x, float pos_y) :GUIObject(sp, pos_x, pos_y){}
@@ -80,6 +82,19 @@ public:
 			py += 32;
 		}
 	}
+
+
+
+void addComponent(GUIObject component){
+	components.push_back(component);
+}
+void clearComponents(){
+	components.clear();
+}
+
+
+
+
 
 };
 
