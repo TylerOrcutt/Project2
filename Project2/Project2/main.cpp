@@ -1,6 +1,4 @@
-#define VERSION "0.0.1"
-
-
+#define GAME_VERSION "0.0.1"
 
 #include <stdio.h>
 #include <iostream>
@@ -8,6 +6,7 @@
 
 #include <GL/glew.h>
 // Include GLFW
+#define GLFW_INCLUDE_GLU
 #include <GLFW/glfw3.h>
 // Include GLM
 #include <glm/glm.hpp>
@@ -73,7 +72,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 		engine->getCamera().setDirection(3);
 		engine->getPlayer()->setMoving(true);
 		engine->getPlayer()->setDirection(3);
-		
+
 
 	}
 	if (key == GLFW_KEY_D){
@@ -88,8 +87,8 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 		engine->getCamera().setMoving(false);
 	}
 
-	
-	
+
+
 }
 int main(int args, char **argv)
 {
@@ -99,16 +98,16 @@ int main(int args, char **argv)
 #endif
 	mouseX = 0;
 	mouseY = 0;
-	
+
 	glfwSetErrorCallback(error_callback);
 	if (!glfwInit())
 		exit(EXIT_FAILURE);
-	glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
+//	glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
 	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 std::string title=" v:";
-	title.append(VERSION);
+	title.append(GAME_VERSION);
 	window = glfwCreateWindow(800, 600, title.c_str(), NULL, NULL);
 	//window = glfwCreateWindow(800, 600, "My Title", glfwGetPrimaryMonitor(), NULL);
 	//GLFWcursor* cursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
@@ -124,7 +123,7 @@ std::string title=" v:";
 	glfwSetMouseButtonCallback(window, MouseClick_callback);
 
 
-	
+
 engine = new Engine();
 
 
@@ -134,17 +133,17 @@ engine = new Engine();
 		glfwGetCursorPos(window, &mouseX, &mouseY);
 
 		engine->Update();
-		
+
 		/*
 		float ratio;
-	
+
 		ratio = width / (float)height;
 		*/
 
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
 		glViewport(0, 0, width, height);
-		
+
 		glClear(GL_COLOR_BUFFER_BIT);
 
 
@@ -152,14 +151,14 @@ engine = new Engine();
 		glLoadIdentity();
 		//glOrtho(-1, 1, -1.f, 1.f, 1.f, -1.f);
 		glOrtho(0.0f, width, height, 0.0f, 0.0f, 1.0f);
-		
-	// update camara 
+
+	// update camara
 		engine->getCamera().setWidth((float)width);
 		engine->getCamera().setHeight((float)height);
 
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		
+
 
 
 
@@ -173,17 +172,17 @@ engine = new Engine();
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glDepthMask(GL_FALSE);
 		glDisable(GL_DEPTH_TEST);
-	
+
 		glColor3f(1.f,1.f, 1.f);
 
 	//	peon.Draw(0,192,0,0);
-		
+
 		engine->Draw();
-		
-		
+
+
 	//	Te
-		
-	
+
+
 		glEnable(GL_DEPTH_TEST);
 		glDepthMask(GL_TRUE);
 		glDisable(GL_BLEND);
