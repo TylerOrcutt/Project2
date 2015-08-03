@@ -2,26 +2,21 @@
 #define __GUIWINDOW_H_
 //base gui window
 #include "GUIObject.h"
+#include "GUIButton.h"
 #include "../Sprite.h"
 #include "../SpriteSheet.h"
 #include <vector>
 class GUIWindow:public GUIObject{
 private:
 	float width=160, height=256;
-    
-        std::vector<GUIObject> components;
+
+        std::vector<GUIObject*> components;
 public:
 	GUIWindow(SpriteSheet * sp) :GUIObject(sp){}
 	GUIWindow(SpriteSheet * sp, float pos_x, float pos_y) :GUIObject(sp, pos_x, pos_y){}
 	GUIWindow(SpriteSheet * sp, float pos_x, float pos_y, float image_x, float image_y, float image_width, float image_height) :GUIObject(sp, pos_x, pos_y, image_x, image_y, image_width, image_height){}
 
-
-
-
-
 	void Update(){
-		
-
 	}
 
 	void Draw(){
@@ -81,11 +76,17 @@ public:
 			px = GUIObject::getX();
 			py += 32;
 		}
+	//MARK - draw components
+	for(int i=0;i<components.size();i++){
+
+		components[i]->Draw();
+
+	}
 	}
 
 
 
-void addComponent(GUIObject component){
+void addComponent(GUIObject *component){
 	components.push_back(component);
 }
 void clearComponents(){

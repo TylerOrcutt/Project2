@@ -22,7 +22,7 @@ private:
 		GUIObject*  target_hphud;
 		GUIObject * target_hpbar;
 		TextRenderer *textRend;
-				
+
 
 public:
 
@@ -30,15 +30,16 @@ public:
 		gmenu_sprite = new SpriteSheet("GUIWindow");
 			gmenu = new GUIWindow(gmenu_sprite,350,200);
 			gmenu->setVisible(false);
+			gmenu->addComponent(new GUIButton(new SpriteSheet("test_button"),"test",gmenu->getX()+15,gmenu->getY()+15,0,0,128,32));
 			hud_sprite = new SpriteSheet("GUIHud");
 			hud= new GUIObject(hud_sprite, 0, 0,0,0,32,32);
-			
+
                         hpHud = new GUIObject(hud_sprite, 36, 0, 0, 32, 160, 32);
 			hpBar= new GUIObject(hud_sprite, 40,20, 0, 64, 32, 32);
 
 			target_hphud = new GUIObject(hud_sprite, 300, 0, 0, 32, 160, 32);
 			target_hpbar = new GUIObject(hud_sprite, 304, 0, 0, 64, 32, 32);
-			
+
 	}
 	void Update(){
 
@@ -56,7 +57,7 @@ public:
 		hpBar->getSprite()->Draw(40, 0, 0, 64, 32, 32, hp*maxbarlen, 32);
 
 		if (player->getTarget() != nullptr){
-	
+
 			target_hphud->Draw();
 			maxbarlen = 153;
 
@@ -67,7 +68,7 @@ public:
 			//delete(textRend);
 
 		}
-		
+
 
 	//	hpBar->Draw();
 	}

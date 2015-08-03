@@ -2,27 +2,64 @@
 #define __GUIBUTTON_H_
 #include "TextRenderer.h"
 #include <string>
+#include <iostream>
 class GUIButton : public GUIObject{
 private:
-	
-     	TextRenderer *text;
-	float text_x=0,text_y=0;
-        
+
+     	TextRenderer *textRenderer=nullptr;
+			std::string text;
+			float text_x=0,text_y=0;
+      void initText(){
+        textRenderer = new TextRenderer(GUIObject::getX(),GUIObject::getY(),text);
+        int x = GUIObject::getX()+(GUIObject::getImgW()/2)-(textRenderer->getWidth()/2);
+        textRenderer->setX(x);
+        std::cout<<"text initialized\n";
+      }
+
 public:
-        GUIButton(SpriteSheet * sp) :GUIObject(sp){
-		
+	GUIButton(SpriteSheet * sp, std::string _text ) :GUIObject(sp){
+		text=_text;
+		initText();
+  //  std::cout<<"text initialized\n";
 	}
-	GUIButton(SpriteSheet * sp, float pos_x, float pos_y) :GUIObject(sp, pos_x, pos_y){}
-	GUIButton(SpriteSheet * sp, float pos_x, float pos_y, float image_x, float image_y, float image_width, float image_height) :GUIObject(sp, pos_x, pos_y, image_x, image_y, image_width, image_height){}
+	GUIButton(SpriteSheet * sp,std::string _text, float pos_x, float pos_y) :GUIObject(sp, pos_x, pos_y){
+    text=_text;
+  //    std::cout<<"text initialized\n";
+    this->initText();
 
-	void Draw(){
-		GUIObject::Draw();
+  }
+	GUIButton(SpriteSheet * sp, std::string _text, float pos_x, float pos_y, float image_x, float image_y, float image_width, float image_height):GUIObject(sp, pos_x, pos_y, image_x, image_y, image_width, image_height){
+		text=_text;
+  //    std::cout<<"text initialized\n";
+		this->initText();
+
 	}
 
+ void Draw(){
+   GUIObject::Draw();
+		if(textRenderer!=nullptr){
+			textRenderer->Draw();
+			//std::cout<<"drawing text \n";
+
+		}
+	}
+
+	void setText(std::string _text){
+		text=_text;
+    initText();
+	}
+
+	std::string getText() {
+		return text;
+	}
+
+  std::string kindOf(){
+		return "GUIButton";
+	}
 
 };
 
-	
+
 
 
 #endif

@@ -10,7 +10,7 @@ private:
 	float posx=0, posy=0, imgx=0, imgy=0, imgw=32, imgh=32;
 	bool moving = false;
 	int direction = 0;//0-up  1-right 2-down 3-left
-	
+
 	 Entity * target=nullptr;
 //stats and shiiit
 	std::string name;
@@ -54,11 +54,11 @@ public:
 
 			sprite->Draw(posx - cam.getX(), posy - cam.getY(), imgx, imgy, imgw, imgh);
 		}
-		
+
 
 	}
 
-	virtual void Update(){
+	virtual void Update(double dt){
 
 	}
 

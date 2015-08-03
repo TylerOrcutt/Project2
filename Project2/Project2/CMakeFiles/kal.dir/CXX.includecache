@@ -31,6 +31,8 @@ ctime
 -
 sstream
 -
+GLFW/glfw3.h
+-
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Entity.h
 Sprite.h
