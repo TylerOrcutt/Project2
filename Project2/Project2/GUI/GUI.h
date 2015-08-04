@@ -9,6 +9,7 @@
 #include "../Player.h"
 #include "TextRenderer.h"
 #include "GUIButton.h"
+#include <iostream>
 class GUI{
 private:
 	GUIWindow * gmenu;
@@ -25,12 +26,17 @@ private:
 
 
 public:
-
+	 static void testClickCallback (GUIButton *owner) {
+		std::cout<<owner->getText()<<"  - Button clicked\n";
+	}
 	GUI(){
 		gmenu_sprite = new SpriteSheet("GUIWindow");
 			gmenu = new GUIWindow(gmenu_sprite,350,200);
 			gmenu->setVisible(false);
-			gmenu->addComponent(new GUIButton(new SpriteSheet("test_button"),"test",gmenu->getX()+15,gmenu->getY()+15,0,0,128,32));
+
+
+			void (*testCall)(GUIButton *)=testClickCallback;
+			gmenu->addComponent(new GUIButton(new SpriteSheet("test_button"),"test",testCall,gmenu->getX()+15,gmenu->getY()+15,0,0,128,32));
 			hud_sprite = new SpriteSheet("GUIHud");
 			hud= new GUIObject(hud_sprite, 0, 0,0,0,32,32);
 
@@ -41,6 +47,9 @@ public:
 			target_hpbar = new GUIObject(hud_sprite, 304, 0, 0, 64, 32, 32);
 
 	}
+
+
+
 	void Update(){
 
 
@@ -72,7 +81,12 @@ public:
 
 	//	hpBar->Draw();
 	}
-
+	bool checkMouseClick(double mousex, double mousey){
+   if(gmenu->checkMouseClick(mousex,  mousey)){
+		 return true;
+	 }
+	 return false;
+	}
 	void setGameMenuVisible(bool vis){
 		gmenu->setVisible(vis);
 

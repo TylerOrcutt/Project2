@@ -53,7 +53,19 @@ public:
 	}
 
 	virtual void Draw(){
+		if(visible){
 		sprite->Draw(posx , posy, imgx, imgy, imgw, imgh);
+	}
+	}
+
+	virtual bool checkMouseClick(float mousex, float mousey){
+		if(visible){
+		if (mousex >= posx && mousex <= posx + imgw && mousey >= posy && mousey <= posy + imgh){
+			return true;
+		}
+	}
+		return false;
+
 	}
 	//getters and setters
 	float getX(){

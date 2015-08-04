@@ -7,6 +7,7 @@ class GUIButton : public GUIObject{
 private:
 
      	TextRenderer *textRenderer=nullptr;
+      void(*onClickCallback)(GUIButton *);
 			std::string text;
 			float text_x=0,text_y=0;
       void initText(){
@@ -28,16 +29,25 @@ public:
     this->initText();
 
   }
-	GUIButton(SpriteSheet * sp, std::string _text, float pos_x, float pos_y, float image_x, float image_y, float image_width, float image_height):GUIObject(sp, pos_x, pos_y, image_x, image_y, image_width, image_height){
+	GUIButton(SpriteSheet * sp, std::string _text,void (*_onClickCallback)(GUIButton *), float pos_x, float pos_y, float image_x, float image_y, float image_width, float image_height):GUIObject(sp, pos_x, pos_y, image_x, image_y, image_width, image_height){
 		text=_text;
+    onClickCallback=_onClickCallback;
   //    std::cout<<"text initialized\n";
 		this->initText();
 
 	}
+bool checkMouseClick(float mousex, float mousey){
+  if(GUIObject::checkMouseClick((float)mousex,(float)mousey)){
+    onClickCallback(this);
+
+    return true;
+  }
+  return false;
+  }
 
  void Draw(){
    GUIObject::Draw();
-		if(textRenderer!=nullptr){
+		if(textRenderer!=nullptr && GUIObject::isVisible()){
 			textRenderer->Draw();
 			//std::cout<<"drawing text \n";
 

@@ -118,13 +118,17 @@ public:
 
 
 	void MouseClick(int button, double MouseX, double MouseY){
-		MouseX += camera.getX();
-		MouseY += camera.getY();
+	double	gMouseX = MouseX+camera.getX();
+	double	gMouseY = MouseX+camera.getY();
 		//std::cout << "MouseButton:" << button << "  X:" << MouseX << " Y:" << MouseY << "\n";
+
 		if (button == 0){
+			if(gui.checkMouseClick(MouseX, MouseY)){
+				return;
+			}
 		//	std::cout << "RightClick: X:" << MouseX << " Y:" << MouseY << "\n";
 			for (unsigned int i = 0; i < entities.size(); i++){
-				if (entities[i]->checkMouseClick(MouseX, MouseY)){
+				if (entities[i]->checkMouseClick(gMouseX, gMouseY)){
 					std::cout << entities[i]->getName() << " Selected\n";
 					player->setTarget(entities[i]);
 					break;

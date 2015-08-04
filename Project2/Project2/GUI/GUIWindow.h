@@ -84,7 +84,17 @@ public:
 	}
 	}
 
-
+bool checkMouseClick(double mousex, double mousey){
+	if(GUIObject::isVisible()){
+	for(int i=0;i<components.size();i++){
+		if(components[i]->checkMouseClick(mousex, mousey)){
+			    //  std::cout<<"button clicked\n";
+			return true;
+		}
+	}
+}
+	return false;
+}
 
 void addComponent(GUIObject *component){
 	components.push_back(component);
