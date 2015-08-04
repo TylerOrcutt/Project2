@@ -36,7 +36,7 @@ public:
 
 
 			void (*testCall)(GUIButton *)=testClickCallback;
-			gmenu->addComponent(new GUIButton(new SpriteSheet("test_button"),"test",testCall,gmenu->getX()+15,gmenu->getY()+15,0,0,128,32));
+			gmenu->addComponent(new GUIButton(new SpriteSheet("test_button"),"Exit",testCall,gmenu->getX()+15,gmenu->getY()+15,0,0,128,32));
 			hud_sprite = new SpriteSheet("GUIHud");
 			hud= new GUIObject(hud_sprite, 0, 0,0,0,32,32);
 

@@ -119,12 +119,12 @@ public:
 
 	void MouseClick(int button, double MouseX, double MouseY){
 	double	gMouseX = MouseX+camera.getX();
-	double	gMouseY = MouseX+camera.getY();
+	double	gMouseY = MouseY+camera.getY();
 		//std::cout << "MouseButton:" << button << "  X:" << MouseX << " Y:" << MouseY << "\n";
 
 		if (button == 0){
 			if(gui.checkMouseClick(MouseX, MouseY)){
-				return;
+			  return;
 			}
 		//	std::cout << "RightClick: X:" << MouseX << " Y:" << MouseY << "\n";
 			for (unsigned int i = 0; i < entities.size(); i++){

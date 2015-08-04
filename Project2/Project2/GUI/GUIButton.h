@@ -13,7 +13,9 @@ private:
       void initText(){
         textRenderer = new TextRenderer(GUIObject::getX(),GUIObject::getY(),text);
         int x = GUIObject::getX()+(GUIObject::getImgW()/2)-(textRenderer->getWidth()/2);
+          int y = GUIObject::getY()+(GUIObject::getImgH()/2)-(textRenderer->getHeight()/2);
         textRenderer->setX(x);
+        textRenderer->setY(y-2);
         std::cout<<"text initialized\n";
       }
 
