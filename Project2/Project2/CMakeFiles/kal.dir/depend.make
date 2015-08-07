@@ -7,6 +7,7 @@ CMakeFiles/kal.dir/main.cpp.o: Entity.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/GUI.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/GUIButton.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/GUIObject.h
+CMakeFiles/kal.dir/main.cpp.o: GUI/GUITextField.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/GUIWindow.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/TextRenderer.h
 CMakeFiles/kal.dir/main.cpp.o: Map.h

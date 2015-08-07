@@ -8,6 +8,7 @@
 #include <vector>
 class GUIWindow:public GUIObject{
 private:
+	//TODO the width and height have to be divisible by 32 - fix this!
 	float width=160, height=256;
 
         std::vector<GUIObject*> components;
@@ -17,12 +18,15 @@ public:
 	GUIWindow(SpriteSheet * sp, float pos_x, float pos_y, float image_x, float image_y, float image_width, float image_height) :GUIObject(sp, pos_x, pos_y, image_x, image_y, image_width, image_height){}
 
 	void Update(){
+		GUIObject::Update();
 	}
 
 	void Draw(){
 		if (!GUIObject::isVisible()){
 			return;
 		}
+
+		//should predraw this
 		float px = GUIObject::getX();
 		float py = GUIObject::getY();
 		for (int h = 0; h < height; h += 32){
@@ -103,7 +107,16 @@ void clearComponents(){
 	components.clear();
 }
 
+float getWidth(){
+	return width;
+}
+float getHeight(){
+	return height;
+}
 
+void resize(float _width, float _height){
+
+}
 
 
 

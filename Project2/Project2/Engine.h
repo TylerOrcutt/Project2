@@ -25,6 +25,7 @@ private:
 	 double curtime=0, lastframe=0,lastUpdate;
 	 long frames=0;
 	 int WIDTH = 1024, HEIGHT = 768;
+	 bool running=true;
 
 	 GUI gui;
 	TextRenderer *fpsText;
@@ -32,6 +33,7 @@ private:
 public:
 
 	Engine(){
+	//	gui.setEngine(this);
 		 map = new Map("map001");
 
 	  peon = new SpriteSheet("weddingguy02");
@@ -148,8 +150,17 @@ public:
 	Map * getMap(){
 		return map;
 	}
-	GUI& getGUI(){
-		return gui;
+	GUI* getGUI(){
+		return &gui;
+	}
+	bool isRunning(){
+		return running;
+	}
+	void setRunning(bool _running){
+		running = _running;
+	}
+	void exitGame(std::string method){
+
 	}
 };
 

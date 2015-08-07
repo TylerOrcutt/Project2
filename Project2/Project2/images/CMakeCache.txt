@@ -372,6 +372,12 @@ X11_xf86misc_INCLUDE_PATH:PATH=X11_xf86misc_INCLUDE_PATH-NOTFOUND
 //Path to a file.
 X11_xf86vmode_INCLUDE_PATH:PATH=/usr/include
 
+//The directory containing a CMake configuration file for glib-2.0.
+glib-2.0_DIR:PATH=glib-2.0_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for glib.
+glib_DIR:PATH=glib_DIR-NOTFOUND
+
 
 ########################
 # INTERNAL cache entries
@@ -576,6 +582,10 @@ GTK3_gtk+-2.0_INCLUDEDIR:INTERNAL=
 GTK3_gtk+-2.0_LIBDIR:INTERNAL=
 GTK3_gtk+-2.0_PREFIX:INTERNAL=
 GTK3_gtk+-2.0_VERSION:INTERNAL=
+GTK3_gtk+-3.0_INCLUDEDIR:INTERNAL=
+GTK3_gtk+-3.0_LIBDIR:INTERNAL=
+GTK3_gtk+-3.0_PREFIX:INTERNAL=
+GTK3_gtk+-3.0_VERSION:INTERNAL=
 //ADVANCED property for variable: OPENGL_INCLUDE_DIR
 OPENGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENGL_gl_LIBRARY

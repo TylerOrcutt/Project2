@@ -61,11 +61,19 @@ TextRenderer.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/TextRenderer.h
 GUIButton.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIButton.h
+GUITextField.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUITextField.h
+iostream
+-
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIButton.h
 TextRenderer.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/TextRenderer.h
+GUI.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUI.h
 string
+-
+iostream
 -
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIObject.h
@@ -75,10 +83,22 @@ string
 /home/twittumz/Desktop/git/Project2/Project2/Project2/SpriteSheet.h
 TextRenderer.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/TextRenderer.h
+string
+-
+
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUITextField.h
+GUIObject.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIObject.h
+TextRenderer.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/TextRenderer.h
+string
+-
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIWindow.h
 GUIObject.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIObject.h
+GUIButton.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIButton.h
 ../Sprite.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Sprite.h
 ../SpriteSheet.h
@@ -167,6 +187,8 @@ Windows.h
 -
 Engine.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Engine.h
+sstream
+-
 
 /usr/include/cairo/cairo-deprecated.h
 

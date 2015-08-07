@@ -24,7 +24,7 @@
 #endif
 
 #include "Engine.h"
-
+#include <sstream>
 Engine *engine;
 GLFWwindow* window;
 double mouseX, mouseY;
@@ -48,24 +48,38 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS){
 		// glfwSetWindowShouldClose(window, GL_TRUE);
 		//
-		engine->getGUI().setGameMenuVisible(!engine->getGUI().getGameMenuVisible());
+		engine->getGUI()->setGameMenuVisible(!engine->getGUI()->getGameMenuVisible());
 
 	}
+	if(key == GLFW_KEY_ENTER &&action == GLFW_PRESS){
+	//	std::cout<<"enter\n";
+	engine->getGUI()->setTyping(!engine->getGUI()->isTyping());
+	return;
+}
+if(engine->getGUI()->isTyping() && action==GLFW_PRESS){
+//	std::cout<<key<<std::endl;
+std::stringstream keyStr;
+char k = key;
+keyStr<<k;
+//	std::cout<<k<<std::endl;
 
+	engine->getGUI()->keyPressed(keyStr.str());
+	return;
+}
 	if (key == GLFW_KEY_W){
 		//engine->getCamera().setMoving(true);
 		engine->getCamera().setDirection(0);
 		engine->getPlayer()->setMoving(true);
 		engine->getPlayer()->setDirection(0);
 
-	}
+	} else
 	if (key == GLFW_KEY_S){
 		//engine->getCamera().setMoving(true);
 		engine->getCamera().setDirection(2);
 		engine->getPlayer()->setMoving(true);
 		engine->getPlayer()->setDirection(2);
 
-	}
+	} else
 
 	if (key == GLFW_KEY_A){
 		//engine->getCamera().setMoving(true);
@@ -74,13 +88,14 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 		engine->getPlayer()->setDirection(3);
 
 
-	}
+	}else
 	if (key == GLFW_KEY_D){
 	//	engine->getCamera().setMoving(true);
 		//engine->getCamera().setDirection(1);
 		engine->getPlayer()->setMoving(true);
         engine->getPlayer()->setDirection(1);
 	}
+
 
 	if ((key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D) && action == GLFW_RELEASE){
 		engine->getPlayer()->setMoving(false);
@@ -128,7 +143,7 @@ engine = new Engine();
 
 
 
-	while (!glfwWindowShouldClose(window))
+	while (!glfwWindowShouldClose(window) && engine->isRunning())
 	{
 		glfwGetCursorPos(window, &mouseX, &mouseY);
 

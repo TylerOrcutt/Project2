@@ -1,6 +1,7 @@
 #ifndef __GUIBUTTON_H_
 #define __GUIBUTTON_H_
 #include "TextRenderer.h"
+#include "GUI.h"
 #include <string>
 #include <iostream>
 class GUIButton : public GUIObject{

@@ -16,7 +16,8 @@ private: GLuint texture;
 	int width, height;
         float x=0,y=0;
 	std::string text;
-
+std::string fontSize="16";
+std::string font="Sans";
    public:
 
 	TextRenderer(float posx,float posy,std::string text_str){
@@ -38,7 +39,7 @@ private: GLuint texture;
 		PangoLayout *layout=pango_cairo_create_layout (layout_context);
 		pango_layout_set_text(layout,text.c_str(),-1);
 
-		desc = pango_font_description_from_string("Sans 16");
+		desc = pango_font_description_from_string(((std::string)font + " " + fontSize).c_str());
 		pango_layout_set_font_description(layout,desc);
 		pango_font_description_free(desc);
 
@@ -151,7 +152,14 @@ pango_cairo_update_layout(render_context, layout);
 	float getY(){
 		return y;
 	}
-
+void setFont(std::string _font){
+	font=_font;
+	initText();
+}
+void setFontSize(std::string _fontSize){
+	fontSize = _fontSize;
+	initText();
+}
 
 };
 
