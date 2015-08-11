@@ -1,17 +1,18 @@
 #ifndef __GUI_H_
 #define __GUI_H_
 //manage all gui things
-//#include "../Engine.h"
+#include "../Settings.h"
 #include "../Sprite.h"
 #include "../SpriteSheet.h"
 #include "GUIObject.h"
 #include "GUIWindow.h"
-#include "../Entity.h"
 #include "../Player.h"
 #include "TextRenderer.h"
 #include "GUIButton.h"
 #include "GUITextField.h"
 #include <iostream>
+#include <sstream>
+#include <locale>
 
 class GUI{
 private:
@@ -31,10 +32,12 @@ private:
 		GUITextField *textfield;
 
 		bool typing=false;
+		bool capsLock=false;
+		bool shiftDown=false;
 public:
 	 static void gameMenuExit_onClick (GUIButton *owner) {
 		std::cout<<owner->getText()<<"  - Button clicked\n";
-	//	gmenu->setX(gmenu->getX()+10);
+		running=false;
 	}
 	GUI(){
 		gmenu_sprite = new SpriteSheet("GUIWindow");
@@ -47,7 +50,7 @@ public:
 			hud_sprite = new SpriteSheet("GUIHud");
 			hud= new GUIObject(hud_sprite, 0, 0,0,0,32,32);
 
-                        hpHud = new GUIObject(hud_sprite, 36, 0, 0, 32, 160, 32);
+      hpHud = new GUIObject(hud_sprite, 36, 0, 0, 32, 160, 32);
 			hpBar= new GUIObject(hud_sprite, 40,20, 0, 64, 32, 32);
 
 			target_hphud = new GUIObject(hud_sprite, 300, 0, 0, 32, 160, 32);
@@ -107,8 +110,42 @@ bool isTyping(){
 void setTyping(bool _typing){
 	typing=_typing;
 }
-void keyPressed(std::string key){
-	textfield->setText((std::string)textfield->getText()+key);
+void keyPressed(int key){
+//	textfield->setText((std::string)textfield->getText()+key);
+//std::cout<<key<<std::endl;
+std::string text = textfield->getText();
+if(key == 259){
+	text = text.substr(0,text.length()-1);
+}else if(key == 280){
+//	upperCase=!upperCase;
+return;
+}else {
+std::stringstream ss;
+char k = key;
+ss<<k;
+std::string _key = ss.str();
+if(!shiftDown && !capsLock ){
+std::locale loc;
+_key = std::tolower(_key[0],loc);
+}
+
+text = text + _key;
+}
+textfield->setText(text);
+}
+
+void setCapsLock(bool _capsLock){
+capsLock = _capsLock;
+}
+bool isCapsLock(){
+	return capsLock;
+}
+
+void setShiftDown(bool _shiftDown){
+	shiftDown= _shiftDown;
+}
+bool isShiftDown(){
+	return shiftDown;
 }
 };
 

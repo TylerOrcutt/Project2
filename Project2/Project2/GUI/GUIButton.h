@@ -7,6 +7,7 @@
 class GUIButton : public GUIObject{
 private:
 
+//   GUI *gui;
      	TextRenderer *textRenderer=nullptr;
       void(*onClickCallback)(GUIButton *);
 			std::string text;

@@ -1,5 +1,5 @@
-#ifndef __ENGINE_H_
-#define __ENGINE_H_
+#ifndef __KAL_ENGINE_H_
+#define __KAL_ENGINE_H_
 #include "Entity.h"
 #include "Player.h"
 #include "SpriteSheet.h"
@@ -13,6 +13,7 @@
 #include <ctime>
 #include <sstream>
 #include <GLFW/glfw3.h>
+
 class Engine{
 private:
 	//TODO data struct, hash?
@@ -24,16 +25,17 @@ private:
 	 Camera camera;
 	 double curtime=0, lastframe=0,lastUpdate;
 	 long frames=0;
-	 int WIDTH = 1024, HEIGHT = 768;
-	 bool running=true;
+	 int WIDTH = 800, HEIGHT = 600;
+
 
 	 GUI gui;
 	TextRenderer *fpsText;
 	std::string fps_str;
+
 public:
 
 	Engine(){
-	//	gui.setEngine(this);
+	//	gui.setEngine(thiis);
 		 map = new Map("map001");
 
 	  peon = new SpriteSheet("weddingguy02");
@@ -61,7 +63,7 @@ public:
 	lastUpdate=curtime;
 	curtime = glfwGetTime();
 
-//double dt = curtime-lastUpdate;
+double dt = (curtime-lastUpdate)*100;
 		double elp = curtime - lastframe;
 
 
@@ -75,10 +77,11 @@ public:
 			frames = 0;
 		}
 	//
-		player->Update(curtime);
+	//std::cout<<dt<<std::endl;
+		player->Update(dt);
 
-		camera.setX(player->getX() - ((WIDTH / 2) - (player->getImgW() / 2)));
-		camera.setY(player->getY() - ((HEIGHT / 2) - (player->getImgH() / 2)));
+		camera.setX((int)(player->getX() - ((WIDTH / 2) - (player->getImgW() / 2))));
+		camera.setY((int)(player->getY() - ((HEIGHT / 2) - (player->getImgH() / 2))));
 		camera.Update();
 		//probably will need to be fixed later
 		if (camera.getX() < map->getMinX()){
@@ -106,7 +109,7 @@ public:
 
 	void Draw(){
 
-		map->Draw(camera);
+    map->Draw(camera);
 		for (unsigned int i = 0; i < entities.size(); i++){
 			entities[i]->Draw(camera);
 		}
@@ -153,12 +156,7 @@ public:
 	GUI* getGUI(){
 		return &gui;
 	}
-	bool isRunning(){
-		return running;
-	}
-	void setRunning(bool _running){
-		running = _running;
-	}
+
 	void exitGame(std::string method){
 
 	}

@@ -24,7 +24,7 @@
 #endif
 
 #include "Engine.h"
-#include <sstream>
+#include "Settings.h"
 Engine *engine;
 GLFWwindow* window;
 double mouseX, mouseY;
@@ -51,20 +51,27 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 		engine->getGUI()->setGameMenuVisible(!engine->getGUI()->getGameMenuVisible());
 
 	}
-	if(key == GLFW_KEY_ENTER &&action == GLFW_PRESS){
+		if(key == GLFW_KEY_ENTER &&action == GLFW_PRESS){
 	//	std::cout<<"enter\n";
 	engine->getGUI()->setTyping(!engine->getGUI()->isTyping());
 	return;
 }
-if(engine->getGUI()->isTyping() && action==GLFW_PRESS){
-//	std::cout<<key<<std::endl;
-std::stringstream keyStr;
-char k = key;
-keyStr<<k;
-//	std::cout<<k<<std::endl;
-
-	engine->getGUI()->keyPressed(keyStr.str());
+if(engine->getGUI()->isTyping()){
+	if(action == GLFW_PRESS && key == 340){
+		engine->getGUI()->setShiftDown(true);
+	//	std::cout<<"ShiftDown\n";
+		return;
+	}
+	if(action == GLFW_RELEASE && key == 340){
+			engine->getGUI()->setShiftDown(false);
+	//		std::cout<<"shiftUp\n";
+				return;
+	}
+if(action==GLFW_PRESS){
+//	std::cout<<scancode<<std::endl;
+	engine->getGUI()->keyPressed(key);
 	return;
+}
 }
 	if (key == GLFW_KEY_W){
 		//engine->getCamera().setMoving(true);
@@ -123,10 +130,19 @@ int main(int args, char **argv)
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 std::string title=" v:";
 	title.append(GAME_VERSION);
-	window = glfwCreateWindow(800, 600, title.c_str(), NULL, NULL);
-	//window = glfwCreateWindow(800, 600, "My Title", glfwGetPrimaryMonitor(), NULL);
-	//GLFWcursor* cursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
+
+	SCREEN_WIDTH = 800; //1920
+	SCREEN_HEIGHT=600; //1080
+	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, title.c_str(), NULL, NULL);
+
+	/*
+	SCREEN_WIDTH = 1920;
+	SCREEN_HEIGHT=1080;
+	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, title.c_str(),  glfwGetPrimaryMonitor(), NULL);
+	/**///GLFWcursor* cursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
 	//glfwSetCursor(window, cursor);
+
+	running=true;
 	if (!window)
 	{
 		glfwTerminate();
@@ -143,7 +159,7 @@ engine = new Engine();
 
 
 
-	while (!glfwWindowShouldClose(window) && engine->isRunning())
+	while (!glfwWindowShouldClose(window) && 	running )
 	{
 		glfwGetCursorPos(window, &mouseX, &mouseY);
 
@@ -166,7 +182,8 @@ engine = new Engine();
 		glLoadIdentity();
 		//glOrtho(-1, 1, -1.f, 1.f, 1.f, -1.f);
 		glOrtho(0.0f, width, height, 0.0f, 0.0f, 1.0f);
-
+		SCREEN_WIDTH = width;
+		SCREEN_HEIGHT=height;
 	// update camara
 		engine->getCamera().setWidth((float)width);
 		engine->getCamera().setHeight((float)height);

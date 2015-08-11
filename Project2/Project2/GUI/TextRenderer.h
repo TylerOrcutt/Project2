@@ -17,7 +17,7 @@ private: GLuint texture;
         float x=0,y=0;
 	std::string text;
 std::string fontSize="16";
-std::string font="Sans";
+std::string font="arial";
    public:
 
 	TextRenderer(float posx,float posy,std::string text_str){

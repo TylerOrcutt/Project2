@@ -45,6 +45,8 @@ string
 -
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUI.h
+../Settings.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Settings.h
 ../Sprite.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Sprite.h
 ../SpriteSheet.h
@@ -53,8 +55,6 @@ GUIObject.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIObject.h
 GUIWindow.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIWindow.h
-../Entity.h
-/home/twittumz/Desktop/git/Project2/Project2/Project2/Entity.h
 ../Player.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Player.h
 TextRenderer.h
@@ -64,6 +64,10 @@ GUIButton.h
 GUITextField.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUITextField.h
 iostream
+-
+sstream
+-
+locale
 -
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIButton.h
@@ -146,6 +150,8 @@ ctime
 iostream
 -
 
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Settings.h
+
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Sprite.h
 GL/glew.h
 -
@@ -187,8 +193,8 @@ Windows.h
 -
 Engine.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Engine.h
-sstream
--
+Settings.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Settings.h
 
 /usr/include/cairo/cairo-deprecated.h
 

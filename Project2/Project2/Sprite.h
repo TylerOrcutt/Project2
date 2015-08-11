@@ -6,13 +6,13 @@
 #include <iostream>
 class Sprite{
 private:
-	
+
 	SpriteSheet* sprite;
 
 public:
 	/*
 	Sprite(){
- 	
+
 		//init(0,0,0,0);
 	}*/
 	Sprite(SpriteSheet *sp){
@@ -22,49 +22,11 @@ public:
 	~Sprite(){
 		delete sprite;
 	}
-	void Draw(float posx, float posy, float x, float y){
-		float w = 32.f, h = 32.f;
-		glBindTexture(GL_TEXTURE_2D, sprite->getTexture());
 
-		glBegin(GL_QUADS);
-
-
-		float swidth = (1.0f / sprite->getWidth())*w;
-		float sheight = (1.0f / sprite->getHeight())*h;
-
-
-		//std::cout << swidth << std::endl;
-		x = (1.0f / sprite->getWidth())*x;
-		y = (1.0f / sprite->getHeight())*y;
-	//	float y = (((0.0f) / 7.0f));
-		//float x = 1, y = 1;
-		//float posx = 0;
-		//float posy = 0;
-	//	float h = 32.f, w = 32.f;
-		//top left
-		glTexCoord2f(x, y);
-		//	glVertex2f(-1+posx, 1.f -(posy+h));
-		glVertex2f(posx, (posy));
-		//	std::cout << y << std::endl;
-
-		//top right
-		glTexCoord2f(x + swidth, y);
-		glVertex2f(posx + w, (posy));
-
-		//bottom right
-
-		glTexCoord2f(x + swidth, y + sheight);
-		glVertex2f(posx + w, posy + h);
-
-		//bottom left
-		glTexCoord2f(x, y + sheight);
-		glVertex2f(posx, posy + h);
-		/**/
-		
-		glEnd();
+	void Draw( float posx, float posy, float x, float y){
+		Draw(posx, posy,32.f,32.f,x,y);
 	}
-
-	void Draw(float posx, float posy, float x, float y,float w,float h){
+	void Draw(float posx, float posy, float w,float h, float x, float y){
 	//	float w = 32.f, h = 32.f;
 		glBindTexture(GL_TEXTURE_2D, sprite->getTexture());
 
@@ -78,11 +40,11 @@ public:
 		//std::cout << swidth << std::endl;
 		x = (1.0f / sprite->getWidth())*x;
 		y = (1.0f / sprite->getHeight())*y;
-	
+
 		glTexCoord2f(x, y);
-	
+
 		glVertex2f(posx, (posy));
-	
+
 
 		//top right
 		glTexCoord2f(x + swidth, y);
@@ -100,8 +62,8 @@ public:
 
 		glEnd();
 	}
-	
-	void Draw(float posx, float posy, float x, float y, float w, float h, float width, float height ){
+
+	void Draw(float posx, float posy, float width, float height,float x, float y, float w, float h ){
 		glBindTexture(GL_TEXTURE_2D, sprite->getTexture());
 
 		glBegin(GL_QUADS);
@@ -111,14 +73,9 @@ public:
 		float sheight = (1.0f / sprite->getHeight())*h;
 
 
-		//std::cout << swidth << std::endl;
 		x = (1.0f / sprite->getWidth())*x;
 		y = (1.0f / sprite->getHeight())*y;
-		//	float y = (((0.0f) / 7.0f));
-		//float x = 1, y = 1;
-		//float posx = 0;
-		//float posy = 0;
-		//	float h = 32.f, w = 32.f;
+
 		//top left
 		glTexCoord2f(x, y);
 		//	glVertex2f(-1+posx, 1.f -(posy+h));
@@ -137,7 +94,7 @@ public:
 		//bottom left
 		glTexCoord2f(x, y + sheight);
 		glVertex2f(posx, posy + height);
-		
+
 
 		glEnd();
 	}

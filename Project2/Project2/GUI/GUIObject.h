@@ -8,7 +8,7 @@
 class GUIObject{
 private:
 	Sprite *sprite;
-	float posx = 0, posy = 0, imgx = 0, imgy = 0, imgw = 32, imgh = 32;
+	float posx = 0, posy = 0, width=32, height=32, imgx = 0, imgy = 0, imgw = 32, imgh = 32;
 	bool visible = true;
 std::string  Name;
 
@@ -34,6 +34,7 @@ public:
 		imgx = image_x;
 		imgy = image_y;
 
+
 	}
 
 	GUIObject(SpriteSheet * sp, float pos_x, float pos_y, float image_x, float image_y, float image_width, float image_height){
@@ -44,6 +45,8 @@ public:
 		imgy = image_y;
 		imgw = image_width;
 		imgh = image_height;
+		width=image_width;
+		height=image_height;
 
 	}
 
@@ -54,7 +57,7 @@ public:
 
 	virtual void Draw(){
 		if(visible){
-		sprite->Draw(posx , posy, imgx, imgy, imgw, imgh);
+		sprite->Draw(posx , posy, width,height, imgx, imgy, imgw, imgh);
 	}
 	}
 
@@ -80,6 +83,20 @@ public:
 	void setY(float _y){
 		posy = _y;
 	}
+
+void setWidth(float _width){
+	width=_width;
+}
+float getWidth(){
+	return width;
+}
+
+float setHeight(float _height){
+	height=_height;
+}
+float getHeight(){
+	return height;
+}
 
 	float getImgX(){
 		return imgx;

@@ -16,6 +16,7 @@ private:
 	std::string name;
 	int hp = 100;
 	int max_hp = 100;
+	float speed = 3;
 public:
 
 	Entity(SpriteSheet * sp){
@@ -52,7 +53,7 @@ public:
 	virtual void Draw(Camera cam){
 		if (posx >= cam.getX() - imgw && posx <= cam.getX() + cam.getWidth() && posy >= cam.getY() - imgh && posy <= cam.getY() + cam.getHeight()){
 
-			sprite->Draw(posx - cam.getX(), posy - cam.getY(), imgx, imgy, imgw, imgh);
+			sprite->Draw(posx - cam.getX(), posy - cam.getY(), imgw, imgh, imgx, imgy);
 		}
 
 
@@ -163,6 +164,11 @@ public:
 	void setName(std::string _name){
 		name = _name;
 	}
-
+	int getSpeed(){
+		return speed;
+	}
+void setSpeed(int _speed){
+	speed=_speed;
+}
 };
 #endif

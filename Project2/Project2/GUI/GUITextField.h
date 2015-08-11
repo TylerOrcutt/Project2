@@ -15,7 +15,7 @@ std::string text;
 void updateText(){
   textRenderer = new TextRenderer(GUIObject::getX(),GUIObject::getY(),text);
   textRenderer->setFontSize("12");
-  int x = GUIObject::getX()+(GUIObject::getImgW()/2)-(textRenderer->getWidth()/2);
+  int x = GUIObject::getX()+10;
     int y = GUIObject::getY()+(GUIObject::getImgH()/2)-(textRenderer->getHeight()/2);
   textRenderer->setX(x);
   textRenderer->setY(y-2);
@@ -23,10 +23,12 @@ void updateText(){
 
   public:
   GUITextField(SpriteSheet *sp):GUIObject(sp){
-    GUIObject::setX(100);
-    GUIObject::setY(100);
-    GUIObject::setImgH(30);
-    GUIObject::setImgW(120);
+    GUIObject::setX(50);
+    GUIObject::setY(500);
+    GUIObject::setImgH(32);
+    GUIObject::setImgW(32);
+    GUIObject::setWidth(300);
+
     text = "";
     updateText();
   }
