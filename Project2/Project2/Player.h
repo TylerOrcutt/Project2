@@ -1,7 +1,7 @@
 #ifndef __PLAYER_H_
 #define __PLAYER_H_
 #include "Entity.h"
-
+#include <GLFW/glfw3.h>
 #include<ctime>
 #include<iostream>
 class Player: public Entity{
@@ -51,18 +51,18 @@ public:
 
 			}
 
-		//	curtime=clock();
-	//	dt*=1000;
+			curtime = glfwGetTime();
+		curtime*=1000;
 		//	 dt = dt- lastUpdate;
 		//	long dt =curtime-lastupdate;
 		//std::cout << dt << std::endl;
-			if ( dt> 1500){
+			if ( (curtime-lastUpdate)> (20*Entity::getSpeed())){
 
-			//	Entity::setImgX(Entity::getImgX()+32);
+			Entity::setImgX(Entity::getImgX()+32);
 				if (Entity::getImgX() >=128){
-				//	Entity::setImgX(0);
+					Entity::setImgX(0);
 				}
-				lastUpdate=dt;
+				lastUpdate=curtime;
 			}
 
 		}else{

@@ -13,7 +13,7 @@
 #include <ctime>
 #include <sstream>
 #include <GLFW/glfw3.h>
-
+#include <unistd.h>
 class Engine{
 private:
 	//TODO data struct, hash?
@@ -67,7 +67,7 @@ double dt = (curtime-lastUpdate)*100;
 		double elp = curtime - lastframe;
 
 
-		//std::cout << elp << std::endl;
+
 		if (elp>1){
 			std::stringstream stream;
 			stream<<((frames)/(elp));
@@ -103,8 +103,9 @@ double dt = (curtime-lastUpdate)*100;
 		}
 
 
-
-
+dt *=10000;
+		//std::cout << dt << std::endl;
+usleep((1*dt)/30);
 	}
 
 	void Draw(){

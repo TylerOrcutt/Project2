@@ -33,6 +33,8 @@ sstream
 -
 GLFW/glfw3.h
 -
+unistd.h
+-
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Entity.h
 Sprite.h
@@ -117,6 +119,8 @@ GLFW/glfw3.h
 -
 string
 -
+sstream
+-
 iostream
 -
 pango/pangocairo.h
@@ -145,6 +149,8 @@ Camera.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Player.h
 Entity.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Entity.h
+GLFW/glfw3.h
+-
 ctime
 -
 iostream

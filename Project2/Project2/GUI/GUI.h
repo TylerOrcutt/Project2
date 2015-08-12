@@ -74,7 +74,7 @@ public:
 		float hp = (float)player->getHP() / (float)player->getMaxHP();
 
 
-		hpBar->getSprite()->Draw(40, 0, 0, 64, 32, 32, hp*maxbarlen, 32);
+		hpBar->getSprite()->Draw(40, 0, hp*maxbarlen,32,0, 64, 32, 32);
 
 		if (player->getTarget() != nullptr){
 
@@ -82,7 +82,7 @@ public:
 			maxbarlen = 153;
 
 			hp = (float)player->getTarget()->getHP() / (float)player->getTarget()->getMaxHP();
-			target_hpbar->getSprite()->Draw(304, 0, 0, 64, 32, 32, hp*maxbarlen, 32);
+			target_hpbar->getSprite()->Draw(304, 0, hp*maxbarlen,32,0,64,32, 32);
 
 
 		}

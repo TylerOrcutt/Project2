@@ -13,12 +13,16 @@ TextRenderer *textRenderer = nullptr;
 std::string text;
 
 void updateText(){
+  if(textRenderer!=nullptr){
+    delete(textRenderer);
+  }
   textRenderer = new TextRenderer(GUIObject::getX(),GUIObject::getY(),text);
-  textRenderer->setFontSize("12");
+  textRenderer->setFontSize(12);
   int x = GUIObject::getX()+10;
     int y = GUIObject::getY()+(GUIObject::getImgH()/2)-(textRenderer->getHeight()/2);
   textRenderer->setX(x);
   textRenderer->setY(y-2);
+textRenderer->setObjectWidth(300);
 }
 
   public:

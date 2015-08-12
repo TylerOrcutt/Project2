@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include <string>
+#include <sstream>
 #include <iostream>
 #include <pango/pangocairo.h>
 #include <string>
@@ -15,8 +16,11 @@ class TextRenderer{
 private: GLuint texture;
 	int width, height;
         float x=0,y=0;
+				float objectWidth=32,objectHeight=32;
 	std::string text;
-std::string fontSize="16";
+	int fontSize=16;
+	int padding=20;
+
 std::string font="arial";
    public:
 
@@ -25,9 +29,14 @@ std::string font="arial";
 		x=posx;
 		y=posy;
 		initText();
+
 	}
 
 	void initText(){
+
+
+std::string temp_text=text;
+
 
 		cairo_t *render_context;
 		cairo_surface_t *temp_surface;
@@ -37,9 +46,12 @@ std::string font="arial";
 
 		cairo_t *layout_context = create_layout_context();
 		PangoLayout *layout=pango_cairo_create_layout (layout_context);
-		pango_layout_set_text(layout,text.c_str(),-1);
+		pango_layout_set_text(layout,temp_text.c_str(),-1);
 
-		desc = pango_font_description_from_string(((std::string)font + " " + fontSize).c_str());
+		std::stringstream ssize;
+		ssize<<fontSize;
+
+		desc = pango_font_description_from_string(((std::string)(font + " " + ssize.str())).c_str());
 		pango_layout_set_font_description(layout,desc);
 		pango_font_description_free(desc);
 
@@ -107,17 +119,24 @@ pango_cairo_update_layout(render_context, layout);
                      glColor3f (1.f,1.f,1.f);
 
                       glBegin (GL_QUADS);
-
-                       glTexCoord2f (0.0f, 0.0f);
+											float w=0,h=0;
+										float	maxWidth=width;
+											if(objectWidth>32){
+												 if(width>(objectWidth-padding)){
+													 maxWidth=(objectWidth-padding);
+												w=1.f-((1.0f/width)*(objectWidth-padding));
+											}
+											}
+                       glTexCoord2f (w, h);
                        glVertex2f (x, y);
 
-                       glTexCoord2f (1.0f, 0.0f);
-                       glVertex2f (x+width, y);
+                       glTexCoord2f (1.0f, h);
+                       glVertex2f (x+maxWidth, y);
 
                        glTexCoord2f (1.0f, 1.0f);
-                       glVertex2f (x+width , y+height);
+                       glVertex2f (x+maxWidth , y+height);
 
-                       glTexCoord2f (0.0f, 1.0f);
+                       glTexCoord2f (w, 1.0f);
                        glVertex2f (x, y+height);
                        glEnd ();
 
@@ -156,9 +175,12 @@ void setFont(std::string _font){
 	font=_font;
 	initText();
 }
-void setFontSize(std::string _fontSize){
+void setFontSize(int _fontSize){
 	fontSize = _fontSize;
 	initText();
+}
+void setObjectWidth(float _width){
+	objectWidth=_width;
 }
 
 };

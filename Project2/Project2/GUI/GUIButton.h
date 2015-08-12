@@ -13,6 +13,9 @@ private:
 			std::string text;
 			float text_x=0,text_y=0;
       void initText(){
+        if(textRenderer!=nullptr){
+          delete(textRenderer);
+        }
         textRenderer = new TextRenderer(GUIObject::getX(),GUIObject::getY(),text);
         int x = GUIObject::getX()+(GUIObject::getImgW()/2)-(textRenderer->getWidth()/2);
           int y = GUIObject::getY()+(GUIObject::getImgH()/2)-(textRenderer->getHeight()/2);
