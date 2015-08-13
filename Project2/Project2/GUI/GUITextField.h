@@ -21,7 +21,7 @@ void updateText(){
   textRenderer->setObjectWidth(GUIObject::getWidth());
   textRenderer->setObjectHeight(GUIObject::getHeight());
   textRenderer->setPadding(5);
-  textRenderer->setFontSize(12);
+  textRenderer->setFontSize(10);
   int x = GUIObject::getX();
     int y = GUIObject::getY();
   textRenderer->setX(x);

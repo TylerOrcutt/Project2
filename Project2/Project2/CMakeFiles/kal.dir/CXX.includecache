@@ -167,6 +167,8 @@ Camera.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/PickUp.h
 GameObject.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GameObject.h
+GLFW/glfw3.h
+-
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Player.h
 Entity.h

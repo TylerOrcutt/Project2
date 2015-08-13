@@ -84,7 +84,7 @@ double dt = (curtime-lastUpdate)*100;
 	//
 	//std::cout<<dt<<std::endl;
 		player->Update(dt);
-
+    pickup->Update(dt);
 		camera.setX((int)(player->getX() - ((WIDTH / 2) - (player->getImgW() / 2))));
 		camera.setY((int)(player->getY() - ((HEIGHT / 2) - (player->getImgH() / 2))));
 		camera.Update();
@@ -140,7 +140,7 @@ usleep((1*dt)/30);
     if(button==1){
       if(pickup->checkMouseClick(gMouseX,gMouseY)){
        pickup->setVisible(false);
-       gui.addChatLogText("You picked up " + pickup->getName()+".");
+       gui.addChatLogText("You looted " + pickup->getName()+".");
       }
     }
 

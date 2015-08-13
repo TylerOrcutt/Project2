@@ -15,7 +15,7 @@ public:
 		posx = pos_x;
 		posy = pos_y;
 	}
-  virtual void Update(){
+  virtual void Update(double dt){
 
   }
   virtual void Draw(Camera* cam){
