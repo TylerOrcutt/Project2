@@ -8,6 +8,10 @@
 #include "GUI/GUI.h"
 #include "GUI/TextRenderer.h"
 
+//game Objects
+#include "GameObject.h"
+#include "PickUp.h"
+
 #include <vector>
 #include <string>
 #include <ctime>
@@ -27,7 +31,7 @@ private:
 	 long frames=0;
 	 int WIDTH = 800, HEIGHT = 600;
 
-
+   GameObject *pickup;
 	 GUI gui;
 	TextRenderer *fpsText;
 	std::string fps_str;
@@ -52,7 +56,8 @@ public:
 		curtime=glfwGetTime();
 		lastframe=glfwGetTime();
 		//lastframe = clock();
-
+    pickup= new PickUp(new SpriteSheet("itemPickup"),200,200);
+    pickup->setName("EarthRoot");
 	//textrend.initText("Hello worldssss\n  sss sssssssssss");
 
 	}
@@ -111,10 +116,14 @@ usleep((1*dt)/30);
 	void Draw(){
 
     map->Draw(camera);
+        pickup->Draw(&camera);
 		for (unsigned int i = 0; i < entities.size(); i++){
 			entities[i]->Draw(camera);
 		}
 		player->Draw(camera);
+
+
+
 		gui.Draw(player);
 		fpsText->Draw();
 		//textrend.Draw();
@@ -127,7 +136,15 @@ usleep((1*dt)/30);
 	double	gMouseX = MouseX+camera.getX();
 	double	gMouseY = MouseY+camera.getY();
 		//std::cout << "MouseButton:" << button << "  X:" << MouseX << " Y:" << MouseY << "\n";
+    //right click
+    if(button==1){
+      if(pickup->checkMouseClick(gMouseX,gMouseY)){
+       pickup->setVisible(false);
+       gui.addChatLogText("You picked up " + pickup->getName()+".");
+      }
+    }
 
+//left click
 		if (button == 0){
 			if(gui.checkMouseClick(MouseX, MouseY)){
 			  return;

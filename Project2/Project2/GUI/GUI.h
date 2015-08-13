@@ -115,6 +115,10 @@ bool isTyping(){
 void setTyping(bool _typing){
 	typing=_typing;
 }
+
+void addChatLogText(std::string text){
+		textArea->setText(textArea->getText()+"\n"+text);
+}
 void keyPressed(int key){
 //	textfield->setText((std::string)textfield->getText()+key);
 //std::cout<<key<<std::endl;
@@ -124,7 +128,16 @@ std::string text = textfield->getText();
 if(key==257){
 	if(typing && text!=""){
 		if(text=="/nod"){
-			text+="\nYou Nod.";
+			text="You nod.";
+		}
+		if(text=="/caw"){
+			text="You caw.";
+		}
+		if(text=="/lol"){
+			text="You laugh.";
+		}
+		if(text=="/rofl"){
+			text="You roll on the floor laughing.";
 		}
 	textArea->setText(textArea->getText()+"\n"+text);
 	textfield->setText("");

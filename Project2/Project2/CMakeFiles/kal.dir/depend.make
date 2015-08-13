@@ -11,7 +11,9 @@ CMakeFiles/kal.dir/main.cpp.o: GUI/GUITextField.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/GUIWindow.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/KeyMap.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/TextRenderer.h
+CMakeFiles/kal.dir/main.cpp.o: GameObject.h
 CMakeFiles/kal.dir/main.cpp.o: Map.h
+CMakeFiles/kal.dir/main.cpp.o: PickUp.h
 CMakeFiles/kal.dir/main.cpp.o: Player.h
 CMakeFiles/kal.dir/main.cpp.o: Settings.h
 CMakeFiles/kal.dir/main.cpp.o: Sprite.h
