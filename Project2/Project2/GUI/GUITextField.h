@@ -9,6 +9,7 @@ class GUITextField : public GUIObject {
 
   private:
 bool editable;
+bool multiline=false;
 TextRenderer *textRenderer = nullptr;
 std::string text;
 
@@ -17,18 +18,22 @@ void updateText(){
     delete(textRenderer);
   }
   textRenderer = new TextRenderer(GUIObject::getX(),GUIObject::getY(),text);
+  textRenderer->setObjectWidth(GUIObject::getWidth());
+  textRenderer->setObjectHeight(GUIObject::getHeight());
+  textRenderer->setPadding(5);
   textRenderer->setFontSize(12);
-  int x = GUIObject::getX()+10;
-    int y = GUIObject::getY()+(GUIObject::getImgH()/2)-(textRenderer->getHeight()/2);
+  int x = GUIObject::getX();
+    int y = GUIObject::getY();
   textRenderer->setX(x);
-  textRenderer->setY(y-2);
-textRenderer->setObjectWidth(300);
+  textRenderer->setY(y);
+  //std::cout<<GUIObject::getHeight()<<std::endl;
+textRenderer->setText(text);
 }
 
   public:
   GUITextField(SpriteSheet *sp):GUIObject(sp){
-    GUIObject::setX(50);
-    GUIObject::setY(500);
+    GUIObject::setX(10);
+    GUIObject::setY(560);
     GUIObject::setImgH(32);
     GUIObject::setImgW(32);
     GUIObject::setWidth(300);
@@ -42,6 +47,7 @@ GUITextField(SpriteSheet * sp, float pos_x, float pos_y, float image_x, float im
 }
     void Update(){}
   void Draw(){
+
     GUIObject::Draw();
     if(textRenderer!=nullptr){
       textRenderer->Draw();
@@ -57,6 +63,12 @@ bool isEditable(){
 void setText(std::string _text){
   text=_text;
   updateText();
+}
+void setMultiLine(bool _multiline){
+  multiline=_multiline;
+}
+bool isMultiLine(){
+  return multiline;
 }
 std::string getText(){
   return text;

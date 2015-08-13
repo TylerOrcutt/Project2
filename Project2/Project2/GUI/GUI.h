@@ -13,7 +13,7 @@
 #include <iostream>
 #include <sstream>
 #include <locale>
-
+#include "KeyMap.h"
 class GUI{
 private:
 	//Engine *engine;
@@ -30,6 +30,7 @@ private:
 		TextRenderer *textRend;
 
 		GUITextField *textfield;
+		GUITextField *textArea;
 
 		bool typing=false;
 		bool capsLock=false;
@@ -57,6 +58,9 @@ public:
 			target_hpbar = new GUIObject(hud_sprite, 304, 0, 0, 64, 32, 32);
 
 			textfield = new GUITextField(new SpriteSheet("textFieldBg"));
+				textArea = new GUITextField(new SpriteSheet("textFieldBg"));
+				textArea->setY(textArea->getY()-155);
+				textArea->setHeight(150);
 	}
 
 
@@ -70,6 +74,7 @@ public:
 		hud->Draw();
 		hpHud->Draw();
 		textfield->Draw();
+		textArea->Draw();
 		float maxbarlen = 153;
 		float hp = (float)player->getHP() / (float)player->getMaxHP();
 
@@ -113,7 +118,19 @@ void setTyping(bool _typing){
 void keyPressed(int key){
 //	textfield->setText((std::string)textfield->getText()+key);
 //std::cout<<key<<std::endl;
+
 std::string text = textfield->getText();
+
+if(key==257){
+	if(typing && text!=""){
+		if(text=="/nod"){
+			text+="\nYou Nod.";
+		}
+	textArea->setText(textArea->getText()+"\n"+text);
+	textfield->setText("");
+}
+	return;
+}
 if(key == 259){
 	text = text.substr(0,text.length()-1);
 }else if(key == 280){
@@ -125,8 +142,17 @@ char k = key;
 ss<<k;
 std::string _key = ss.str();
 if(!shiftDown && !capsLock ){
+
 std::locale loc;
 _key = std::tolower(_key[0],loc);
+}else{
+	if(key<65){
+		k=key;
+		std::stringstream sss;
+
+		sss<<k;
+		_key=getShiftKey(sss.str());
+	}
 }
 
 text = text + _key;

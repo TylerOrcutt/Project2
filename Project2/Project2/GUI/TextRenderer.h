@@ -8,6 +8,7 @@
 #include <sstream>
 #include <iostream>
 #include <pango/pangocairo.h>
+
 #include <string>
 #include <stdlib.h>
 
@@ -46,6 +47,13 @@ std::string temp_text=text;
 
 		cairo_t *layout_context = create_layout_context();
 		PangoLayout *layout=pango_cairo_create_layout (layout_context);
+//	std::cout<<objectHeight<<"\n";
+if(objectHeight>32.f){
+//	std::cout<<"setting word wrap\n";
+pango_layout_set_width(layout,objectWidth*PANGO_SCALE);
+pango_layout_set_wrap(layout,PANGO_WRAP_WORD);
+}
+
 		pango_layout_set_text(layout,temp_text.c_str(),-1);
 
 		std::stringstream ssize;
@@ -61,7 +69,7 @@ std::string temp_text=text;
 		pango_layout_get_size(layout,&width,&height);
 		width/=PANGO_SCALE;
 		height/=PANGO_SCALE;
-
+     //width=200;
 		//create context
 		 surface_data=(unsigned char*)calloc(4*width*height,sizeof(unsigned char));
 		surface =cairo_image_surface_create_for_data(surface_data, CAIRO_FORMAT_ARGB32,width,height,4 * width);
@@ -120,24 +128,39 @@ pango_cairo_update_layout(render_context, layout);
 
                       glBegin (GL_QUADS);
 											float w=0,h=0;
+											float maxW=1.f,maxH=1.f;
 										float	maxWidth=width;
-											if(objectWidth>32){
+										float maxHeight=height;
+											if(objectWidth>32 && objectHeight==32.f){
 												 if(width>(objectWidth-padding)){
 													 maxWidth=(objectWidth-padding);
 												w=1.f-((1.0f/width)*(objectWidth-padding));
 											}
 											}
+
+											if(objectHeight>32){
+												if(width>objectWidth){
+													maxWidth=objectWidth;
+										//			maxHeight=objectHeight;
+												maxW =((1.f/width)*objectWidth);
+											}
+											//	std::cout<<maxW<<std::endl;
+												if(height>(objectHeight-(padding))){
+													maxHeight=(objectHeight-(padding));
+													h=1.f-((1.0f/height)*(objectHeight-(padding)));
+												}
+											}
                        glTexCoord2f (w, h);
-                       glVertex2f (x, y);
+                       glVertex2f (x, y+5);
 
-                       glTexCoord2f (1.0f, h);
-                       glVertex2f (x+maxWidth, y);
+                       glTexCoord2f (maxW, h);
+                       glVertex2f (x+maxWidth, y+5);
 
-                       glTexCoord2f (1.0f, 1.0f);
-                       glVertex2f (x+maxWidth , y+height);
+                       glTexCoord2f (maxW, maxH);
+                       glVertex2f (x+maxWidth , y+maxHeight+5);
 
-                       glTexCoord2f (w, 1.0f);
-                       glVertex2f (x, y+height);
+                       glTexCoord2f (w, maxH);
+                       glVertex2f (x, y+maxHeight+5);
                        glEnd ();
 
 	            }
@@ -181,8 +204,13 @@ void setFontSize(int _fontSize){
 }
 void setObjectWidth(float _width){
 	objectWidth=_width;
+}void setObjectHeight(float _height){
+	objectHeight=_height;
 }
 
+void setPadding(float _padding){
+	padding=_padding;
+}
 };
 
 

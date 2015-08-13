@@ -17,10 +17,12 @@ private:
           delete(textRenderer);
         }
         textRenderer = new TextRenderer(GUIObject::getX(),GUIObject::getY(),text);
+          textRenderer->setPadding(0);
         int x = GUIObject::getX()+(GUIObject::getImgW()/2)-(textRenderer->getWidth()/2);
           int y = GUIObject::getY()+(GUIObject::getImgH()/2)-(textRenderer->getHeight()/2);
         textRenderer->setX(x);
-        textRenderer->setY(y-2);
+        textRenderer->setY(y-10);
+
         std::cout<<"text initialized\n";
       }
 

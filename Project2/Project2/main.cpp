@@ -51,18 +51,20 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 		engine->getGUI()->setGameMenuVisible(!engine->getGUI()->getGameMenuVisible());
 
 	}
+//	std::cout<<key<<std::endl;
 		if(key == GLFW_KEY_ENTER &&action == GLFW_PRESS){
 	//	std::cout<<"enter\n";
+		engine->getGUI()->keyPressed(key);
 	engine->getGUI()->setTyping(!engine->getGUI()->isTyping());
 	return;
 }
 if(engine->getGUI()->isTyping()){
-	if(action == GLFW_PRESS && key == 340){
+	if(action == GLFW_PRESS && (key == 340  || key==344)){
 		engine->getGUI()->setShiftDown(true);
 	//	std::cout<<"ShiftDown\n";
 		return;
 	}
-	if(action == GLFW_RELEASE && key == 340){
+	if(action == GLFW_RELEASE && (key == 340  || key==344)){
 			engine->getGUI()->setShiftDown(false);
 	//		std::cout<<"shiftUp\n";
 				return;
