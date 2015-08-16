@@ -12,6 +12,8 @@
 #include "GameObject.h"
 #include "PickUp.h"
 
+#include "GameItem.h"
+
 #include <vector>
 #include <string>
 #include <ctime>
@@ -35,12 +37,13 @@ private:
 	 GUI gui;
 	TextRenderer *fpsText;
 	std::string fps_str;
-
+std::vector<GameItem *>inventory;
 public:
 
 	Engine(){
 	//	gui.setEngine(thiis);
-		 map = new Map("map001");
+	gui.setInventory(&inventory);
+			 map = new Map("map001");
 
 	  peon = new SpriteSheet("weddingguy02");
 
@@ -58,7 +61,7 @@ public:
 		//lastframe = clock();
     pickup= new PickUp(new SpriteSheet("itemPickup"),200,200);
     pickup->setName("EarthRoot");
-	//textrend.initText("Hello worldssss\n  sss sssssssssss");
+
 
 	}
 
@@ -110,7 +113,7 @@ double dt = (curtime-lastUpdate)*100;
 
 dt *=10000;
 		//std::cout << dt << std::endl;
-usleep((1*dt)/30);
+usleep(10000);
 	}
 
 	void Draw(){
@@ -141,6 +144,7 @@ usleep((1*dt)/30);
       if(pickup->checkMouseClick(gMouseX,gMouseY)){
        pickup->setVisible(false);
        gui.addChatLogText("You looted " + pickup->getName()+".");
+			 inventory.push_back(new GameItem(pickup->getSprite()));
       }
     }
 

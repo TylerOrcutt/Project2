@@ -51,7 +51,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 		engine->getGUI()->setGameMenuVisible(!engine->getGUI()->getGameMenuVisible());
 
 	}
-//	std::cout<<key<<std::endl;
+	//std::cout<<key<<std::endl;
 		if(key == GLFW_KEY_ENTER &&action == GLFW_PRESS){
 	//	std::cout<<"enter\n";
 		engine->getGUI()->keyPressed(key);
@@ -111,6 +111,9 @@ if(action==GLFW_PRESS){
 		engine->getCamera().setMoving(false);
 	}
 
+	if (key == GLFW_KEY_B && action == GLFW_PRESS){
+		engine->getGUI()->getBagWindow()->setVisible(!	engine->getGUI()->getBagWindow()->isVisible());
+	}
 
 
 }
@@ -126,10 +129,10 @@ int main(int args, char **argv)
 	glfwSetErrorCallback(error_callback);
 	if (!glfwInit())
 		exit(EXIT_FAILURE);
-	//glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+//	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 std::string title=" v:";
 	title.append(GAME_VERSION);
 

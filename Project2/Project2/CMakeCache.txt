@@ -14,6 +14,9 @@
 # EXTERNAL cache entries
 ########################
 
+//Path to a program.
+CMAKE_AR:FILEPATH=/usr/bin/ar
+
 //Choose the type of build, options are: None(CMAKE_CXX_FLAGS or
 // CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
 CMAKE_BUILD_TYPE:STRING=
@@ -81,6 +84,9 @@ CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=OFF
 CMAKE_INSTALL_PREFIX:PATH=/usr/local
 
 //Path to a program.
+CMAKE_LINKER:FILEPATH=/usr/bin/ld
+
+//Path to a program.
 CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/make
 
 //Flags used by the linker during the creation of modules.
@@ -98,8 +104,20 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=
 //Flags used by the linker during Release with Debug Info builds.
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
+//Path to a program.
+CMAKE_NM:FILEPATH=/usr/bin/nm
+
+//Path to a program.
+CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
+
+//Path to a program.
+CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
+
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=RPG
+
+//Path to a program.
+CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
 
 //Flags used by the linker during the creation of dll's.
 CMAKE_SHARED_LINKER_FLAGS:STRING=' '
@@ -137,6 +155,9 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=
 
 //Flags used by the linker during Release with Debug Info builds.
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
+
+//Path to a program.
+CMAKE_STRIP:FILEPATH=/usr/bin/strip
 
 //If true, cmake will use relative paths in makefiles and projects.
 CMAKE_USE_RELATIVE_PATHS:BOOL=OFF
@@ -208,10 +229,10 @@ X11_X11_INCLUDE_PATH:PATH=/usr/include
 X11_X11_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libX11.so
 
 //Path to a file.
-X11_XRes_INCLUDE_PATH:PATH=X11_XRes_INCLUDE_PATH-NOTFOUND
+X11_XRes_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a library.
-X11_XRes_LIB:FILEPATH=X11_XRes_LIB-NOTFOUND
+X11_XRes_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXRes.so
 
 //Path to a file.
 X11_XShm_INCLUDE_PATH:PATH=/usr/include
@@ -220,13 +241,13 @@ X11_XShm_INCLUDE_PATH:PATH=/usr/include
 X11_XSync_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a file.
-X11_XTest_INCLUDE_PATH:PATH=X11_XTest_INCLUDE_PATH-NOTFOUND
+X11_XTest_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a library.
-X11_XTest_LIB:FILEPATH=X11_XTest_LIB-NOTFOUND
+X11_XTest_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXtst.so
 
 //Path to a file.
-X11_Xaccessrules_INCLUDE_PATH:PATH=X11_Xaccessrules_INCLUDE_PATH-NOTFOUND
+X11_Xaccessrules_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a file.
 X11_Xaccessstr_INCLUDE_PATH:PATH=/usr/include
@@ -298,10 +319,10 @@ X11_Xinput_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXi.so
 X11_Xkb_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a file.
-X11_Xkbfile_INCLUDE_PATH:PATH=X11_Xkbfile_INCLUDE_PATH-NOTFOUND
+X11_Xkbfile_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a library.
-X11_Xkbfile_LIB:FILEPATH=X11_Xkbfile_LIB-NOTFOUND
+X11_Xkbfile_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libxkbfile.so
 
 //Path to a file.
 X11_Xkblib_INCLUDE_PATH:PATH=/usr/include
@@ -310,16 +331,16 @@ X11_Xkblib_INCLUDE_PATH:PATH=/usr/include
 X11_Xlib_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a file.
-X11_Xmu_INCLUDE_PATH:PATH=X11_Xmu_INCLUDE_PATH-NOTFOUND
+X11_Xmu_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a library.
-X11_Xmu_LIB:FILEPATH=X11_Xmu_LIB-NOTFOUND
+X11_Xmu_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXmu.so
 
 //Path to a file.
-X11_Xpm_INCLUDE_PATH:PATH=X11_Xpm_INCLUDE_PATH-NOTFOUND
+X11_Xpm_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a library.
-X11_Xpm_LIB:FILEPATH=X11_Xpm_LIB-NOTFOUND
+X11_Xpm_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXpm.so
 
 //Path to a file.
 X11_Xrandr_INCLUDE_PATH:PATH=/usr/include
@@ -334,28 +355,28 @@ X11_Xrender_INCLUDE_PATH:PATH=/usr/include
 X11_Xrender_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXrender.so
 
 //Path to a file.
-X11_Xscreensaver_INCLUDE_PATH:PATH=X11_Xscreensaver_INCLUDE_PATH-NOTFOUND
+X11_Xscreensaver_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a library.
-X11_Xscreensaver_LIB:FILEPATH=X11_Xscreensaver_LIB-NOTFOUND
+X11_Xscreensaver_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXss.so
 
 //Path to a file.
 X11_Xshape_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a file.
-X11_Xt_INCLUDE_PATH:PATH=X11_Xt_INCLUDE_PATH-NOTFOUND
+X11_Xt_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a library.
-X11_Xt_LIB:FILEPATH=X11_Xt_LIB-NOTFOUND
+X11_Xt_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXt.so
 
 //Path to a file.
 X11_Xutil_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a file.
-X11_Xv_INCLUDE_PATH:PATH=X11_Xv_INCLUDE_PATH-NOTFOUND
+X11_Xv_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a library.
-X11_Xv_LIB:FILEPATH=X11_Xv_LIB-NOTFOUND
+X11_Xv_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libXv.so
 
 //Path to a library.
 X11_Xxf86misc_LIB:FILEPATH=X11_Xxf86misc_LIB-NOTFOUND
@@ -415,14 +436,20 @@ CAIRO_cairo_INCLUDEDIR:INTERNAL=
 CAIRO_cairo_LIBDIR:INTERNAL=
 CAIRO_cairo_PREFIX:INTERNAL=
 CAIRO_cairo_VERSION:INTERNAL=
+//ADVANCED property for variable: CMAKE_AR
+CMAKE_AR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_BUILD_TOOL
+CMAKE_BUILD_TOOL-ADVANCED:INTERNAL=1
+//What is the target build tool cmake is generating for.
+CMAKE_BUILD_TOOL:INTERNAL=/usr/bin/make
 //This is the directory where this CMakeCache.txt was created
 CMAKE_CACHEFILE_DIR:INTERNAL=/home/twittumz/Desktop/git/Project2/Project2/Project2
 //Major version of cmake used to create the current loaded cache
-CMAKE_CACHE_MAJOR_VERSION:INTERNAL=3
+CMAKE_CACHE_MAJOR_VERSION:INTERNAL=2
 //Minor version of cmake used to create the current loaded cache
-CMAKE_CACHE_MINOR_VERSION:INTERNAL=0
+CMAKE_CACHE_MINOR_VERSION:INTERNAL=8
 //Patch version of cmake used to create the current loaded cache
-CMAKE_CACHE_PATCH_VERSION:INTERNAL=2
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=12
 //ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
 CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 //Path to CMake executable.
@@ -431,6 +458,8 @@ CMAKE_COMMAND:INTERNAL=/usr/bin/cmake
 CMAKE_CPACK_COMMAND:INTERNAL=/usr/bin/cpack
 //Path to ctest program executable.
 CMAKE_CTEST_COMMAND:INTERNAL=/usr/bin/ctest
+//ADVANCED property for variable: CMAKE_CXX_COMPILER
+CMAKE_CXX_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS
 CMAKE_CXX_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_DEBUG
@@ -441,6 +470,8 @@ CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_RELWITHDEBINFO
 CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_COMPILER
+CMAKE_C_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS
 CMAKE_C_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS_DEBUG
@@ -451,6 +482,8 @@ CMAKE_C_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_C_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_FLAGS_RELWITHDEBINFO
 CMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//Executable file format
+CMAKE_EXECUTABLE_FORMAT:INTERNAL=ELF
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS
 CMAKE_EXE_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_DEBUG
@@ -482,6 +515,8 @@ CMAKE_HOME_DIRECTORY:INTERNAL=/home/twittumz/Desktop/git/Project2/Project2/Proje
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
 //Have library ICE
 CMAKE_LIB_ICE_HAS_ICECONNECTIONNUMBER:INTERNAL=1
+//ADVANCED property for variable: CMAKE_LINKER
+CMAKE_LINKER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MAKE_PROGRAM
 CMAKE_MAKE_PROGRAM-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS
@@ -494,10 +529,18 @@ CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_MODULE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_NM
+CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
 CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=1
+//ADVANCED property for variable: CMAKE_OBJCOPY
+CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_OBJDUMP
+CMAKE_OBJDUMP-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_RANLIB
+CMAKE_RANLIB-ADVANCED:INTERNAL=1
 //Path to CMake installation.
-CMAKE_ROOT:INTERNAL=/usr/share/cmake-3.0
+CMAKE_ROOT:INTERNAL=/usr/share/cmake-2.8
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS
 CMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG
@@ -522,20 +565,58 @@ CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_STRIP
+CMAKE_STRIP-ADVANCED:INTERNAL=1
+//uname command
+CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_USE_RELATIVE_PATHS
 CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding GLIB
-FIND_PACKAGE_MESSAGE_DETAILS_GLIB:INTERNAL=[/usr/include/glib-2.0;/usr/lib/x86_64-linux-gnu/glib-2.0/include][/usr/lib/x86_64-linux-gnu/libglib-2.0.so][v2.42.1()]
+FIND_PACKAGE_MESSAGE_DETAILS_GLIB:INTERNAL=[/usr/include/glib-2.0;/usr/lib/x86_64-linux-gnu/glib-2.0/include][/usr/lib/x86_64-linux-gnu/libglib-2.0.so][v2.40.2()]
 //Details about finding OpenGL
 FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/usr/lib/x86_64-linux-gnu/libGL.so][/usr/include][v()]
 //Details about finding PkgConfig
-FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.28()]
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.26()]
 //Details about finding SOIL
 FIND_PACKAGE_MESSAGE_DETAILS_SOIL:INTERNAL=[/usr/lib/libSOIL.so][/usr/include/SOIL][v()]
 //Details about finding X11
 FIND_PACKAGE_MESSAGE_DETAILS_X11:INTERNAL=[/usr/lib/x86_64-linux-gnu/libX11.so][/usr/include]
+GLFW_CFLAGS:INTERNAL=-I/usr/local/include;-I/usr/include/libdrm
+GLFW_CFLAGS_I:INTERNAL=
+GLFW_CFLAGS_OTHER:INTERNAL=
+GLFW_FOUND:INTERNAL=1
+GLFW_INCLUDEDIR:INTERNAL=/usr/local/include
+GLFW_INCLUDE_DIRS:INTERNAL=/usr/local/include;/usr/include/libdrm
+GLFW_LDFLAGS:INTERNAL=-L/usr/local/lib;-lglfw3
+GLFW_LDFLAGS_OTHER:INTERNAL=
+GLFW_LIBDIR:INTERNAL=/usr/local/lib
+GLFW_LIBRARIES:INTERNAL=glfw3
+GLFW_LIBRARY_DIRS:INTERNAL=/usr/local/lib
+GLFW_LIBS:INTERNAL=
+GLFW_LIBS_L:INTERNAL=
+GLFW_LIBS_OTHER:INTERNAL=
+GLFW_LIBS_PATHS:INTERNAL=
+GLFW_PREFIX:INTERNAL=/usr/local
+GLFW_STATIC_CFLAGS:INTERNAL=-I/usr/local/include;-I/usr/include/libdrm
+GLFW_STATIC_CFLAGS_I:INTERNAL=
+GLFW_STATIC_CFLAGS_OTHER:INTERNAL=
+GLFW_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/include;/usr/include/libdrm
+GLFW_STATIC_LDFLAGS:INTERNAL=-L/usr/local/lib;-lglfw3;-lrt;-lXrandr;-lXinerama;-lXi;-lXcursor;-lGL;-lm;-ldl;-lXrender;-ldrm;-lXdamage;-lX11-xcb;-lxcb-glx;-lxcb-dri2;-lxcb-dri3;-lxcb-present;-lxcb-sync;-lxshmfence;-lXxf86vm;-lXfixes;-lXext;-lX11;-lpthread;-lxcb;-lXau;-lXdmcp
+GLFW_STATIC_LDFLAGS_OTHER:INTERNAL=
+GLFW_STATIC_LIBDIR:INTERNAL=
+GLFW_STATIC_LIBRARIES:INTERNAL=glfw3;rt;Xrandr;Xinerama;Xi;Xcursor;GL;m;dl;Xrender;drm;Xdamage;X11-xcb;xcb-glx;xcb-dri2;xcb-dri3;xcb-present;xcb-sync;xshmfence;Xxf86vm;Xfixes;Xext;X11;pthread;xcb;Xau;Xdmcp
+GLFW_STATIC_LIBRARY_DIRS:INTERNAL=/usr/local/lib
+GLFW_STATIC_LIBS:INTERNAL=
+GLFW_STATIC_LIBS_L:INTERNAL=
+GLFW_STATIC_LIBS_OTHER:INTERNAL=
+GLFW_STATIC_LIBS_PATHS:INTERNAL=
+GLFW_VERSION:INTERNAL=3.1.1
+GLFW_glfw3_INCLUDEDIR:INTERNAL=
+GLFW_glfw3_LIBDIR:INTERNAL=
+GLFW_glfw3_PREFIX:INTERNAL=
+GLFW_glfw3_VERSION:INTERNAL=
 //ADVANCED property for variable: GLIBCONFIG_INCLUDE_DIR
 GLIBCONFIG_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GLIB_INCLUDE_DIR
@@ -753,6 +834,7 @@ X11_xf86misc_INCLUDE_PATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: X11_xf86vmode_INCLUDE_PATH
 X11_xf86vmode_INCLUDE_PATH-ADVANCED:INTERNAL=1
 __pkg_config_checked_CAIRO:INTERNAL=1
+__pkg_config_checked_GLFW:INTERNAL=1
 __pkg_config_checked_GTK3:INTERNAL=1
 __pkg_config_checked_PC_GLIB:INTERNAL=1
 

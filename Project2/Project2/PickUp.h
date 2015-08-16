@@ -6,7 +6,7 @@ class PickUp:public GameObject{
 
 private:
 double respawnStart=0;
-int respawnTime=30;
+int respawnTime=5;
 public:
 
   PickUp(SpriteSheet * sp, float pos_x, float pos_y):GameObject(sp,pos_x,pos_y){

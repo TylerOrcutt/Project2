@@ -202,6 +202,11 @@ MARK_AS_ADVANCED( SOIL_LIBRARY SOIL_INCLUDE_DIR )
 SET(SOIL_INCLUDE_DIRS "${SOIL_INCLUDE_DIR}")
 SET(SOIL_LIBRARIES    "${SOIL_LIBRARY}")
 
+
+
+pkg_search_module(GLFW REQUIRED glfw3)
+include_directories(${GLFW_INCLUDE_DIRS})
+
 # handle the QUIETLY and REQUIRED arguments and set SOIL_FOUND to TRUE if
 # all listed variables are TRUE
 INCLUDE(FindPackageHandleStandardArgs)
@@ -211,4 +216,4 @@ FIND_PACKAGE_HANDLE_STANDARD_ARGS(SOIL DEFAULT_MSG SOIL_LIBRARIES SOIL_INCLUDE_D
 # assumes that glfw was built with BUILD_SHARED_LIBS to ON
 include_directories(kal ${Pango_1_0_INCLUDE_DIR} ${GLIB_INCLUDE_DIR} ${GLIBCONFIG_INCLUDE_DIR} ${CAIRO_INCLUDE_DIRS})
 add_executable(kal main.cpp)
-target_link_libraries(kal glfw  ${GL_LIBRARY} ${Pango_1_0_LIBRARY} ${GLIB_LIBRARIES} ${GTK3_LIBRARIES} ${SOIL_LIBRARIES} m)
+target_link_libraries(kal ${GLFW_STATIC_LIBRARIES}  ${GL_LIBRARY} ${Pango_1_0_LIBRARY} ${GLIB_LIBRARIES} ${GTK3_LIBRARIES} ${SOIL_LIBRARIES} m)

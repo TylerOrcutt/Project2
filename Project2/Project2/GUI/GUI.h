@@ -10,14 +10,19 @@
 #include "TextRenderer.h"
 #include "GUIButton.h"
 #include "GUITextField.h"
+
+#include "../GameItem.h"
+
 #include <iostream>
 #include <sstream>
+#include <vector>
 #include <locale>
 #include "KeyMap.h"
 class GUI{
 private:
 	//Engine *engine;
 	GUIWindow * gmenu;
+		GUIWindow * bagWindow;
 	SpriteSheet *gmenu_sprite;
 	GUIObject *hud;
 		SpriteSheet *hud_sprite;
@@ -32,9 +37,13 @@ private:
 		GUITextField *textfield;
 		GUITextField *textArea;
 
+		std::vector<GameItem *> *inventory;
+
 		bool typing=false;
 		bool capsLock=false;
 		bool shiftDown=false;
+
+
 public:
 	 static void gameMenuExit_onClick (GUIButton *owner) {
 		std::cout<<owner->getText()<<"  - Button clicked\n";
@@ -45,6 +54,9 @@ public:
 			gmenu = new GUIWindow(gmenu_sprite,350,200);
 			gmenu->setVisible(false);
 
+			 bagWindow= new GUIWindow(gmenu_sprite,600,224);
+			 bagWindow->resize(160,256);
+			//	bagWindow->setVisible(false);
 
 			//void (*testCall)(GUIButton *)=testClickCallback;
 			gmenu->addComponent(new GUIButton(new SpriteSheet("test_button"),"Exit",gameMenuExit_onClick,gmenu->getX()+15,gmenu->getY()+15,0,0,128,32));
@@ -71,6 +83,24 @@ public:
 
 	void Draw(Entity *player){
 		gmenu->Draw();
+
+if(bagWindow->isVisible()){
+		bagWindow->Draw();
+
+			float startX = bagWindow->getX()+20;
+			float startY = bagWindow->getY()+20;
+			float itemX=startX;
+			float itemY=startY;
+		for(int i=0;i<inventory->size();i++){
+			if(itemX+36 > bagWindow->getX()+bagWindow->getWidth()-10) {
+				itemX=startX;
+				itemY+=36;
+			}
+			(*inventory)[i]->Draw(itemX,itemY);
+			itemX+=36;
+		}
+	}
+
 		hud->Draw();
 		hpHud->Draw();
 		textfield->Draw();
@@ -131,7 +161,7 @@ if(key==257){
 			text="You nod.";
 		}
 		if(text=="/caw"){
-			text="You caw.";
+			text="You caaawwww.";
 		}
 		if(text=="/lol"){
 			text="You laugh.";
@@ -185,6 +215,17 @@ void setShiftDown(bool _shiftDown){
 }
 bool isShiftDown(){
 	return shiftDown;
+}
+
+std::vector<GameItem *>* getInventory(){
+	return inventory;
+}
+void setInventory (std::vector<GameItem *> *_inventory){
+	inventory= _inventory;
+}
+
+GUIWindow * getBagWindow(){
+	return bagWindow;
 }
 };
 

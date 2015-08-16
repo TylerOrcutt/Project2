@@ -123,7 +123,12 @@ float getHeight(){
 }
 
 void resize(float _width, float _height){
-
+if((int)_width%32==0){
+width=_width;
+}
+if((int)_height%32==0){
+	height=_height;
+}
 }
 
 
