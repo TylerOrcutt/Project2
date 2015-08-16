@@ -87,7 +87,7 @@ public:
 if(bagWindow->isVisible()){
 		bagWindow->Draw();
 
-			float startX = bagWindow->getX()+20;
+			float startX = bagWindow->getX()+26;
 			float startY = bagWindow->getY()+20;
 			float itemX=startX;
 			float itemY=startY;

@@ -143,8 +143,23 @@ usleep(10000);
     if(button==1){
       if(pickup->checkMouseClick(gMouseX,gMouseY)){
        pickup->setVisible(false);
+			 bool adNew=true;
        gui.addChatLogText("You looted " + pickup->getName()+".");
-			 inventory.push_back(new GameItem(pickup->getSprite()));
+			 for(int i=0;i<inventory.size();i++){
+				 if(inventory[i]->getName()==pickup->getName()){
+					 if(inventory[i]->getStackCount()<inventory[i]->getMaxStack()){
+						 inventory[i]->incCount();
+						 adNew=false;
+						 break;
+					 }
+				 }
+			 }
+			 if(adNew){
+				 GameItem  * temp = new GameItem(pickup->getSprite());
+				 temp->setName(pickup->getName());
+				 	 inventory.push_back(temp);
+				 }
+
       }
     }
 

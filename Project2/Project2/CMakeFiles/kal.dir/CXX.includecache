@@ -149,10 +149,14 @@ stdlib.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GameItem.h
 string
 -
+sstream
+-
 Sprite.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Sprite.h
 SpriteSheet.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/SpriteSheet.h
+GUI/TextRenderer.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/TextRenderer.h
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GameObject.h
 string
