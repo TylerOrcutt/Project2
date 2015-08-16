@@ -70,7 +70,7 @@ public:
 		lastframe=glfwGetTime();
 		//lastframe = clock();
     pickup= new PickUp(new SpriteSheet("itemPickup"),200,200);
-    pickup->setName("EarthRoot");
+    pickup->setName("Stuff");
 
 
 	}
@@ -124,6 +124,10 @@ if(proj != nullptr){
 
 
 		for (unsigned int i = 0; i < entities.size(); i++){
+			entities[i]->setX(entities[i]->getX()+1);
+			if(entities[i]->getX()>700){
+					entities[i]->setX(300);
+			}
 			entities[i]->Update(curtime);
 		}
 
@@ -154,13 +158,29 @@ usleep(10000);
 	}
 
 void actionBarKey(int key){
+	if(key==GLFW_KEY_2){
+		int dir=player->getDirection();
+		if(dir==0){
+		player->setY(player->getY()-300);
+	}
+	if(dir==1){
+	player->setX(player->getX()+300);
+}
+if(dir==2){
+player->setY(player->getY()+300);
+}
+if(dir==3){
+player->setX(player->getX()-300);
+}
+
+	}
 if(key==GLFW_KEY_1){
 	if(player->getTarget()!= nullptr){
 		if(proj!=nullptr){
 			delete (proj);
 			proj=nullptr;
 		}
-	proj = new Projectile(fireball, player->getX(), player->getY() );
+	proj = new Projectile(fireball, player->getX(), player->getY()  +(player->getImgH()/2));
 	proj->setTarget(player->getTarget());
 //	proj->setTargetPosition(player->getTarget()->getX(),player->getTarget()->getY());
 

@@ -18,7 +18,9 @@ private:
   bool visible=true;
   float damage=10;
   float targetX=0,targetY=0;
-  float speed=10;
+  float speed=5;
+  float maxDistance = 500;
+  float distance=0;
   Entity * target=nullptr;
 public:
   Projectile(SpriteSheet *sp){
@@ -38,9 +40,18 @@ public:
       visible=false;
       return;
     }
-    float angle = atan2(posy-target->getY(),posx-target->getX());
-    posx+=(cos(angle*speed));
-    posy+=(sin(angle*speed));
+    float angle = atan2(target->getY()-posy,target->getX()-posx);
+
+    float incX=(cos(angle)*speed)*dt;
+    float incY=(sin(angle)*speed)*dt;
+    posx+=incX;
+    posy+= incY;
+    distance+=abs(incX)+abs(incY);
+    //std::cout<<distance<<std::endl;
+    if(distance >=maxDistance){
+      visible=false;
+      return;
+    }
     if(collide()){
       visible=false;
       target->setHP(target->getHP()-damage);
