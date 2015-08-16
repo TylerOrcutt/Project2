@@ -1,3 +1,9 @@
+/**************************************
+*SpriteSheet.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __SPRITESHEET_H_
 #define __SPRITESHEET_H_
 #include <GL/glew.h>

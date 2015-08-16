@@ -1,3 +1,9 @@
+/**************************************
+*PickUp.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __GAME_PICKUP_H
 #define __GAME_PICKUP_H
 #include "GameObject.h"

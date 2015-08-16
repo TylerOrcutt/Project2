@@ -1,3 +1,9 @@
+/**************************************
+*Camera.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __CAMERA_H_
 #define __CAMERA_H_
 class Camera{
@@ -32,7 +38,7 @@ public:
 	void setWidth(float _width){
 		width=_width;
 	}
-		
+
 	float getHeight(){
 		return height;
 	}
@@ -51,7 +57,7 @@ public:
 	void setDirection(int dir){
 		direction = dir;
 	}
- 
+
 
 };
 #endif

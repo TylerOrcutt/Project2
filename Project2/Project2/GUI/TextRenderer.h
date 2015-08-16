@@ -1,3 +1,9 @@
+/**************************************
+*TextRenderer.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __TEXTRENDERER_H_
 #define __TEXTRENDERER_H_
 

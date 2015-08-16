@@ -1,3 +1,9 @@
+/**************************************
+*map.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __MAP_H_
 #define __MAP_H_
 #include "Sprite.h"
@@ -20,11 +26,11 @@ private:
 	float minX=0, minY=0, maxX=0, maxY=0;
 
 public:
-	
+
 	Map(std::string file){
 		Load(file);
 	//	SpriteSheet mpsh;
-		
+
 		mapsheet = new Sprite(new SpriteSheet("sp2"));
 
 	}
@@ -68,7 +74,7 @@ public:
 					}
 				}
 				//	std::cout << "New block\n";
-			
+
 
 				if (maxX < blk.x){
 					maxX = blk.x;
@@ -107,7 +113,7 @@ public:
 
 	float getMaxX(){
 		return maxX;
-	}	
+	}
 	float getMaxY(){
 		return maxY;
 	}

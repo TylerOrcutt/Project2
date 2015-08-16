@@ -1,3 +1,9 @@
+/**************************************
+* Projectile.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __PROJECTILE_H_
 #define __PROJECTILE_H_
 #include "Sprite.h"
@@ -8,7 +14,7 @@
 class Projectile {
 private:
   Sprite *sprite;
-  float posx = 0, posy = 0, width=32, height=32, imgx = 0, imgy = 0, imgw = 32, imgh = 32;
+  float posx = 0, posy = 0, width=16, height=16, imgx = 0, imgy = 0, imgw = 32, imgh = 32;
   bool visible=true;
   float damage=10;
   float targetX=0,targetY=0;

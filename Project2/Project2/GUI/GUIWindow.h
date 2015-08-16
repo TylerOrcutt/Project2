@@ -1,3 +1,9 @@
+/**************************************
+*GUIWindow.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __GUIWINDOW_H_
 #define __GUIWINDOW_H_
 //base gui window

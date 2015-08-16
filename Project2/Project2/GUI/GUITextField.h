@@ -1,3 +1,9 @@
+/**************************************
+*GUITextField.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __GUI_TEXTFIELD_H
 #define __GUI_TEXTFIELD_H
 

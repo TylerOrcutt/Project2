@@ -1,3 +1,9 @@
+/**************************************
+*Engine.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __KAL_ENGINE_H_
 #define __KAL_ENGINE_H_
 #include "Entity.h"

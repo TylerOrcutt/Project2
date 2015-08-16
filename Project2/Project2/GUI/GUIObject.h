@@ -1,3 +1,9 @@
+/**************************************
+*GUIObject.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __GUIOBJECT_H_
 #define __GUIOBJECT_H_
 //manage all gui things

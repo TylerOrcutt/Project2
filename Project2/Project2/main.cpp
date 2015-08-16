@@ -1,3 +1,10 @@
+/**************************************
+*main.cpp
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
+
 #define GAME_VERSION "0.1.0"
 
 #include <stdio.h>

@@ -1,3 +1,9 @@
+/**************************************
+*GameItem.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __GAME_ITEM_H_
 #define __GAME_ITEM_H_
 #include <string>

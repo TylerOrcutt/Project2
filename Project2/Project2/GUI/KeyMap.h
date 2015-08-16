@@ -1,3 +1,9 @@
+/**************************************
+*KeyMap.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __KEY_MAP_H_
 #define __KEY_MAP_H_
 #include <string>
