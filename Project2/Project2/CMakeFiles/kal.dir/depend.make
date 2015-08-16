@@ -16,6 +16,7 @@ CMakeFiles/kal.dir/main.cpp.o: GameObject.h
 CMakeFiles/kal.dir/main.cpp.o: Map.h
 CMakeFiles/kal.dir/main.cpp.o: PickUp.h
 CMakeFiles/kal.dir/main.cpp.o: Player.h
+CMakeFiles/kal.dir/main.cpp.o: Projectile.h
 CMakeFiles/kal.dir/main.cpp.o: Settings.h
 CMakeFiles/kal.dir/main.cpp.o: Sprite.h
 CMakeFiles/kal.dir/main.cpp.o: SpriteSheet.h

@@ -29,6 +29,8 @@ PickUp.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/PickUp.h
 GameItem.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GameItem.h
+Projectile.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Projectile.h
 vector
 -
 string
@@ -196,6 +198,18 @@ GLFW/glfw3.h
 ctime
 -
 iostream
+-
+
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Projectile.h
+Sprite.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Sprite.h
+SpriteSheet.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/SpriteSheet.h
+Camera.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Camera.h
+Entity.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Entity.h
+math.h
 -
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Settings.h

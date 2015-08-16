@@ -104,7 +104,9 @@ if(action==GLFW_PRESS){
 		engine->getPlayer()->setMoving(true);
         engine->getPlayer()->setDirection(1);
 	}
-
+if (key == GLFW_KEY_1 && action == GLFW_PRESS){
+	engine->actionBarKey(GLFW_KEY_1);
+}
 
 	if ((key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D) && action == GLFW_RELEASE){
 		engine->getPlayer()->setMoving(false);

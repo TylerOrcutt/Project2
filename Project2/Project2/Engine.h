@@ -14,6 +14,8 @@
 
 #include "GameItem.h"
 
+#include "Projectile.h"
+
 #include <vector>
 #include <string>
 #include <ctime>
@@ -25,7 +27,7 @@ private:
 	//TODO data struct, hash?
 	std::vector<Entity*> entities;
 
-	SpriteSheet * peon;
+	SpriteSheet * peon,*fireball;
 	 Map *map;
 	 Entity*player;
 	 Camera camera;
@@ -38,6 +40,7 @@ private:
 	TextRenderer *fpsText;
 	std::string fps_str;
 std::vector<GameItem *>inventory;
+Projectile *proj=nullptr;
 public:
 
 	Engine(){
@@ -46,6 +49,7 @@ public:
 			 map = new Map("map001");
 
 	  peon = new SpriteSheet("weddingguy02");
+		fireball = new SpriteSheet("fireball");
 
 	  player = new Player(peon, 200, 200, 0, 0, 32, 64);
 
@@ -73,6 +77,13 @@ public:
 
 double dt = (curtime-lastUpdate)*100;
 		double elp = curtime - lastframe;
+if(proj != nullptr){
+	proj->Update(dt);
+	if(!proj->isVisible()){
+		delete(proj);
+		proj=nullptr;
+	}
+}
 
 
 
@@ -124,7 +135,9 @@ usleep(10000);
 			entities[i]->Draw(camera);
 		}
 		player->Draw(camera);
-
+		if(proj != nullptr){
+			proj->Draw(&camera);
+		}
 
 
 		gui.Draw(player);
@@ -134,7 +147,20 @@ usleep(10000);
 
 	}
 
+void actionBarKey(int key){
+if(key==GLFW_KEY_1){
+	if(player->getTarget()!= nullptr){
+		if(proj!=nullptr){
+			delete (proj);
+			proj=nullptr;
+		}
+	proj = new Projectile(fireball, player->getX(), player->getY() );
+	proj->setTarget(player->getTarget());
+//	proj->setTargetPosition(player->getTarget()->getX(),player->getTarget()->getY());
 
+}
+}
+}
 	void MouseClick(int button, double MouseX, double MouseY){
 	double	gMouseX = MouseX+camera.getX();
 	double	gMouseY = MouseY+camera.getY();
