@@ -161,16 +161,16 @@ void actionBarKey(int key){
 	if(key==GLFW_KEY_2){
 		int dir=player->getDirection();
 		if(dir==0){
-		player->setY(player->getY()-300);
+		player->setY(player->getY()-500);
 	}
 	if(dir==1){
-	player->setX(player->getX()+300);
+	player->setX(player->getX()+500);
 }
 if(dir==2){
-player->setY(player->getY()+300);
+player->setY(player->getY()+500);
 }
 if(dir==3){
-player->setX(player->getX()-300);
+player->setX(player->getX()-500);
 }
 
 	}

@@ -58,7 +58,10 @@ public:
     posy=_y;
   }
 
-
+  void setPosition(float x, float y){
+    posx=x;
+    posy=y;
+  }
   void setWidth(float _width){
   	width=_width;
   }

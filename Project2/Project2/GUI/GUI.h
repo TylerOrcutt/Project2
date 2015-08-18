@@ -28,16 +28,20 @@ class GUI{
 private:
 	//Engine *engine;
 	GUIWindow * gmenu;
-		GUIWindow * bagWindow;
+		GUIWindow * bagWindow,*actionBar;
 	SpriteSheet *gmenu_sprite;
 	GUIObject *hud;
-		SpriteSheet *hud_sprite;
-
+		SpriteSheet *hud_sprite, *fireSprite,*teleSprite;
+GUIObject *fireball,*teleport;
 		GUIObject *hpHud;
 		GUIObject *hpBar;
 
 		GUIObject*  target_hphud;
 		GUIObject * target_hpbar;
+
+		std::vector<GUIObject *> actionBarItems;
+		int actionBarItemCount=10;
+
 		TextRenderer *textRend;
 
 		GUITextField *textfield;
@@ -57,12 +61,26 @@ public:
 	}
 	GUI(){
 		gmenu_sprite = new SpriteSheet("GUIWindow");
+
+		fireSprite= new SpriteSheet("fireball");
+		teleSprite= new SpriteSheet("teleport_icon");
+
+
 			gmenu = new GUIWindow(gmenu_sprite,350,200);
 			gmenu->setVisible(false);
 
 			 bagWindow= new GUIWindow(gmenu_sprite,600,224);
 			 bagWindow->resize(160,256);
-			//	bagWindow->setVisible(false);
+			 bagWindow->setVisible(false);
+
+			 actionBar= new GUIWindow(gmenu_sprite,350,540);
+			actionBar->resize(320,64);
+
+			actionBarItems.push_back(new GUIObject(fireSprite,actionBar->getX()+20,actionBar->getY()+15));
+			actionBarItems.push_back(new GUIObject(teleSprite,actionBar->getX()+56,actionBar->getY()+15));
+
+
+
 
 			//void (*testCall)(GUIButton *)=testClickCallback;
 			gmenu->addComponent(new GUIButton(new SpriteSheet("test_button"),"Exit",gameMenuExit_onClick,gmenu->getX()+15,gmenu->getY()+15,0,0,128,32));
@@ -128,7 +146,10 @@ if(bagWindow->isVisible()){
 
 		}
 
-
+		actionBar->Draw();
+		for(int i=0;i<actionBarItems.size();i++){
+			actionBarItems[i]->Draw();
+		}
 	//	hpBar->Draw();
 	}
 

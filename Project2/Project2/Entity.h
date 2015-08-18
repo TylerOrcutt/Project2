@@ -66,6 +66,9 @@ public:
 	}
 
 	virtual void Update(double dt){
+		if(hp<=0){
+			//visible=false;
+		}
 
 	}
 
