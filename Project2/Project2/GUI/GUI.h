@@ -31,7 +31,7 @@ private:
 		GUIWindow * bagWindow,*actionBar;
 	SpriteSheet *gmenu_sprite;
 	GUIObject *hud;
-		SpriteSheet *hud_sprite, *fireSprite,*teleSprite;
+		SpriteSheet *hud_sprite, *fireSprite,*teleSprite,*actionBarItemBlank;
 GUIObject *fireball,*teleport;
 		GUIObject *hpHud;
 		GUIObject *hpBar;
@@ -64,7 +64,7 @@ public:
 
 		fireSprite= new SpriteSheet("fireball");
 		teleSprite= new SpriteSheet("teleport_icon");
-
+	actionBarItemBlank= new SpriteSheet("actionBarItem_blank");
 
 			gmenu = new GUIWindow(gmenu_sprite,350,200);
 			gmenu->setVisible(false);
@@ -74,10 +74,17 @@ public:
 			 bagWindow->setVisible(false);
 
 			 actionBar= new GUIWindow(gmenu_sprite,350,540);
-			actionBar->resize(320,64);
+			actionBar->resize(320+64,64);
 
-			actionBarItems.push_back(new GUIObject(fireSprite,actionBar->getX()+20,actionBar->getY()+15));
-			actionBarItems.push_back(new GUIObject(teleSprite,actionBar->getX()+56,actionBar->getY()+15));
+			float abix= actionBar->getX()+15;
+			float abiy=actionBar->getY()+15;
+			for(int i=0;i<actionBarItemCount;i++){
+				actionBarItems.push_back(new GUIObject(actionBarItemBlank,abix+(i*36), abiy));
+			}
+delete(actionBarItems[0]);
+delete(actionBarItems[1]);
+			actionBarItems[0]=(new GUIObject(fireSprite,abix,abiy));
+			actionBarItems[1]=(new GUIObject(teleSprite,abix+36, abiy));
 
 
 
@@ -148,7 +155,9 @@ if(bagWindow->isVisible()){
 
 		actionBar->Draw();
 		for(int i=0;i<actionBarItems.size();i++){
+			if(actionBarItems[i]!=nullptr){
 			actionBarItems[i]->Draw();
+		}
 		}
 	//	hpBar->Draw();
 	}
