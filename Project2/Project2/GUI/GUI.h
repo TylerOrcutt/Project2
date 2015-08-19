@@ -24,9 +24,13 @@
 #include <vector>
 #include <locale>
 #include "KeyMap.h"
+#include "../Network/NetworkClient.h"
+
 class GUI{
 private:
 	//Engine *engine;
+NetworkClient * network;
+
 	GUIWindow * gmenu;
 		GUIWindow * bagWindow,*actionBar;
 	SpriteSheet *gmenu_sprite;
@@ -206,6 +210,7 @@ if(key==257){
 			text="You roll on the floor laughing.";
 		}
 	textArea->setText(textArea->getText()+"\n"+text);
+	network->sendData(text);
 	textfield->setText("");
 }
 	return;
@@ -262,6 +267,9 @@ void setInventory (std::vector<GameItem *> *_inventory){
 
 GUIWindow * getBagWindow(){
 	return bagWindow;
+}
+void setNetworkClient(NetworkClient * client){
+	network = client;
 }
 };
 

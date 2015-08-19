@@ -28,12 +28,17 @@
 #include <sstream>
 #include <GLFW/glfw3.h>
 #include <unistd.h>
+
+#include "Network/NetworkClient.h"
+
 class Engine{
 private:
+	NetworkClient * network;
+
 	//TODO data struct, hash?
 	std::vector<Entity*> entities;
 
-	SpriteSheet * peon,*fireball;
+	SpriteSheet * peon,*wedguy, *fireball;
 	 Map *map;
 	 Entity*player;
 	 Camera camera;
@@ -51,19 +56,27 @@ public:
 
 	Engine(){
 	//	gui.setEngine(thiis);
+network = new NetworkClient();
+if(network->Connect()){
+
+}else{
+	gui.addChatLogText("Connection to server failed");
+}
+	gui.setNetworkClient(network);
 	gui.setInventory(&inventory);
 			 map = new Map("map001");
-
-	  peon = new SpriteSheet("weddingguy02");
+peon = new SpriteSheet("peon");
+	  wedguy=new SpriteSheet("weddingguy02");
 		fireball = new SpriteSheet("fireball");
 
-	  player = new Player(peon, 200, 200, 0, 0, 32, 64);
+	  player = new Player(wedguy, 200, 200, 0, 0, 32, 64);
 
 	  fpsText  = new TextRenderer(camera.getWidth()-50,10,"");
 
-		Entity *ent = new Entity(peon,200,100,0,0,32,64);
+		Entity *ent = new Entity(peon,200,100,0,0,32,32);
 		ent->setName("Test");
 		ent->setHP(50);
+		ent->resize(64,64);
 		entities.push_back(ent);
 		//curtime = clock();
 		curtime=glfwGetTime();
@@ -245,6 +258,8 @@ if(key==GLFW_KEY_1){
 	GUI* getGUI(){
 		return &gui;
 	}
+
+
 
 	void exitGame(std::string method){
 

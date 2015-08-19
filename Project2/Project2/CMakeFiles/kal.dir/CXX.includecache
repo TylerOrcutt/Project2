@@ -43,6 +43,8 @@ GLFW/glfw3.h
 -
 unistd.h
 -
+Network/NetworkClient.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Network/NetworkClient.h
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Entity.h
 Sprite.h
@@ -85,6 +87,8 @@ locale
 -
 KeyMap.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/KeyMap.h
+../Network/NetworkClient.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Network/NetworkClient.h
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIButton.h
 TextRenderer.h
@@ -184,6 +188,40 @@ vector
 Camera.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Camera.h
 
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Network/NetworkClient.h
+string.h
+-
+sstream
+-
+errno.h
+-
+unistd.h
+-
+malloc.h
+-
+string.h
+-
+arpa/inet.h
+-
+sys/socket.h
+-
+sys/types.h
+-
+netinet/in.h
+-
+netdb.h
+-
+resolv.h
+-
+openssl/ssl.h
+-
+openssl/err.h
+-
+openssl/crypto.h
+-
+vector
+-
+
 /home/twittumz/Desktop/git/Project2/Project2/Project2/PickUp.h
 GameObject.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GameObject.h
@@ -255,6 +293,8 @@ Windows.h
 -
 Engine.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Engine.h
+Network/NetworkClient.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Network/NetworkClient.h
 Settings.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Settings.h
 

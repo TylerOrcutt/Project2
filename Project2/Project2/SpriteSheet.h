@@ -25,7 +25,7 @@ public:
 		Load(file);
     }
 	void Load(std::string file){
-		std::cout << file << std::endl;
+		//std::cout << file << std::endl;
 		file = "./images/" + file + ".png";
 		texture = SOIL_load_OGL_texture(file.c_str(),
 			SOIL_LOAD_AUTO,

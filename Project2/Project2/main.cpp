@@ -31,9 +31,11 @@
 #endif
 
 #include "Engine.h"
+#include "Network/NetworkClient.h"
 #include "Settings.h"
 Engine *engine;
 GLFWwindow* window;
+//NetworkClient * network;
 double mouseX, mouseY;
 static void error_callback(int error, const char* description)
 {

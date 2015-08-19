@@ -13,7 +13,7 @@
 class Entity{
 private:
 	Sprite *sprite;
-	float posx=0, posy=0, imgx=0, imgy=0, imgw=32, imgh=32;
+	float posx=0, posy=0, imgx=0, imgy=0, imgw=32, imgh=32,width=32,height=32;
 	bool moving = false;
 	int direction = 0;//0-up  1-right 2-down 3-left
 
@@ -40,7 +40,6 @@ public:
 		posy = pos_y;
 		imgx = image_x;
 		imgy = image_y;
-
 	}
 
 	Entity(SpriteSheet * sp, float pos_x, float pos_y, float image_x, float image_y, float image_width, float image_height){
@@ -51,6 +50,8 @@ public:
 		imgy = image_y;
 		imgw = image_width;
 		imgh = image_height;
+		width=image_width;
+		height=image_height;
 
 	}
 
@@ -59,7 +60,7 @@ public:
 	virtual void Draw(Camera cam){
 		if (posx >= cam.getX() - imgw && posx <= cam.getX() + cam.getWidth() && posy >= cam.getY() - imgh && posy <= cam.getY() + cam.getHeight()){
 
-			sprite->Draw(posx - cam.getX(), posy - cam.getY(), imgw, imgh, imgx, imgy);
+			sprite->Draw(posx - cam.getX(), posy - cam.getY(), width,height, imgx, imgy,imgw, imgh);
 		}
 
 
@@ -73,7 +74,7 @@ public:
 	}
 
 	bool checkMouseClick(double mousex, double mousey){
-		if (mousex >= posx && mousex <= posx + imgw && mousey >= posy && mousey <= posy + imgh){
+		if (mousex >= posx && mousex <= posx + width && mousey >= posy && mousey <= posy + height){
 			return true;
 		}
 		return false;
@@ -108,6 +109,16 @@ public:
 		imgy = y;
 	}
 
+	void resize(float w,float h){
+		width=w;
+		height=h;
+	}
+	float getWidth(){
+		return width;
+	}
+	float getHeight(){
+		return height;
+	}
 
 	float getImgW(){
 		return imgw;

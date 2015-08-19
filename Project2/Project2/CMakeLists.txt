@@ -212,8 +212,19 @@ include_directories(${GLFW_INCLUDE_DIRS})
 INCLUDE(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(SOIL DEFAULT_MSG SOIL_LIBRARIES SOIL_INCLUDE_DIRS)
 
+# Search OpenSSL
+find_package(PkgConfig REQUIRED)
+pkg_search_module(OPENSSL REQUIRED openssl)
+
+if( OPENSSL_FOUND )
+    include_directories(${OPENSSL_INCLUDE_DIRS})
+    message(STATUS "Using OpenSSL ${OPENSSL_VERSION}")
+else()
+    # Error; with REQUIRED, pkg_search_module() will throw an error by it's own
+endif()
+
 # linking "glfw" and not "glfw3"
 # assumes that glfw was built with BUILD_SHARED_LIBS to ON
-include_directories(kal ${Pango_1_0_INCLUDE_DIR} ${GLIB_INCLUDE_DIR} ${GLIBCONFIG_INCLUDE_DIR} ${CAIRO_INCLUDE_DIRS})
+include_directories(kal ${OPENSSL_INCLUDE_DIRS} ${Pango_1_0_INCLUDE_DIR} ${GLIB_INCLUDE_DIR} ${GLIBCONFIG_INCLUDE_DIR} ${CAIRO_INCLUDE_DIRS})
 add_executable(kal main.cpp)
-target_link_libraries(kal ${GLFW_STATIC_LIBRARIES}  ${GL_LIBRARY} ${Pango_1_0_LIBRARY} ${GLIB_LIBRARIES} ${GTK3_LIBRARIES} ${SOIL_LIBRARIES} m)
+target_link_libraries(kal ${GLFW_STATIC_LIBRARIES}  ${GL_LIBRARY} ${Pango_1_0_LIBRARY} ${GLIB_LIBRARIES} ${GTK3_LIBRARIES} ${SOIL_LIBRARIES}  ${OPENSSL_LIBRARIES})
