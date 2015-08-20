@@ -18,6 +18,8 @@
 #include <vector>
 #include <openssl/sha.h>
 
+#include "Crypto.h"
+
 #define remoteHost "127.0.0.1"
 #define remotePort 9898
 
@@ -32,19 +34,7 @@ public:
   NetworkClient(){
     initCTX();
 
-    unsigned char digest[SHA_DIGEST_LENGTH];
-      const char* string = "asdasd1";
-
-      SHA_CTX sha;
-      SHA1_Init(&sha);
-      SHA1_Update(&sha, string, strlen(string));
-      SHA1_Final(digest, &sha);
-
-      char mdString[SHA_DIGEST_LENGTH*2+1];
-      for (int i = 0; i < SHA_DIGEST_LENGTH; i++)
-          sprintf(&mdString[i*2], "%02x", (unsigned int)digest[i]);
-
-      printf("SHA1: %s\n", mdString);
+std::cout<<"SHA1:"<< encrypt_SHA1("asdasd1")<<std::endl;
   }
   bool Connect(){
 
