@@ -16,7 +16,7 @@
 #include <openssl/err.h>
 #include <openssl/crypto.h>
 #include <vector>
-
+#include <openssl/sha.h>
 
 #define remoteHost "127.0.0.1"
 #define remotePort 9898
@@ -32,7 +32,19 @@ public:
   NetworkClient(){
     initCTX();
 
+    unsigned char digest[SHA_DIGEST_LENGTH];
+      const char* string = "asdasd1";
 
+      SHA_CTX sha;
+      SHA1_Init(&sha);
+      SHA1_Update(&sha, string, strlen(string));
+      SHA1_Final(digest, &sha);
+
+      char mdString[SHA_DIGEST_LENGTH*2+1];
+      for (int i = 0; i < SHA_DIGEST_LENGTH; i++)
+          sprintf(&mdString[i*2], "%02x", (unsigned int)digest[i]);
+
+      printf("SHA1: %s\n", mdString);
   }
   bool Connect(){
 
@@ -68,6 +80,9 @@ public:
   }
   void sendData(std::string data){
   //  ShowCerts();
+  if(data=="showcert"){
+    ShowCerts();
+  }
 data=data+" \n";
   int bytes_sent=SSL_write(ssl,data.c_str(),strlen(data.c_str()));
     if(bytes_sent==0){
