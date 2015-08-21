@@ -24,7 +24,7 @@ private:
 	float objectWidth=32,objectHeight=32;
 	std::string text;
 	int fontSize=16;
-	int padding=20;
+	int padding=0;
 	std::string font="arial";
 public:
 
@@ -110,6 +110,9 @@ public:
 		float	maxWidth=width;
 		float maxHeight=height;
 
+if(width+(padding)<objectWidth){
+	maxWidth+=padding;
+}
 		if(objectWidth>32 && objectHeight==32.f){
 			if(width>(objectWidth-padding)){
 				maxWidth=(objectWidth-padding);
@@ -130,13 +133,16 @@ public:
 
 		glBegin (GL_QUADS);
 		glTexCoord2f (w, h);
-		glVertex2f (x, y+5);
+		glVertex2f ((x+padding), y+5);
+
 		glTexCoord2f (maxW, h);
 		glVertex2f (x+maxWidth, y+5);
+
 		glTexCoord2f (maxW, maxH);
 		glVertex2f (x+maxWidth , y+maxHeight+5);
+
 		glTexCoord2f (w, maxH);
-		glVertex2f (x, y+maxHeight+5);
+		glVertex2f (x+padding, y+maxHeight+5);
 		glEnd ();
 	}
 

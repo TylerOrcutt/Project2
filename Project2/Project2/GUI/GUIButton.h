@@ -53,7 +53,9 @@ public:
 	}
 bool checkMouseClick(float mousex, float mousey){
   if(GUIObject::checkMouseClick((float)mousex,(float)mousey)){
+    if(onClickCallback!=NULL){
     onClickCallback(this);
+  }
 
     return true;
   }

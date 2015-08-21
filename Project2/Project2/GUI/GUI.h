@@ -31,6 +31,11 @@ private:
 	//Engine *engine;
 NetworkClient * network;
 
+//login Stuff
+GUITextField *textUser,*textPass;
+GUIButton *loginBtn;
+
+
 	GUIWindow * gmenu;
 		GUIWindow * bagWindow,*actionBar;
 	SpriteSheet *gmenu_sprite;
@@ -57,6 +62,7 @@ GUIObject *fireball,*teleport;
 		bool capsLock=false;
 		bool shiftDown=false;
 
+	GUITextField * focusText=nullptr;
 
 public:
 	 static void gameMenuExit_onClick (GUIButton *owner) {
@@ -105,9 +111,22 @@ delete(actionBarItems[1]);
 			target_hpbar = new GUIObject(hud_sprite, 304, 0, 0, 64, 32, 32);
 
 			textfield = new GUITextField(new SpriteSheet("textFieldBg"));
+			textfield->setPadding(15);
 				textArea = new GUITextField(new SpriteSheet("textFieldBg"));
 				textArea->setY(textArea->getY()-155);
 				textArea->setHeight(150);
+				textArea->setPadding(15);
+
+	textUser = new GUITextField(new SpriteSheet("textFieldBg"));
+	textUser->setWidth(200);
+		textUser->setPadding(17);
+	textUser->setPosition((SCREEN_WIDTH/2)-(textUser->getWidth()/2),(SCREEN_HEIGHT/2)-(textUser->getHeight()/2)-20);
+					textPass = new GUITextField(new SpriteSheet("textFieldBg"));
+					textPass->setPadding(17);
+						textPass->setWidth(200);
+					textPass->setPosition((SCREEN_WIDTH/2)-(textPass->getWidth()/2),(SCREEN_HEIGHT/2)-(textPass->getHeight()/2)+20);
+textPass->setPasswordText(true);
+loginBtn =new GUIButton(new SpriteSheet("test_button"),"Login",NULL,400,500,0,0,128,32);
 	}
 
 
@@ -115,8 +134,14 @@ delete(actionBarItems[1]);
 
 
 	}
+	void DrawLoginMenu(){
+		textUser->Draw();
+		textPass->Draw();
+		loginBtn->Draw();
+	}
 
 	void Draw(Entity *player){
+
 		gmenu->Draw();
 
 if(bagWindow->isVisible()){
@@ -170,6 +195,23 @@ if(bagWindow->isVisible()){
    if(gmenu->checkMouseClick(mousex,  mousey)){
 		 return true;
 	 }
+	 if(loginMenu){
+	 if(textUser->checkMouseClick(mousex,mousey)){
+		 focusText=textUser;
+		 typing=true;
+		 return true;
+	 }
+	 if(textPass->checkMouseClick(mousex,mousey)){
+		 focusText=textPass;
+		 typing=true;
+		 return true;
+	 }
+	 if(loginBtn->checkMouseClick(mousex,mousey)){
+		 std::cout<<"Login button click\n";
+		 network->sendLogin(textUser->getText(), textPass->getText());
+		return true;
+	}
+ }
 	 return false;
 	}
 	void setGameMenuVisible(bool vis){
@@ -192,8 +234,12 @@ void addChatLogText(std::string text){
 void keyPressed(int key){
 //	textfield->setText((std::string)textfield->getText()+key);
 //std::cout<<key<<std::endl;
-
-std::string text = textfield->getText();
+std::string text;
+if(focusText ==nullptr){
+text= textfield->getText();
+}else{
+	text = focusText->getText();
+}
 
 if(key==257){
 	if(typing && text!=""){
@@ -209,9 +255,13 @@ if(key==257){
 		if(text=="/rofl"){
 			text="You roll on the floor laughing.";
 		}
+		if(focusText ==nullptr){
 	textArea->setText(textArea->getText()+"\n"+text);
+}
 	network->sendData(text);
+	if(focusText ==nullptr){
 	textfield->setText("");
+}
 }
 	return;
 }
@@ -241,7 +291,11 @@ _key = std::tolower(_key[0],loc);
 
 text = text + _key;
 }
+	if(focusText ==nullptr){
 textfield->setText(text);
+}else{
+	focusText->setText(text);
+}
 }
 
 void setCapsLock(bool _capsLock){

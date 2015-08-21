@@ -79,6 +79,14 @@ data=data+" \n";
     std::cout<<">>>failed to send message\n";
   }
   }
+
+
+    void sendLogin(std::string user, std::string pass){
+      pass= encrypt_SHA1(pass);
+    std::string data = "{\"Login\":[\"username\":\""+user+"\",\"password\":\""+pass+"\"]}";
+     sendData(data);
+    }
+
   void ShowCerts()
 {   X509 *cert;
     char *line;

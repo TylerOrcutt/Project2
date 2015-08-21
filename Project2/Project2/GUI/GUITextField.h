@@ -18,7 +18,8 @@ bool editable;
 bool multiline=false;
 TextRenderer *textRenderer = nullptr;
 std::string text;
-
+float padding=0;
+bool passwordText=false;
 void updateText(){
   if(textRenderer!=nullptr){
     delete(textRenderer);
@@ -32,8 +33,16 @@ void updateText(){
     int y = GUIObject::getY();
   textRenderer->setX(x);
   textRenderer->setY(y);
+  textRenderer->setPadding(padding);
   //std::cout<<GUIObject::getHeight()<<std::endl;
-textRenderer->setText(text);
+  std::string temp = text;
+if(passwordText){
+  temp = "";
+  for(int i=0;i<text.length();i++){
+    temp +="*";
+  }
+}
+textRenderer->setText(temp);
 }
 
   public:
@@ -75,6 +84,15 @@ void setMultiLine(bool _multiline){
 }
 bool isMultiLine(){
   return multiline;
+}
+void setPadding(float _padding){
+  padding=_padding;
+}
+bool isPasswordText(){
+  return passwordText;
+}
+void setPasswordText(bool _passwd){
+  passwordText=_passwd;
 }
 std::string getText(){
   return text;

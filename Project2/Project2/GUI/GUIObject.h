@@ -69,7 +69,7 @@ public:
 
 	virtual bool checkMouseClick(float mousex, float mousey){
 		if(visible){
-		if (mousex >= posx && mousex <= posx + imgw && mousey >= posy && mousey <= posy + imgh){
+		if (mousex >= posx && mousex <= posx + width && mousey >= posy && mousey <= posy + height){
 			return true;
 		}
 	}
@@ -89,7 +89,10 @@ public:
 	void setY(float _y){
 		posy = _y;
 	}
-
+void setPosition(float x, float y){
+	posx=x;
+	posy=y;
+}
 void setWidth(float _width){
 	width=_width;
 }

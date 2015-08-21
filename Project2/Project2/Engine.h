@@ -55,6 +55,7 @@ Projectile *proj=nullptr;
 public:
 
 	Engine(){
+		loginMenu=true;
 	//	gui.setEngine(thiis);
 network = new NetworkClient();
 if(network->Connect()){
@@ -147,10 +148,15 @@ if(proj != nullptr){
 
 dt *=10000;
 		//std::cout << dt << std::endl;
-usleep(10000);
+//usleep(10000);
 	}
 
 	void Draw(){
+		if(loginMenu){
+			gui.DrawLoginMenu();
+			fpsText->Draw();
+			return;
+		}
 
     map->Draw(camera);
         pickup->Draw(&camera);
