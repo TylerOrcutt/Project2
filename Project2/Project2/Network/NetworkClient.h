@@ -106,10 +106,10 @@ data=data+" \n";
 
 Dictionary * getData(){
   //read_fds=master;
+  Dictionary * dict = nullptr;
 read_fds=master;
             FD_SET(con, &read_fds);
-    Dictionary * dict=nullptr;
-//std::cout<<"reading data\n";
+  //std::cout<<"reading data\n";
 t.tv_sec = 0;
                t.tv_usec = 10;
   if(select(con+1,&read_fds,NULL,NULL,&t)==-1){

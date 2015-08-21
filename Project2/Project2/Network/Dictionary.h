@@ -13,39 +13,69 @@ struct DictionaryItem {
   std::string key;
   std::string value;
   std::vector<DictionaryItem> items;
+
+  DictionaryItem & operator[](std::string param){
+    for(int i=0;i<items.size();i++){
+      if(items[i].key==param){
+        return items[i];
+      }
+    }
+
+  }
+  DictionaryItem & operator[](int index){
+
+    return items[index];
+  }
+  DictionaryItem * getItem(std::string pram){
+  for(int i=0;i<items.size();i++ ){
+    if(pram==items[i].key){
+    return &items[i];
+  }
+  }
+return nullptr;
+  }
+
 };
 class Dictionary {
 private:
-std::vector<DictionaryItem*> nodes;
+std::vector<DictionaryItem> nodes;
 public:
 Dictionary(){ }
 
-DictionaryItem * operator [](std::string pram){
+DictionaryItem & operator [](std::string pram){
 for(int i=0;i<nodes.size();i++ ){
-  if(pram==nodes[i]->key){
+  if(pram==nodes[i].key){
   return nodes[i];
+}
+}
+
+}
+
+DictionaryItem * getItem(std::string pram){
+for(int i=0;i<nodes.size();i++ ){
+  if(pram==nodes[i].key){
+  return &nodes[i];
 }
 }
 return nullptr;
 }
+ DictionaryItem&  operator[](int index){
 
-
- DictionaryItem*  operator[](int index){
   return nodes[index];
 }
 int size(){
   return nodes.size();
 }
-void push_back(DictionaryItem * n){
+void push_back(DictionaryItem n){
   nodes.push_back(n);
 }
 
 void printDictionay(){
 for(int i=0;i<nodes.size();i++){
-  std::cout<<"key : "<<nodes[i]->key<<std::endl;
-  std::cout<<"value : "<<nodes[i]->value<<std::endl;
-  if(nodes[i]->items.size()>0){
-    printSubItems(nodes[i]->items,5);
+  std::cout<<"key : "<<nodes[i].key<<std::endl;
+  std::cout<<"value : "<<nodes[i].value<<std::endl;
+  if(nodes[i].items.size()>0){
+    printSubItems(nodes[i].items,5);
   }
 
 }

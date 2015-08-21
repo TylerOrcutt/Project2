@@ -90,7 +90,7 @@ peon = new SpriteSheet("peon");
 	}
 
 	void Update(){
-		network->getData();
+		handleNetworkData(network->getData());
 		frames++;
 	//	time(&curtime);
 	lastUpdate=curtime;
@@ -271,6 +271,20 @@ if(key==GLFW_KEY_1){
 	void exitGame(std::string method){
 
 	}
+
+
+//Process network data
+void handleNetworkData(Dictionary * dict){
+if(dict == nullptr){
+	return;
+}
+if(loginMenu){
+	if(dict->getItem("Login")->value=="success"){
+		loginMenu=false;
+		gui.setTyping(false);
+	}
+}
+}
 };
 
 
