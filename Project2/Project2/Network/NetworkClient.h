@@ -1,3 +1,9 @@
+/**************************************
+*NetworkClient.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __GAME_NETWORKCLIENT_H_
 #define __GAME_NETWORKCLIENT_H_
 #include<string.h>
@@ -30,15 +36,14 @@ private:
   SSL *ssl;
   fd_set master;
 fd_set read_fds;
+ timeval t;
 int fdmax;
 struct addrinfo hints,*servinfo;
-  int con;
+  int con=-1;
 public:
 
   NetworkClient(){
     initCTX();
-
-std::cout<<"SHA1:"<< encrypt_SHA1("asdasd1")<<std::endl;
   }
   bool Connect(){
 
@@ -100,11 +105,15 @@ data=data+" \n";
 
 
 Dictionary * getData(){
-  read_fds=master;
+  //read_fds=master;
+read_fds=master;
+            FD_SET(con, &read_fds);
     Dictionary * dict=nullptr;
 //std::cout<<"reading data\n";
-  if(select(con+1,&read_fds,NULL,NULL,NULL)==-1){
-  //  std::cout<<"select error\n";
+t.tv_sec = 0;
+               t.tv_usec = 10;
+  if(select(con+1,&read_fds,NULL,NULL,&t)==-1){
+   std::cout<<"select error\n";
     return nullptr;
   }
 //std::cout<<"reading data 2\n";

@@ -1,3 +1,9 @@
+/**************************************
+*Crypto.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __KAL_CRYPTO_H_
 #define __KAL_CRYPTO_H_
 #include <openssl/sha.h>
@@ -23,7 +29,7 @@ std::string encrypt_SHA1(std::string data){
       }
       std::stringstream ss;
       ss<<mdString;
-      
+
       return ss.str();
 }
 

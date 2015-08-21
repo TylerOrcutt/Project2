@@ -1,3 +1,9 @@
+/**************************************
+*JSONParser.h
+*Created by Tyler Orcutt
+*
+*Copyright 2015 Tyler Orcutt
+****************************************/
 #ifndef __JSONPARSER_H_
 #define __JSONPARSER_H_
 #include <vector>
