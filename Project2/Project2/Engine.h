@@ -90,6 +90,7 @@ peon = new SpriteSheet("peon");
 	}
 
 	void Update(){
+		network->getData();
 		frames++;
 	//	time(&curtime);
 	lastUpdate=curtime;

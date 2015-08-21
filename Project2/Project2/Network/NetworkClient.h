@@ -18,6 +18,7 @@
 #include <vector>
 #include <openssl/sha.h>
 
+#include "JSONParser.h"
 #include "Crypto.h"
 
 #define remoteHost "127.0.0.1"
@@ -27,6 +28,9 @@ class NetworkClient {
 private:
   SSL_CTX * ctx;
   SSL *ssl;
+  fd_set master;
+fd_set read_fds;
+int fdmax;
 struct addrinfo hints,*servinfo;
   int con;
 public:
@@ -66,8 +70,14 @@ std::cout<<"SHA1:"<< encrypt_SHA1("asdasd1")<<std::endl;
           std::cout<<"SSL Connection failed\n";
               return false;
             }
+            std::cout<<con<<std::endl;
+            fdmax=con;
+            SSL_set_fd(ssl,con);
+            FD_SET(con,&master);
       return true;
   }
+
+
   void sendData(std::string data){
   //  ShowCerts();
   if(data=="showcert"){
@@ -78,7 +88,8 @@ data=data+" \n";
     if(bytes_sent==0){
     std::cout<<">>>failed to send message\n";
   }
-  }
+}
+
 
 
     void sendLogin(std::string user, std::string pass){
@@ -86,6 +97,38 @@ data=data+" \n";
     std::string data = "{\"Login\":[\"username\":\""+user+"\",\"password\":\""+pass+"\"]}";
      sendData(data);
     }
+
+
+Dictionary * getData(){
+  read_fds=master;
+    Dictionary * dict=nullptr;
+//std::cout<<"reading data\n";
+  if(select(con+1,&read_fds,NULL,NULL,NULL)==-1){
+  //  std::cout<<"select error\n";
+    return nullptr;
+  }
+//std::cout<<"reading data 2\n";
+   if(FD_ISSET(con,&read_fds)){//data to be red
+  char buffer[256];
+  int bytes;
+  //cout<<"data?\n";
+//std::cout<<"reading data\n";
+  bytes=SSL_read(ssl,buffer,sizeof(buffer));
+  buffer[bytes-2]='\0';
+  if(bytes>0){
+
+    std::stringstream ss;
+    ss<<buffer;
+    std::cout<<ss.str()<<std::endl;
+    dict = JSONParser::parseJson(ss.str());
+    dict->printDictionay();
+  }/**/
+}
+//}
+  return dict;
+}
+
+
 
   void ShowCerts()
 {   X509 *cert;

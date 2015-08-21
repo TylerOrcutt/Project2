@@ -204,6 +204,22 @@ sstream
 iostream
 -
 
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Network/Dictionary.h
+string
+-
+vector
+-
+
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Network/JSONParser.h
+vector
+-
+iostream
+-
+string
+-
+Dictionary.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Network/Dictionary.h
+
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Network/NetworkClient.h
 string.h
 -
@@ -239,6 +255,8 @@ vector
 -
 openssl/sha.h
 -
+JSONParser.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/Network/JSONParser.h
 Crypto.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/Network/Crypto.h
 

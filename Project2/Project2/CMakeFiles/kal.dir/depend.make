@@ -15,6 +15,8 @@ CMakeFiles/kal.dir/main.cpp.o: GameItem.h
 CMakeFiles/kal.dir/main.cpp.o: GameObject.h
 CMakeFiles/kal.dir/main.cpp.o: Map.h
 CMakeFiles/kal.dir/main.cpp.o: Network/Crypto.h
+CMakeFiles/kal.dir/main.cpp.o: Network/Dictionary.h
+CMakeFiles/kal.dir/main.cpp.o: Network/JSONParser.h
 CMakeFiles/kal.dir/main.cpp.o: Network/NetworkClient.h
 CMakeFiles/kal.dir/main.cpp.o: PickUp.h
 CMakeFiles/kal.dir/main.cpp.o: Player.h
