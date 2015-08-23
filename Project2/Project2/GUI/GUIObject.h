@@ -24,6 +24,9 @@ public:
 		//delete sprite;
 
 	}
+	GUIObject(){
+		
+	}
 	GUIObject(SpriteSheet * sp){
 		sprite = new Sprite(sp);
 	}

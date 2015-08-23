@@ -128,9 +128,9 @@ t.tv_sec = 0;
 
     std::stringstream ss;
     ss<<buffer;
-    std::cout<<ss.str()<<std::endl;
+  //  std::cout<<ss.str()<<std::endl;
     dict = JSONParser::parseJson(ss.str());
-    dict->printDictionay();
+  //  dict->printDictionay();
   }/**/
 }
 //}

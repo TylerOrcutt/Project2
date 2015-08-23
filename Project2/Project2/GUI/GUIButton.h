@@ -65,6 +65,10 @@ bool checkMouseClick(float mousex, float mousey){
  void Draw(){
    GUIObject::Draw();
 		if(textRenderer!=nullptr && GUIObject::isVisible()){
+      int x = GUIObject::getX()+(GUIObject::getImgW()/2)-(textRenderer->getWidth()/2);
+        int y = GUIObject::getY()+(GUIObject::getImgH()/2)-(textRenderer->getHeight()/2);
+      textRenderer->setX(x);
+      textRenderer->setY(y-10);
 			textRenderer->Draw();
 			//std::cout<<"drawing text \n";
 

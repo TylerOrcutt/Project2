@@ -282,6 +282,9 @@ if(loginMenu){
 	if(dict->getItem("Login")->value=="success"){
 		loginMenu=false;
 		gui.setTyping(false);
+	}else{
+		//std::cout<<dict->getItem("Login")->value<<std::endl;
+		gui.setMsgBox(new GUIMessagebox(dict->getItem("Login")->value));
 	}
 }
 }

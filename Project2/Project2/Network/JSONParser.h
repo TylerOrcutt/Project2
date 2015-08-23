@@ -70,7 +70,7 @@ for(int i=(*index);i<data.length() && data.substr(i,1) !="]";i++){
     }else
       if(data.substr(i,1)=="["){
         i++;
-        std::cout<<"array pair\n";
+  //      std::cout<<"array pair\n";
       n.items=  getSubItems(data, &i);
         }
    a.push_back(n);

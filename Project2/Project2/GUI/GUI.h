@@ -16,7 +16,7 @@
 #include "TextRenderer.h"
 #include "GUIButton.h"
 #include "GUITextField.h"
-
+#include "GUIMessagebox.h"
 #include "../GameItem.h"
 
 #include <iostream>
@@ -64,12 +64,15 @@ GUIObject *fireball,*teleport;
 
 	GUITextField * focusText=nullptr;
 
+	GUIMessagebox *msgbox=nullptr;
+
 public:
 	 static void gameMenuExit_onClick (GUIButton *owner) {
 		std::cout<<owner->getText()<<"  - Button clicked\n";
 		running=false;
 	}
 	GUI(){
+	//	msgbox = new GUIMessagebox("Login Failed");
 		gmenu_sprite = new SpriteSheet("GUIWindow");
 
 		fireSprite= new SpriteSheet("fireball");
@@ -138,6 +141,9 @@ loginBtn =new GUIButton(new SpriteSheet("test_button"),"Login",NULL,400,500,0,0,
 		textUser->Draw();
 		textPass->Draw();
 		loginBtn->Draw();
+		if(msgbox!=nullptr){
+			msgbox->Draw();
+		}
 	}
 
 	void Draw(Entity *player){
@@ -208,9 +214,17 @@ if(bagWindow->isVisible()){
 	 }
 	 if(loginBtn->checkMouseClick(mousex,mousey)){
 		 std::cout<<"Login button click\n";
+		 focusText=nullptr;
 		 network->sendLogin(textUser->getText(), textPass->getText());
 		return true;
 	}
+ }
+ if(msgbox!=nullptr){
+	 if(msgbox->checkMouseClick(mousex,mousey)){
+		 delete(msgbox);
+		 msgbox=nullptr;
+		 return true;
+	 }
  }
 	 return false;
 	}
@@ -321,6 +335,13 @@ void setInventory (std::vector<GameItem *> *_inventory){
 
 GUIWindow * getBagWindow(){
 	return bagWindow;
+}
+
+void setMsgBox(GUIMessagebox *_msgbox){
+	if(msgbox!=nullptr){
+		delete(msgbox);
+	}
+	msgbox=_msgbox;
 }
 void setNetworkClient(NetworkClient * client){
 	network = client;

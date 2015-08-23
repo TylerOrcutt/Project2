@@ -75,6 +75,8 @@ GUIButton.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIButton.h
 GUITextField.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUITextField.h
+GUIMessagebox.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIMessagebox.h
 ../GameItem.h
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GameItem.h
 iostream
@@ -99,6 +101,18 @@ string
 -
 iostream
 -
+
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIMessagebox.h
+string
+-
+GUIObject.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIObject.h
+GUIButton.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIButton.h
+GUIWindow.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIWindow.h
+TextRenderer.h
+/home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/TextRenderer.h
 
 /home/twittumz/Desktop/git/Project2/Project2/Project2/GUI/GUIObject.h
 ../Sprite.h
