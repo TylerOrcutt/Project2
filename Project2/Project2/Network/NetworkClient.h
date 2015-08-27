@@ -9,15 +9,22 @@
 #include<string.h>
 #include<sstream>
 #include <errno.h>
-#include <unistd.h>
+
 #include <malloc.h>
 #include <string.h>
+
+#include <sys/types.h>
+
+#ifdef __LINUX__
+#include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
-#include <sys/types.h>
 #include <netinet/in.h>
 #include <netdb.h>
 #include <resolv.h>
+#endif
+
+
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 #include <openssl/crypto.h>
@@ -38,14 +45,17 @@ private:
 fd_set read_fds;
  timeval t;
 int fdmax;
+#ifdef __LINUX__
 struct addrinfo hints,*servinfo;
+#endif
   int con=-1;
 public:
 
   NetworkClient(){
     initCTX();
   }
-  bool Connect(){
+#ifdef __LINUX__
+  bool Connect_LINUX(){
 
     memset(&hints,0,sizeof hints);
     hints.ai_family=AF_UNSPEC;//use ipv4 or ipv6
@@ -81,6 +91,17 @@ public:
             FD_SET(con,&master);
       return true;
   }
+#endif
+  bool Connect(){
+#ifdef __LINUX__
+	  return Connect_LINUX();
+#endif
+	  return Connect_WIN();
+  }
+
+  bool Connect_WIN(){
+	  return false;
+  }
 
 
   void sendData(std::string data){
@@ -106,7 +127,7 @@ data=data+" \n";
 
 Dictionary * getData(){
   //read_fds=master;
-  Dictionary * dict = nullptr;
+	Dictionary * dict = nullptr;/*
 read_fds=master;
             FD_SET(con, &read_fds);
   //std::cout<<"reading data\n";
@@ -132,7 +153,7 @@ t.tv_sec = 0;
     dict = JSONParser::parseJson(ss.str());
   //  dict->printDictionay();
   }/**/
-}
+//}
 //}
   return dict;
 }
@@ -159,7 +180,7 @@ t.tv_sec = 0;
         printf("No certificates.\n");
 }
 ~NetworkClient(){
-  close(con);
+  //close(con);
   SSL_CTX_free(ctx);
 }
 private:
