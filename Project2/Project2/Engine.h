@@ -91,6 +91,11 @@ peon = new SpriteSheet("peon");
 
 	void Update(){
 		handleNetworkData(network->getData());
+		if (!network->isConnected() && !loginMenu){
+			std::cout << "Disconnected\n";
+			loginMenu = true;
+			gui.setMsgBox(new GUIMessagebox("Connection to server lost"));
+		}
 		frames++;
 	//	time(&curtime);
 	lastUpdate=curtime;

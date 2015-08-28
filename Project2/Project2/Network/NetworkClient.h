@@ -197,6 +197,9 @@ public:
 
 #endif
   void sendData(std::string data){
+	  if (con == -1){
+		  return;
+	  }
   //  ShowCerts();
   if(data=="showcert"){
     ShowCerts();
@@ -218,6 +221,9 @@ data=data+" \n";
 
 
 Dictionary * getData(){
+	if (con == -1){
+		return nullptr;
+	}
   read_fds=master;
 	Dictionary * dict = nullptr;
 read_fds=master;
@@ -225,7 +231,10 @@ read_fds=master;
   //std::cout<<"reading data\n";
 t.tv_sec = 0;
                t.tv_usec = 10;
-  if(select(con+1,&read_fds,NULL,NULL,&t)==-1){
+			   if (select(0, &read_fds, NULL, NULL, NULL) == -1){
+				   return nullptr;
+			   }
+  if(select(con,&read_fds,NULL,NULL,&t)==-1){
    std::cout<<"select error\n";
     return nullptr;
   }
@@ -271,6 +280,14 @@ t.tv_sec = 0;
     else
         printf("No certificates.\n");
 }
+
+  bool isConnected(){
+	  if (con <= 0){
+		  return false;
+	  }
+	  return true;
+  }
+
 ~NetworkClient(){
 #ifdef _WIN32
 	closesocket(con);
@@ -294,6 +311,7 @@ void initCTX() {
     }
 
 }
+
 };
 
 #endif
