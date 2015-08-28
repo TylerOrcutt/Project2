@@ -13,7 +13,6 @@
 #include <malloc.h>
 #include <string.h>
 
-#include <sys/types.h>
 
 #ifdef __LINUX__
 #include <unistd.h>
@@ -22,8 +21,19 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <resolv.h>
+#include <sys/types.h>
 #endif
 
+#ifdef _WIN32
+#include<WinSock2.h>
+#include<WS2tcpip.h>
+
+#include<stdlib.h>
+#include<stdio.h>
+#pragma comment(lib,"Ws2_32.lib")
+#pragma comment(lib, "Mswsock.lib")
+#pragma comment(lib,"AdvApi32.lib")
+#endif
 
 #include <openssl/ssl.h>
 #include <openssl/err.h>
@@ -33,9 +43,17 @@
 
 #include "JSONParser.h"
 #include "Crypto.h"
+#ifdef _WIN32
+#define remoteHost "10.0.0.3"
+#define remotePort "9898"
+#define _WINSOCK_DEPRECATED_NO_WARNINGS 0
 
+
+#else
 #define remoteHost "127.0.0.1"
 #define remotePort 9898
+
+#endif
 
 class NetworkClient {
 private:
@@ -45,9 +63,19 @@ private:
 fd_set read_fds;
  timeval t;
 int fdmax;
-#ifdef __LINUX__
-struct addrinfo hints,*servinfo;
+
+
+struct addrinfo hints, *result, *ptr;
+
+
+#ifdef _WIN32
+//char *port;
+int s;
+WSADATA wsaData;
+
 #endif
+
+
   int con=-1;
 public:
 
@@ -100,7 +128,69 @@ public:
   }
 
   bool Connect_WIN(){
-	  return false;
+	  con = INVALID_SOCKET;
+	  int iresult;
+	  iresult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+	  if (iresult != 0) {
+		  printf("WSAStartup failed with error: %d\n", iresult);
+		  return 1;
+	  }
+
+	  ZeroMemory(&hints, sizeof(hints));
+	  hints.ai_family = AF_UNSPEC;
+	  hints.ai_socktype = SOCK_STREAM;
+	  hints.ai_protocol = IPPROTO_TCP;
+
+	  // Resolve the server address and port
+	  iresult = getaddrinfo(remoteHost,remotePort, &hints, &result);
+	  if (iresult != 0) {
+		  printf("getaddrinfo failed with error: %d\n", iresult);
+		  WSACleanup();
+		  return 1;
+	  }
+
+	  // Attempt to connect to an address until one succeeds
+	  for (ptr = result; ptr != NULL; ptr = ptr->ai_next) {
+
+		  // Create a SOCKET for connecting to server
+		  con = socket(ptr->ai_family, ptr->ai_socktype,
+			  ptr->ai_protocol);
+		  if (con == INVALID_SOCKET) {
+			  printf("socket failed with error: %ld\n", WSAGetLastError());
+			  WSACleanup();
+			  return 1;
+		  }
+
+		  // Connect to server.
+		  iresult = connect(con, ptr->ai_addr, (int)ptr->ai_addrlen);
+		  if (iresult == SOCKET_ERROR) {
+			  closesocket(con);
+			  con = INVALID_SOCKET;
+			  continue;
+		  }
+		  break;
+	  }
+
+	  freeaddrinfo(result);
+
+	  if (con == INVALID_SOCKET) {
+		  printf("Unable to connect to server!\n");
+		  WSACleanup();
+		  return false;
+	  }
+	  ssl = SSL_new(ctx);
+	  SSL_set_fd(ssl, con);
+	  if (SSL_connect(ssl) == -1){
+		  std::cout << "SSL Connection failed\n";
+		  return false;
+	  }
+	  std::cout << con << std::endl;
+	  fdmax = con;
+	  SSL_set_fd(ssl, con);
+	  FD_SET(con, &master);
+	  //	sendData("");
+	//  connected = true;
+	  return true;
   }
 
 
@@ -126,8 +216,8 @@ data=data+" \n";
 
 
 Dictionary * getData(){
-  //read_fds=master;
-	Dictionary * dict = nullptr;/*
+  read_fds=master;
+	Dictionary * dict = nullptr;
 read_fds=master;
             FD_SET(con, &read_fds);
   //std::cout<<"reading data\n";
@@ -153,7 +243,7 @@ t.tv_sec = 0;
     dict = JSONParser::parseJson(ss.str());
   //  dict->printDictionay();
   }/**/
-//}
+}
 //}
   return dict;
 }
@@ -180,7 +270,11 @@ t.tv_sec = 0;
         printf("No certificates.\n");
 }
 ~NetworkClient(){
-  //close(con);
+#ifdef _WIN32
+	closesocket(con);
+#else
+  close(con);
+#endif
   SSL_CTX_free(ctx);
 }
 private:

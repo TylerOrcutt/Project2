@@ -34,7 +34,7 @@
 #pragma comment(lib, "libeay32.lib")
 //#pragma comment(lib, "freetype240")
 #ifdef _WIN32
-#include<Windows.h>
+//#include<Windows.h>
 
 #endif
 

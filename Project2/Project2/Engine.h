@@ -29,7 +29,7 @@
 #include <GLFW/glfw3.h>
 //#include <unistd.h>
 
-//#include "Network/NetworkClient.h"
+#include "Network/NetworkClient.h"
 
 class Engine{
 private:
@@ -55,14 +55,14 @@ Projectile *proj=nullptr;
 public:
 
 	Engine(){
-		loginMenu=false;
+		loginMenu=true;
 	//	gui.setEngine(thiis);
-//network = new NetworkClient();
-//if(network->Connect()){
+network = new NetworkClient();
+if(network->Connect()){
 
-//}else{
-	//gui.addChatLogText("Connection to server failed");
-//}
+}else{
+	gui.addChatLogText("Connection to server failed");
+}
 	gui.setNetworkClient(network);
 	gui.setInventory(&inventory);
 			 map = new Map("map001");
