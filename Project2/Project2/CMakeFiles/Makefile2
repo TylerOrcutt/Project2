@@ -47,10 +47,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/twittumz/Desktop/git/Project2/Project2/Project2
+CMAKE_SOURCE_DIR = /home/twittumz/Project2/Project2/Project2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/twittumz/Desktop/git/Project2/Project2/Project2
+CMAKE_BINARY_DIR = /home/twittumz/Project2/Project2/Project2
 
 #=============================================================================
 # Target rules for target CMakeFiles/kal.dir
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/twittumz/Desktop/git/Project2/Project2/Project2
 CMakeFiles/kal.dir/all:
 	$(MAKE) -f CMakeFiles/kal.dir/build.make CMakeFiles/kal.dir/depend
 	$(MAKE) -f CMakeFiles/kal.dir/build.make CMakeFiles/kal.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/twittumz/Desktop/git/Project2/Project2/Project2/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/twittumz/Project2/Project2/Project2/CMakeFiles  1
 	@echo "Built target kal"
 .PHONY : CMakeFiles/kal.dir/all
 
@@ -69,9 +69,9 @@ all: CMakeFiles/kal.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/kal.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/twittumz/Desktop/git/Project2/Project2/Project2/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/twittumz/Project2/Project2/Project2/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/kal.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/twittumz/Desktop/git/Project2/Project2/Project2/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/twittumz/Project2/Project2/Project2/CMakeFiles 0
 .PHONY : CMakeFiles/kal.dir/rule
 
 # Convenience name for target.

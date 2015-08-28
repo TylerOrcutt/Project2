@@ -14,7 +14,7 @@
 #include <string.h>
 
 
-#ifdef __LINUX__
+#ifdef __linux__
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -65,7 +65,7 @@ fd_set read_fds;
 int fdmax;
 
 
-struct addrinfo hints, *result, *ptr;
+struct addrinfo hints, *result, *ptr,*servinfo;
 
 
 #ifdef _WIN32
@@ -82,7 +82,7 @@ public:
   NetworkClient(){
     initCTX();
   }
-#ifdef __LINUX__
+#ifdef __linux__
   bool Connect_LINUX(){
 
     memset(&hints,0,sizeof hints);
@@ -121,19 +121,21 @@ public:
   }
 #endif
   bool Connect(){
-#ifdef __LINUX__
+#ifdef __linux__
 	  return Connect_LINUX();
 #endif
+#ifdef _WIN32
 	  return Connect_WIN();
+#endif
   }
-
+#ifdef _WIN32
   bool Connect_WIN(){
 	  con = INVALID_SOCKET;
 	  int iresult;
 	  iresult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	  if (iresult != 0) {
 		  printf("WSAStartup failed with error: %d\n", iresult);
-		  return 1;
+		  return false;
 	  }
 
 	  ZeroMemory(&hints, sizeof(hints));
@@ -146,7 +148,7 @@ public:
 	  if (iresult != 0) {
 		  printf("getaddrinfo failed with error: %d\n", iresult);
 		  WSACleanup();
-		  return 1;
+		  return false;
 	  }
 
 	  // Attempt to connect to an address until one succeeds
@@ -158,7 +160,7 @@ public:
 		  if (con == INVALID_SOCKET) {
 			  printf("socket failed with error: %ld\n", WSAGetLastError());
 			  WSACleanup();
-			  return 1;
+			  return false;
 		  }
 
 		  // Connect to server.
@@ -193,7 +195,7 @@ public:
 	  return true;
   }
 
-
+#endif
   void sendData(std::string data){
   //  ShowCerts();
   if(data=="showcert"){

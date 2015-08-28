@@ -25,7 +25,12 @@ std::string encrypt_SHA1(std::string data){
 	std::stringstream ss;
     char mdString [SHA_DIGEST_LENGTH*2+1];
     for (int i = 0; i < SHA_DIGEST_LENGTH; i++){
+    #ifdef _WIN32
 		sprintf_s(&mdString[i * 2], sizeof(char[3]), "%02x", (unsigned int)digest[i]);
+    #else
+    sprintf(&mdString[i * 2], "%02x", (unsigned int)digest[i]);
+    #endif
+
 		//ss << "%02x"(unsigned int)digest[i];
 	}
      // std::stringstream ss;
