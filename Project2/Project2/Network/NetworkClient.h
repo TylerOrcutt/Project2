@@ -44,10 +44,14 @@
 #include "JSONParser.h"
 #include "Crypto.h"
 #ifdef _WIN32
+//#define DEBUG
+#ifdef DEBUG
 #define remoteHost "10.0.0.3"
 #define remotePort "9898"
-#define _WINSOCK_DEPRECATED_NO_WARNINGS 0
-
+#else
+#define remoteHost "10.0.0.3"
+#define remotePort "9898"
+#endif
 
 #else
 #define remoteHost "127.0.0.1"
@@ -58,7 +62,7 @@
 class NetworkClient {
 private:
   SSL_CTX * ctx;
-  SSL *ssl;
+  SSL *ssl=nullptr;
   fd_set master;
 fd_set read_fds;
  timeval t;
@@ -180,6 +184,9 @@ public:
 		  WSACleanup();
 		  return false;
 	  }
+	  if (ssl != nullptr){
+		  delete(ssl);
+	  }
 	  ssl = SSL_new(ctx);
 	  SSL_set_fd(ssl, con);
 	  if (SSL_connect(ssl) == -1){
@@ -198,6 +205,7 @@ public:
 #endif
   void sendData(std::string data){
 	  if (con == -1){
+		 
 		  return;
 	  }
   //  ShowCerts();
@@ -213,7 +221,10 @@ data=data+" \n";
 
 
 
-    void sendLogin(std::string user, std::string pass){
+    bool sendLogin(std::string user, std::string pass){
+		if (con == -1 && !Connect()){
+		return false;
+		}
       pass= encrypt_SHA1(pass);
     std::string data = "{\"Login\":[\"username\":\""+user+"\",\"password\":\""+pass+"\"]}";
      sendData(data);
@@ -231,11 +242,10 @@ read_fds=master;
   //std::cout<<"reading data\n";
 t.tv_sec = 0;
                t.tv_usec = 10;
-			   if (select(0, &read_fds, NULL, NULL, NULL) == -1){
-				   return nullptr;
-			   }
-  if(select(con,&read_fds,NULL,NULL,&t)==-1){
+			 
+  if(select(con+1,&read_fds,NULL,NULL,&t)==-1){
    std::cout<<"select error\n";
+   con = -1;
     return nullptr;
   }
 //std::cout<<"reading data 2\n";
@@ -245,6 +255,10 @@ t.tv_sec = 0;
   //cout<<"data?\n";
 //std::cout<<"reading data\n";
   bytes=SSL_read(ssl,buffer,sizeof(buffer));
+  if (bytes == 0){
+	  con = -1;
+	  return nullptr;
+  }
   buffer[bytes-2]='\0';
   if(bytes>0){
 
@@ -271,10 +285,10 @@ t.tv_sec = 0;
         printf("Server certificates:\n");
         line = X509_NAME_oneline(X509_get_subject_name(cert), 0, 0);
         printf("Subject: %s\n", line);
-        free(line);       /* free the malloc'ed string */
+        delete(line);       /* free the malloc'ed string */
         line = X509_NAME_oneline(X509_get_issuer_name(cert), 0, 0);
         printf("Issuer: %s\n", line);
-        free(line);       /* free the malloc'ed string */
+        delete(line);       /* free the malloc'ed string */
         X509_free(cert);     /* free the malloc'ed certificate copy */
     }
     else

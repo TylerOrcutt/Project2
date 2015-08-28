@@ -58,11 +58,7 @@ public:
 		loginMenu=true;
 	//	gui.setEngine(thiis);
 network = new NetworkClient();
-if(network->Connect()){
 
-}else{
-	gui.addChatLogText("Connection to server failed");
-}
 	gui.setNetworkClient(network);
 	gui.setInventory(&inventory);
 			 map = new Map("map001");
@@ -92,8 +88,8 @@ peon = new SpriteSheet("peon");
 	void Update(){
 		handleNetworkData(network->getData());
 		if (!network->isConnected() && !loginMenu){
-			std::cout << "Disconnected\n";
-			loginMenu = true;
+		std::cout << "Disconnected\n";
+		loginMenu = true;
 			gui.setMsgBox(new GUIMessagebox("Connection to server lost"));
 		}
 		frames++;
@@ -292,6 +288,7 @@ if(loginMenu){
 		gui.setMsgBox(new GUIMessagebox(dict->getItem("Login")->value));
 	}
 }
+delete(dict);
 }
 };
 

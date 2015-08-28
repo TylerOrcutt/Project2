@@ -15,7 +15,7 @@
 #include <pango/pangocairo.h>
 #include <string>
 #include <stdlib.h>
-
+#pragma comment(lib, "gobject-2.0.lib")
 class TextRenderer{
 private:
 	GLuint texture;
@@ -39,13 +39,12 @@ public:
 		
 		std::string temp_text=text;
 		cairo_t *render_context;
-		cairo_surface_t *temp_surface;
 		cairo_surface_t *surface;
 		unsigned char * surface_data = NULL;
 		PangoFontDescription *desc;
 
 		cairo_t *layout_context = create_layout_context();
-		PangoLayout *layout=pango_cairo_create_layout (layout_context);
+		PangoLayout *layout= pango_cairo_create_layout(layout_context);
 
 		if(objectHeight>32.f){
 			pango_layout_set_width(layout,objectWidth*PANGO_SCALE);
@@ -77,12 +76,13 @@ public:
 		unsigned char *data=cairo_image_surface_get_data (surface);
 		create_texture(data);
 		//cairo_surface_write_to_png (surface, "Test.png");
-		//g_object_unref (layout);
+		g_object_unref(layout);
 		free (surface_data);
 		
 		cairo_destroy (layout_context);
 		cairo_destroy (render_context);
 		cairo_surface_destroy (surface);
+		
 	}
 
 	cairo_t * create_layout_context(){
