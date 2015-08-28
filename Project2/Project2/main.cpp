@@ -19,14 +19,22 @@
 #include <glm/glm.hpp>
 #include <SOIL/SOIL.h>
 
+#pragma comment(lib, "glfw3")
 #pragma comment(lib, "OpenGl32")
 #pragma comment(lib, "glew32")
-#pragma comment(lib, "glfw3")
+
 #pragma comment(lib, "SOIL")
 
-#pragma comment(lib, "freetype240")
+#pragma comment(lib, "pango-1.0.lib")
+//#pragma comment(lib, "pangowin32-1.0.lib")
+#pragma comment(lib, "pangocairo-1.0.lib")
+#pragma comment(lib, "cairo")
+
+#pragma comment(lib, "ssleay32.lib")
+#pragma comment(lib, "libeay32.lib")
+//#pragma comment(lib, "freetype240")
 #ifdef _WIN32
-#include<Windows.h>
+//#include<Windows.h>
 
 #endif
 
@@ -143,9 +151,9 @@ int main(int args, char **argv)
 	glfwSetErrorCallback(error_callback);
 	if (!glfwInit())
 		exit(EXIT_FAILURE);
-	glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+	//glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
+	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 //	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 std::string title=" v:";
 	title.append(GAME_VERSION);

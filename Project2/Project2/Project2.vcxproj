@@ -45,10 +45,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\Dependencies\Windows\x86\openssl\include;..\Dependencies\Windows\x86\cairo\include\cairo;..\Dependencies\Windows\x86\glib-2.34\lib\glib-2.0\include;..\Dependencies\Windows\x86\glib-2.34\include;..\Dependencies\Windows\x86\pango\include;..\Dependencies\Windows\x86\SOIL\include;..\Dependencies\Windows\x86\glm\include;..\Dependencies\Windows\x86\GFLW\include;..\Dependencies\Windows\x86\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft Visual Studio 12.0\VC\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Dependencies\Windows\x86\openssl\lib;..\Dependencies\Windows\x86\openssl\lib\VC;..\Dependencies\Windows\x86\cairo\lib;..\Dependencies\Windows\x86\glib-2.34\lib;..\Dependencies\Windows\x86\pango\lib;..\Dependencies\Windows\x86\SOIL\lib;..\Dependencies\Windows\x86\GFLW\lib;..\Dependencies\Windows\x86\glew\lib\Release\Win32;C:\Program Files %28x86%29\Microsoft Visual Studio 12.0\VC\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -66,20 +67,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\geforce\Desktop\Project2\Project2\Dependencies\Windows\x86\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="GUI.h" />
-    <ClInclude Include="GUIObject.h" />
-    <ClInclude Include="GUIWindow.h" />
+    <ClInclude Include="GameItem.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GUI\GUI.h" />
+    <ClInclude Include="GUI\GUIButton.h" />
+    <ClInclude Include="GUI\GUIMessagebox.h" />
+    <ClInclude Include="GUI\GUIObject.h" />
+    <ClInclude Include="GUI\GUIProgressBar.h" />
+    <ClInclude Include="GUI\GUITextField.h" />
+    <ClInclude Include="GUI\GUIWindow.h" />
+    <ClInclude Include="GUI\InventoryWindow.h" />
+    <ClInclude Include="GUI\KeyMap.h" />
+    <ClInclude Include="GUI\TextRenderer.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Network\Crypto.h" />
+    <ClInclude Include="Network\Dictionary.h" />
+    <ClInclude Include="Network\JSONParser.h" />
+    <ClInclude Include="Network\NetworkClient.h" />
+    <ClInclude Include="PickUp.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Settings.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteSheet.h" />
-    <ClInclude Include="TextRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

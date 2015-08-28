@@ -103,7 +103,7 @@ float getWidth(){
 	return width;
 }
 
-float setHeight(float _height){
+void setHeight(float _height){
 	height=_height;
 }
 float getHeight(){

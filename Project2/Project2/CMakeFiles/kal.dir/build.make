@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/twittumz/Desktop/git/Project2/Project2/Project2
+CMAKE_SOURCE_DIR = /home/twittumz/Project2/Project2/Project2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/twittumz/Desktop/git/Project2/Project2/Project2
+CMAKE_BINARY_DIR = /home/twittumz/Project2/Project2/Project2
 
 # Include any dependencies generated for this target.
 include CMakeFiles/kal.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/kal.dir/flags.make
 
 CMakeFiles/kal.dir/main.cpp.o: CMakeFiles/kal.dir/flags.make
 CMakeFiles/kal.dir/main.cpp.o: main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/twittumz/Desktop/git/Project2/Project2/Project2/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/twittumz/Project2/Project2/Project2/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/kal.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/kal.dir/main.cpp.o -c /home/twittumz/Desktop/git/Project2/Project2/Project2/main.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/kal.dir/main.cpp.o -c /home/twittumz/Project2/Project2/Project2/main.cpp
 
 CMakeFiles/kal.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/kal.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/twittumz/Desktop/git/Project2/Project2/Project2/main.cpp > CMakeFiles/kal.dir/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/twittumz/Project2/Project2/Project2/main.cpp > CMakeFiles/kal.dir/main.cpp.i
 
 CMakeFiles/kal.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/kal.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/twittumz/Desktop/git/Project2/Project2/Project2/main.cpp -o CMakeFiles/kal.dir/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/twittumz/Project2/Project2/Project2/main.cpp -o CMakeFiles/kal.dir/main.cpp.s
 
 CMakeFiles/kal.dir/main.cpp.o.requires:
 .PHONY : CMakeFiles/kal.dir/main.cpp.o.requires
@@ -103,6 +103,6 @@ CMakeFiles/kal.dir/clean:
 .PHONY : CMakeFiles/kal.dir/clean
 
 CMakeFiles/kal.dir/depend:
-	cd /home/twittumz/Desktop/git/Project2/Project2/Project2 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/twittumz/Desktop/git/Project2/Project2/Project2 /home/twittumz/Desktop/git/Project2/Project2/Project2 /home/twittumz/Desktop/git/Project2/Project2/Project2 /home/twittumz/Desktop/git/Project2/Project2/Project2 /home/twittumz/Desktop/git/Project2/Project2/Project2/CMakeFiles/kal.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/twittumz/Project2/Project2/Project2 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/twittumz/Project2/Project2/Project2 /home/twittumz/Project2/Project2/Project2 /home/twittumz/Project2/Project2/Project2 /home/twittumz/Project2/Project2/Project2 /home/twittumz/Project2/Project2/Project2/CMakeFiles/kal.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/kal.dir/depend
 

@@ -36,6 +36,7 @@ public:
 	}
 
 	void initText(){
+		
 		std::string temp_text=text;
 		cairo_t *render_context;
 		cairo_surface_t *temp_surface;
@@ -54,31 +55,31 @@ public:
 
 		std::stringstream ssize;
 		ssize<<fontSize;
-
+		
 		desc = pango_font_description_from_string(((std::string)(font + " " + ssize.str())).c_str());
 		pango_layout_set_font_description(layout,desc);
 		pango_font_description_free(desc);
-
+		
 		//get size
 		pango_layout_get_size(layout,&width,&height);
 		width/=PANGO_SCALE;
 		height/=PANGO_SCALE;
-
+		
 		//create context
 		surface_data=(unsigned char*)calloc(4*width*height,sizeof(unsigned char));
 		surface =cairo_image_surface_create_for_data(surface_data, CAIRO_FORMAT_ARGB32,width,height,4 * width);
 		render_context=cairo_create(surface);
-
+		
 		cairo_set_source_rgba(render_context,1.0f,1.0f,1.0f,1.0f);
 		pango_cairo_update_layout(render_context, layout);
 		pango_cairo_show_layout(render_context, layout);
-
+		
 		unsigned char *data=cairo_image_surface_get_data (surface);
 		create_texture(data);
 		//cairo_surface_write_to_png (surface, "Test.png");
-
+		//g_object_unref (layout);
 		free (surface_data);
-		g_object_unref (layout);
+		
 		cairo_destroy (layout_context);
 		cairo_destroy (render_context);
 		cairo_surface_destroy (surface);
