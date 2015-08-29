@@ -129,11 +129,17 @@ float getHeight(){
 }
 
 void resize(float _width, float _height){
-if((int)_width%32==0){
-width=_width;
-}
+	if ((int)_width % 32 == 0){
+		width = _width;
+	}
+	else {
+		width = _width - ((int)_width % 32)+64;
+	}
 if((int)_height%32==0){
 	height=_height;
+}
+else{
+	height = _height - ((int)_height % 32) + 64;
 }
 }
 

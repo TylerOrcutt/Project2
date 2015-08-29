@@ -34,6 +34,11 @@ button->setX(window->getX() +((window->getWidth()/2) -( button->getWidth()/2)));
 button->setY(textRenderer->getY()+textRenderer->getHeight()+16);
   }
 public:
+	~GUIMessagebox(){
+		delete (textRenderer);
+		delete(button);
+		delete(window);
+	}
 GUIMessagebox(std::string _text){
   window= new GUIWindow(new SpriteSheet("GUIWindow"),SCREEN_WIDTH/2-256,SCREEN_HEIGHT/2 - 64);
   window->resize(256,128);

@@ -41,6 +41,8 @@ private:
 	SpriteSheet * peon,*wedguy, *fireball;
 	 Map *map;
 	 Entity*player;
+
+	 std::vector<Entity*> players;
 	 Camera camera;
 	 double curtime=0, lastframe=0,lastUpdate;
 	 long frames=0;
@@ -70,6 +72,7 @@ peon = new SpriteSheet("peon");
 
 	  fpsText  = new TextRenderer(camera.getWidth()-50,10,"");
 
+	
 		Entity *ent = new Entity(peon,200,100,0,0,32,32);
 		ent->setName("Test");
 		ent->setHP(50);
@@ -106,7 +109,6 @@ if(proj != nullptr){
 		proj=nullptr;
 	}
 }
-
 
 
 		if (elp>1){
@@ -151,6 +153,12 @@ if(proj != nullptr){
 dt *=10000;
 		//std::cout << dt << std::endl;
 //usleep(10000);
+
+if (player->isMoving()){
+	std::stringstream ss;
+	ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"]}";
+	network->sendData(ss.str());
+}
 	}
 
 	void Draw(){
@@ -165,6 +173,11 @@ dt *=10000;
 		for (unsigned int i = 0; i < entities.size(); i++){
 			entities[i]->Draw(camera);
 		}
+
+		for (int i = 0; i < players.size(); i++){
+			players[i]->Draw(camera);
+		}
+
 		player->Draw(camera);
 		if(proj != nullptr){
 			proj->Draw(&camera);
@@ -293,6 +306,37 @@ if(loginMenu){
 if (dict->getItem("Chat") != nullptr){
 	std::cout << "chat msg revieved\n";
 	gui.addChatLogText(dict->getItem("Chat")->value);
+}
+
+if (dict->getItem("Players") != nullptr){
+	//dict->printDictionay();
+	for (int i = 0; i < dict->getItem("Players")->items.size(); i++){
+		bool found = false;
+		for (int p = 0; p < players.size(); p++){
+			if (players[p]->getName() == dict->getItem("Players")->items[i].key){
+				found = true;
+			
+				players[p]->setX(atof(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position")->getItem("x")->value.c_str()));
+				players[p]->setY(atof(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position")->getItem("y")->value.c_str()));
+				std::cout << "Updating Player " << dict->getItem("Players")->items[i].key << std::endl;
+				break;
+			}
+
+		}
+
+		if (!found){
+			float px = atof(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position")->getItem("x")->value.c_str());
+			float py = atof(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position")->getItem("y")->value.c_str());
+			Player *ply = new Player(wedguy, px, py, 0, 0, 32, 64);
+			ply->setName(dict->getItem("Players")->items[i].key);
+			players.push_back(ply);
+			std::cout << "Adding Player " << dict->getItem("Players")->items[i].key << std::endl;
+
+		}
+	}
+
+	// player = new Player(wedguy, 200, 200, 0, 0, 32, 64);
+
 }
 delete(dict);
 }

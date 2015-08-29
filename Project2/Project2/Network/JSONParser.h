@@ -30,13 +30,13 @@ static Dictionary * parseJson(std::string data){
       //  std::cout<<"value pair\n";
           n.value = getValue(data,i+1);
           i+=n.value.length();
-            for(int k=i;k<data.length() && data.substr(k,1)==",";k++){i=k;}
+            for(int k=i;k<data.length() && data.substr(k,1)!=",";k++){i=k;}
             i++;
       }
         if(data.substr(i,1)=="["){
           i++;
       //    std::cout<<"array pair\n";
-        n.items=  getSubItems(data, &i);
+        n.items =  getSubItems(data, &i);
           }
              a->push_back(n);
     }
@@ -65,15 +65,25 @@ for(int i=(*index);i<data.length() && data.substr(i,1) !="]";i++){
     //  std::cout<<"value pair\n";
         n.value = getValue(data,i+1);
         i+=n.value.length();
-          for(int k=i;k<data.length() && data.substr(k,1)==",";k++){i=k;}
-          i++;
+		for (int k = i; k<data.length() - 1 && data.substr(k, 1) != "," && data.substr(k, 1) != "]"; k++){ i = k; }
+         i++;
+		 
     }else
       if(data.substr(i,1)=="["){
         i++;
   //      std::cout<<"array pair\n";
       n.items=  getSubItems(data, &i);
         }
+	  if (data.substr(i, 1) == "]"){
+		  i++;
+		  (*index) = i;
+		  a.push_back(n);
+		  return a;
+		  
+	  }
+
    a.push_back(n);
+  
   }
   (*index)=i;
   }

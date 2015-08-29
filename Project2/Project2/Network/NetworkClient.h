@@ -85,6 +85,7 @@ public:
 
 	NetworkClient(){
 		initCTX();
+	//	ssl = SSL_new(ctx);
 	}
 #ifdef __linux__
 	bool Connect_LINUX(){
@@ -136,6 +137,8 @@ public:
 	bool Connect_WIN(){
 		con = INVALID_SOCKET;
 		int iresult;
+		//closesocket(con);
+		//WSACleanup();
 		iresult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 		if (iresult != 0) {
 			printf("WSAStartup failed with error: %d\n", iresult);
@@ -167,6 +170,7 @@ public:
 				return false;
 			}
 
+		
 			// Connect to server.
 			iresult = connect(con, ptr->ai_addr, (int)ptr->ai_addrlen);
 			if (iresult == SOCKET_ERROR) {
@@ -178,15 +182,17 @@ public:
 		}
 
 		freeaddrinfo(result);
-
+		printf("connecting to server...\n");
 		if (con == INVALID_SOCKET) {
 			printf("Unable to connect to server!\n");
 			WSACleanup();
 			return false;
 		}
+	//	printf("connecting to server...\n");
 		if (ssl != nullptr){
-			delete(ssl);
+			SSL_free(ssl);
 		}
+	
 		ssl = SSL_new(ctx);
 		SSL_set_fd(ssl, con);
 		if (SSL_connect(ssl) == -1){
@@ -199,6 +205,7 @@ public:
 		FD_SET(con, &master);
 		//	sendData("");
 		//  connected = true;
+	//	closesocket(con);
 		return true;
 	}
 
@@ -269,7 +276,7 @@ t.tv_sec = 0;
     ss<<buffer;
    std::cout<<ss.str()<<std::endl;
     dict = JSONParser::parseJson(ss.str());
-  //  dict->printDictionay();
+  // dict->printDictionay();
   }/**/
 }
 //}
