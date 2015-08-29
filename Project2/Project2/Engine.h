@@ -287,6 +287,12 @@ if(loginMenu){
 		//std::cout<<dict->getItem("Login")->value<<std::endl;
 		gui.setMsgBox(new GUIMessagebox(dict->getItem("Login")->value));
 	}
+
+}
+
+if (dict->getItem("Chat") != nullptr){
+	std::cout << "chat msg revieved\n";
+	gui.addChatLogText(dict->getItem("Chat")->value);
 }
 delete(dict);
 }

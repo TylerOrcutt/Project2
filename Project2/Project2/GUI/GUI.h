@@ -257,22 +257,8 @@ text= textfield->getText();
 
 if(key==257){
 	if(typing && text!=""){
-		if(text=="/nod"){
-			text="You nod.";
-		}
-		if(text=="/caw"){
-			text="You caaawwww.";
-		}
-		if(text=="/lol"){
-			text="You laugh.";
-		}
-		if(text=="/rofl"){
-			text="You roll on the floor laughing.";
-		}
-		if(focusText ==nullptr){
-	textArea->setText(textArea->getText()+"\n"+text);
-}
-	network->sendData(text);
+
+	network->sendMessage(text);
 	if(focusText ==nullptr){
 	textfield->setText("");
 }
