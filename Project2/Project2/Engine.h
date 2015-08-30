@@ -123,6 +123,11 @@ if(proj != nullptr){
 	//std::cout<<dt<<std::endl;
 		player->Update(dt);
     pickup->Update(dt);
+
+	for (int i = 0; i < players.size(); i++){
+		players[i]->Update(dt);
+	}
+
 		camera.setX((int)(player->getX() - ((WIDTH / 2) - (player->getImgW() / 2))));
 		camera.setY((int)(player->getY() - ((HEIGHT / 2) - (player->getImgH() / 2))));
 		camera.Update();
@@ -155,9 +160,9 @@ dt *=10000;
 //usleep(10000);
 
 if (player->isMoving()){
-	std::stringstream ss;
-	ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"]}";
-	network->sendData(ss.str());
+	//std::stringstream ss;
+	//ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"]}";
+//	network->sendData(ss.str());
 }
 	}
 
@@ -279,6 +284,9 @@ if(key==GLFW_KEY_1){
 	GUI* getGUI(){
 		return &gui;
 	}
+	NetworkClient * getNetwork(){
+		return network;
+	}
 
 
 
@@ -287,6 +295,16 @@ if(key==GLFW_KEY_1){
 	}
 
 
+	void sendMoving(){
+		std::stringstream ss;
+		if (player->isMoving()){
+			ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"],\"Moving\":[\"isMoving\":\"true\",\"Direction\":\"" << player->getDirection() << "\"]}";
+		}
+		else{
+			ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"],\"Moving\":[\"isMoving\":\"false\",\"Direction\":\"" << player->getDirection() << "\"]}";
+		}
+		network->sendData(ss.str());
+	}
 //Process network data
 void handleNetworkData(Dictionary * dict){
 if(dict == nullptr){
@@ -315,29 +333,56 @@ if (dict->getItem("Players") != nullptr){
 		for (int p = 0; p < players.size(); p++){
 			if (players[p]->getName() == dict->getItem("Players")->items[i].key){
 				found = true;
-			
-				players[p]->setX(atof(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position")->getItem("x")->value.c_str()));
-				players[p]->setY(atof(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position")->getItem("y")->value.c_str()));
-				std::cout << "Updating Player " << dict->getItem("Players")->items[i].key << std::endl;
+				if (dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position") != nullptr){
+					players[p]->setX(atof(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position")->getItem("x")->value.c_str()));
+					players[p]->setY(atof(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position")->getItem("y")->value.c_str()));
+					//std::cout << "Updating Player " << dict->getItem("Players")->items[i].key << std::endl;
+				}
+				if (dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Moving") != nullptr){
+					if (dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Moving")->getItem("isMoving")->value == "true"){
+						players[p]->setMoving(true);
+					}
+					else{
+						players[p]->setMoving(false);
+					}
+					players[p]->setDirection(atoi(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Moving")->getItem("Direction")->value.c_str()));
+				}
+
 				break;
 			}
 
 		}
 
 		if (!found){
-			float px = atof(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position")->getItem("x")->value.c_str());
-			float py = atof(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position")->getItem("y")->value.c_str());
-			Player *ply = new Player(wedguy, px, py, 0, 0, 32, 64);
+			Player *ply = new Player(wedguy, 200, 200, 0, 0, 32, 64);
+			if (dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position") != nullptr){
+				float px = atof(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position")->getItem("x")->value.c_str());
+				float py = atof(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Position")->getItem("y")->value.c_str());
+				ply->setX(px);
+				ply->setY(py);
+			}
+			if (dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Moving") != nullptr){
+				if (dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Moving")->getItem("isMoving")->value == "true"){
+					ply->setMoving(true);
+				}
+				else{
+					ply->setMoving(false);
+				}
+				ply->setDirection(atoi(dict->getItem("Players")->getItem(dict->getItem("Players")->items[i].key)->getItem("Moving")->getItem("Direction")->value.c_str()));
+			}
+
 			ply->setName(dict->getItem("Players")->items[i].key);
 			players.push_back(ply);
-			std::cout << "Adding Player " << dict->getItem("Players")->items[i].key << std::endl;
 
 		}
+		//std::cout << "Adding Player " << dict->getItem("Players")->items[i].key << std::endl;
+
 	}
 
+}
 	// player = new Player(wedguy, 200, 200, 0, 0, 32, 64);
 
-}
+
 delete(dict);
 }
 };
