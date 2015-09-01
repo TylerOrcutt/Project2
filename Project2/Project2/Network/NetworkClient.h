@@ -49,14 +49,18 @@
 #define remoteHost "10.0.0.3"
 #define remotePort "9898"
 #else
-#define remoteHost "10.0.0.3"
+#define remoteHost "ec2-52-88-34-217.us-west-2.compute.amazonaws.com"
 #define remotePort "9898"
 #endif
 
 #else
-#define remoteHost "127.0.0.1"
+#ifdef DEBUG
+#define remoteHost "10.0.0.3"
 #define remotePort 9898
-
+#else
+#define remoteHost "ec2-52-88-34-217.us-west-2.compute.amazonaws.com"
+#define remotePort 9898
+#endif
 #endif
 
 class NetworkClient {
