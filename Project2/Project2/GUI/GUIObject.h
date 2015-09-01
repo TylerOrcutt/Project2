@@ -13,7 +13,7 @@
 #include <string>
 class GUIObject{
 private:
-	Sprite *sprite;
+	Sprite *sprite=nullptr;
 	float posx = 0, posy = 0, width=32, height=32, imgx = 0, imgy = 0, imgw = 32, imgh = 32;
 	bool visible = true;
 std::string  Name;
@@ -21,11 +21,13 @@ std::string  Name;
 
 public:
 	~GUIObject(){
-		delete sprite;
+		if(sprite!=nullptr){
+		delete (sprite);
+	}
 
 	}
 	GUIObject(){
-		
+
 	}
 	GUIObject(SpriteSheet * sp){
 		sprite = new Sprite(sp);

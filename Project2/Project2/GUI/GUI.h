@@ -40,7 +40,7 @@ GUIWindow * bagWindow,*actionBar;
 
 	SpriteSheet *gmenu_sprite;
 	SpriteSheet *hud_sprite, *fireSprite, *teleSprite, *actionBarItemBlank, *textFieldBg, *test_button;
-	
+
 	GUIObject *fireball,*teleport;
 		GUIObject *hpHud;
 		GUIObject *hpBar;
@@ -215,7 +215,7 @@ if(bagWindow->isVisible()){
 	 if(loginBtn->checkMouseClick(mousex,mousey)){
 		 std::cout<<"Login button click\n";
 		 focusText=nullptr;
-		
+
 		 if (!network->sendLogin(textUser->getText(), textPass->getText())){
 			 createMessageBox("Failed to connect to server.");
 		 }

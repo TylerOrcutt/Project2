@@ -35,7 +35,7 @@ button->setY(textRenderer->getY()+textRenderer->getHeight()+16);
   }
 public:
 	~GUIMessagebox(){
-		std::cout << "Freeing messagebox\n";
+	//	std::cout << "Freeing messagebox\n";
 		button->getSprite()->freeSpriteSheet();
 		window->getSprite()->freeSpriteSheet();
 	//	delete(button->getSprite());
@@ -58,7 +58,7 @@ void Update(){
 bool checkMouseClick(double mousex, double mousey){
 	if(GUIObject::isVisible()){
     if(button->checkMouseClick(mousex,mousey)){
-		
+
       return true;
     }
     return false;

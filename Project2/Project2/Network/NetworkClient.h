@@ -107,11 +107,11 @@ public:
 			return false;
 		}
 		if(connect(con,servinfo->ai_addr,servinfo->ai_addrlen)==-1){
-			//close(s);
+		 	close(con);
 			std::cout<<"Unable to connect.\n";
 			return false;
 		}
-
+std::cout<<"Atempting SSL Connection\n";
 		ssl = SSL_new(ctx);
 		SSL_set_fd(ssl,con);
 		if ( SSL_connect(ssl)==-1){
@@ -170,7 +170,7 @@ public:
 				return false;
 			}
 
-		
+
 			// Connect to server.
 			iresult = connect(con, ptr->ai_addr, (int)ptr->ai_addrlen);
 			if (iresult == SOCKET_ERROR) {
@@ -192,7 +192,7 @@ public:
 		if (ssl != nullptr){
 			SSL_free(ssl);
 		}
-	
+
 		ssl = SSL_new(ctx);
 		SSL_set_fd(ssl, con);
 		if (SSL_connect(ssl) == -1){
@@ -252,7 +252,7 @@ read_fds=master;
   //std::cout<<"reading data\n";
 t.tv_sec = 0;
                t.tv_usec = 10;
-			 
+
   if(select(con+1,&read_fds,NULL,NULL,&t)==-1){
    std::cout<<"select error\n";
    con = -1;
@@ -289,17 +289,17 @@ t.tv_sec = 0;
 {   X509 *cert;
     char *line;
 
-    cert = SSL_get_peer_certificate(ssl); 
+    cert = SSL_get_peer_certificate(ssl);
     if ( cert != NULL )
     {
         printf("Server certificates:\n");
         line = X509_NAME_oneline(X509_get_subject_name(cert), 0, 0);
         printf("Subject: %s\n", line);
-        delete(line);       
+        delete(line);
         line = X509_NAME_oneline(X509_get_issuer_name(cert), 0, 0);
         printf("Issuer: %s\n", line);
-        delete(line);     
-        X509_free(cert);   
+        delete(line);
+        X509_free(cert);
     }
     else
         printf("No certificates.\n");
