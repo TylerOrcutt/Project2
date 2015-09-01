@@ -34,6 +34,16 @@ button->setX(window->getX() +((window->getWidth()/2) -( button->getWidth()/2)));
 button->setY(textRenderer->getY()+textRenderer->getHeight()+16);
   }
 public:
+	~GUIMessagebox(){
+		std::cout << "Freeing messagebox\n";
+		button->getSprite()->freeSpriteSheet();
+		window->getSprite()->freeSpriteSheet();
+	//	delete(button->getSprite());
+		//delete(window->getSprite());
+		delete (textRenderer);
+		delete(button);
+		delete(window);
+	}
 GUIMessagebox(std::string _text){
   window= new GUIWindow(new SpriteSheet("GUIWindow"),SCREEN_WIDTH/2-256,SCREEN_HEIGHT/2 - 64);
   window->resize(256,128);
@@ -48,7 +58,7 @@ void Update(){
 bool checkMouseClick(double mousex, double mousey){
 	if(GUIObject::isVisible()){
     if(button->checkMouseClick(mousex,mousey)){
-
+		
       return true;
     }
     return false;

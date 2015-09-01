@@ -26,7 +26,7 @@ public:
 		//init();
 	}
 	~Sprite(){
-		delete sprite;
+		//delete sprite;
 	}
 
 	void Draw( float posx, float posy, float x, float y){
@@ -103,6 +103,13 @@ public:
 
 
 		glEnd();
+	}
+
+	SpriteSheet * getSpriteSheet(){
+		return sprite;
+	}
+	void freeSpriteSheet(){
+		delete(sprite);
 	}
 
 };

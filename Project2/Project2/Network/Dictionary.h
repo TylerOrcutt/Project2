@@ -89,7 +89,7 @@ void printSubItems(std::vector<DictionaryItem> item,int spaces){
      std::cout<<spaces_str<<"key : "<<item[i].key<<std::endl;
      std::cout<<spaces_str<<"value : "<<item[i].value<<std::endl;
   if(item[i].items.size()>0){
-    printSubItems(item[i].items,spaces*2);
+    printSubItems(item[i].items,spaces+10);
   }
 }
 }

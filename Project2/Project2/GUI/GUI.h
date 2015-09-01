@@ -34,17 +34,16 @@ NetworkClient * network;
 //login Stuff
 GUITextField *textUser,*textPass;
 GUIButton *loginBtn;
-
-
-	GUIWindow * gmenu;
-		GUIWindow * bagWindow,*actionBar;
-	SpriteSheet *gmenu_sprite;
+GUIWindow * gmenu;
+GUIWindow * bagWindow,*actionBar;
 	GUIObject *hud;
-		SpriteSheet *hud_sprite, *fireSprite,*teleSprite,*actionBarItemBlank;
-GUIObject *fireball,*teleport;
+
+	SpriteSheet *gmenu_sprite;
+	SpriteSheet *hud_sprite, *fireSprite, *teleSprite, *actionBarItemBlank, *textFieldBg, *test_button;
+	
+	GUIObject *fireball,*teleport;
 		GUIObject *hpHud;
 		GUIObject *hpBar;
-
 		GUIObject*  target_hphud;
 		GUIObject * target_hpbar;
 
@@ -78,7 +77,8 @@ public:
 		fireSprite= new SpriteSheet("fireball");
 		teleSprite= new SpriteSheet("teleport_icon");
 	actionBarItemBlank= new SpriteSheet("actionBarItem_blank");
-
+	test_button = new SpriteSheet("test_button");
+		textFieldBg = new SpriteSheet("textFieldBg");
 			gmenu = new GUIWindow(gmenu_sprite,350,200);
 			gmenu->setVisible(false);
 
@@ -103,7 +103,7 @@ delete(actionBarItems[1]);
 
 
 			//void (*testCall)(GUIButton *)=testClickCallback;
-			gmenu->addComponent(new GUIButton(new SpriteSheet("test_button"),"Exit",gameMenuExit_onClick,gmenu->getX()+15,gmenu->getY()+15,0,0,128,32));
+			gmenu->addComponent(new GUIButton(test_button, "Exit", gameMenuExit_onClick, gmenu->getX() + 15, gmenu->getY() + 15, 0, 0, 128, 32));
 			hud_sprite = new SpriteSheet("GUIHud");
 			hud= new GUIObject(hud_sprite, 0, 0,0,0,32,32);
 
@@ -113,23 +113,23 @@ delete(actionBarItems[1]);
 			target_hphud = new GUIObject(hud_sprite, 300, 0, 0, 32, 160, 32);
 			target_hpbar = new GUIObject(hud_sprite, 304, 0, 0, 64, 32, 32);
 
-			textfield = new GUITextField(new SpriteSheet("textFieldBg"));
+			textfield = new GUITextField(textFieldBg);
 			textfield->setPadding(15);
-				textArea = new GUITextField(new SpriteSheet("textFieldBg"));
+			textArea = new GUITextField(textFieldBg);
 				textArea->setY(textArea->getY()-155);
 				textArea->setHeight(150);
 				textArea->setPadding(15);
 
-	textUser = new GUITextField(new SpriteSheet("textFieldBg"));
+				textUser = new GUITextField(textFieldBg);
 	textUser->setWidth(200);
 		textUser->setPadding(17);
 	textUser->setPosition((SCREEN_WIDTH/2)-(textUser->getWidth()/2),(SCREEN_HEIGHT/2)-(textUser->getHeight()/2)-20);
-					textPass = new GUITextField(new SpriteSheet("textFieldBg"));
+	textPass = new GUITextField(textFieldBg);
 					textPass->setPadding(17);
 						textPass->setWidth(200);
 					textPass->setPosition((SCREEN_WIDTH/2)-(textPass->getWidth()/2),(SCREEN_HEIGHT/2)-(textPass->getHeight()/2)+20);
 textPass->setPasswordText(true);
-loginBtn =new GUIButton(new SpriteSheet("test_button"),"Login",NULL,400,500,0,0,128,32);
+loginBtn = new GUIButton(test_button, "Login", NULL, 400, 500, 0, 0, 128, 32);
 	}
 
 
@@ -215,7 +215,10 @@ if(bagWindow->isVisible()){
 	 if(loginBtn->checkMouseClick(mousex,mousey)){
 		 std::cout<<"Login button click\n";
 		 focusText=nullptr;
-		 network->sendLogin(textUser->getText(), textPass->getText());
+		
+		 if (!network->sendLogin(textUser->getText(), textPass->getText())){
+			 createMessageBox("Failed to connect to server.");
+		 }
 		return true;
 	}
  }
@@ -257,22 +260,8 @@ text= textfield->getText();
 
 if(key==257){
 	if(typing && text!=""){
-		if(text=="/nod"){
-			text="You nod.";
-		}
-		if(text=="/caw"){
-			text="You caaawwww.";
-		}
-		if(text=="/lol"){
-			text="You laugh.";
-		}
-		if(text=="/rofl"){
-			text="You roll on the floor laughing.";
-		}
-		if(focusText ==nullptr){
-	textArea->setText(textArea->getText()+"\n"+text);
-}
-	network->sendData(text);
+
+	network->sendMessage(text);
 	if(focusText ==nullptr){
 	textfield->setText("");
 }
@@ -342,6 +331,9 @@ void setMsgBox(GUIMessagebox *_msgbox){
 		delete(msgbox);
 	}
 	msgbox=_msgbox;
+}
+void createMessageBox(std::string msg){
+	setMsgBox(new GUIMessagebox( msg));
 }
 void setNetworkClient(NetworkClient * client){
 	network = client;

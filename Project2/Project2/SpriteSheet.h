@@ -42,6 +42,9 @@ public:
 	}
 	int getWidth() { return texture_width; }
 	int getHeight() { return texture_height; }
+	~SpriteSheet(){
+		glDeleteTextures(1, &texture);
+	}
 };
 
 #endif

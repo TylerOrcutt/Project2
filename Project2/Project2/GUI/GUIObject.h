@@ -21,7 +21,7 @@ std::string  Name;
 
 public:
 	~GUIObject(){
-		//delete sprite;
+		delete sprite;
 
 	}
 	GUIObject(){

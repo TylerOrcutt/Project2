@@ -95,34 +95,38 @@ if(action==GLFW_PRESS){
 	return;
 }
 }
-	if (key == GLFW_KEY_W){
+if (key == GLFW_KEY_W && action == GLFW_PRESS){
 		//engine->getCamera().setMoving(true);
 		engine->getCamera().setDirection(0);
 		engine->getPlayer()->setMoving(true);
 		engine->getPlayer()->setDirection(0);
 
+		engine->sendMoving();
 	} else
-	if (key == GLFW_KEY_S){
+	if (key == GLFW_KEY_S && action == GLFW_PRESS){
 		//engine->getCamera().setMoving(true);
 		engine->getCamera().setDirection(2);
 		engine->getPlayer()->setMoving(true);
 		engine->getPlayer()->setDirection(2);
+		engine->sendMoving();
 
 	} else
 
-	if (key == GLFW_KEY_A){
+	if (key == GLFW_KEY_A  && action == GLFW_PRESS){
 		//engine->getCamera().setMoving(true);
 		engine->getCamera().setDirection(3);
 		engine->getPlayer()->setMoving(true);
 		engine->getPlayer()->setDirection(3);
+		engine->sendMoving();
 
 
 	}else
-	if (key == GLFW_KEY_D){
+	if (key == GLFW_KEY_D && action == GLFW_PRESS){
 	//	engine->getCamera().setMoving(true);
 		//engine->getCamera().setDirection(1);
 		engine->getPlayer()->setMoving(true);
         engine->getPlayer()->setDirection(1);
+		engine->sendMoving();
 	}
 if ((key == GLFW_KEY_1 || key == GLFW_KEY_2 ) && action == GLFW_PRESS){
 	engine->actionBarKey(key);
@@ -131,6 +135,7 @@ if ((key == GLFW_KEY_1 || key == GLFW_KEY_2 ) && action == GLFW_PRESS){
 	if ((key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D) && action == GLFW_RELEASE){
 		engine->getPlayer()->setMoving(false);
 		engine->getCamera().setMoving(false);
+		engine->sendMoving();
 	}
 
 	if (key == GLFW_KEY_B && action == GLFW_PRESS){
@@ -151,9 +156,9 @@ int main(int args, char **argv)
 	glfwSetErrorCallback(error_callback);
 	if (!glfwInit())
 		exit(EXIT_FAILURE);
-	//glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
+	glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
 	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+//	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 //	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 std::string title=" v:";
 	title.append(GAME_VERSION);
