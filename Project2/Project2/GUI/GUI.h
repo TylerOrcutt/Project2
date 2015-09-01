@@ -248,6 +248,9 @@ void setTyping(bool _typing){
 void addChatLogText(std::string text){
 		textArea->setText(textArea->getText()+"\n"+text);
 }
+void clearChat(){
+	textArea->setText("");
+}
 void keyPressed(int key){
 //	textfield->setText((std::string)textfield->getText()+key);
 //std::cout<<key<<std::endl;
