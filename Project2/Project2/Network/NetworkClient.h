@@ -49,14 +49,18 @@
 #define remoteHost "10.0.0.3"
 #define remotePort "9898"
 #else
-#define remoteHost "10.0.0.3"
+#define remoteHost "ec2-52-88-129-161.us-west-2.compute.amazonaws.com"
 #define remotePort "9898"
 #endif
 
 #else
-#define remoteHost "127.0.0.1"
+#ifdef DEBUG
+#define remoteHost "10.0.0.3"
 #define remotePort 9898
-
+#else
+#define remoteHost "ec2-52-88-129-161.us-west-2.compute.amazonaws.com"
+#define remotePort 9898
+#endif
 #endif
 
 class NetworkClient {
@@ -111,7 +115,7 @@ public:
 			std::cout<<"Unable to connect.\n";
 			return false;
 		}
-std::cout<<"Atempting SSL Connection\n";
+//std::cout<<"Atempting SSL Connection\n";
 		ssl = SSL_new(ctx);
 		SSL_set_fd(ssl,con);
 		if ( SSL_connect(ssl)==-1){
@@ -274,7 +278,7 @@ t.tv_sec = 0;
 
     std::stringstream ss;
     ss<<buffer;
-  // std::cout<<ss.str()<<std::endl;
+ // std::cout<<ss.str()<<std::endl;
     dict = JSONParser::parseJson(ss.str());
   // dict->printDictionay();
   }/**/

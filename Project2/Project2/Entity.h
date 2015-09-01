@@ -10,6 +10,7 @@
 #include "Camera.h"
 #include <iostream>
 #include <string>
+#include "GUI/TextRenderer.h"
 class Entity{
 private:
 	Sprite *sprite;
@@ -19,13 +20,26 @@ private:
 
 	 Entity * target=nullptr;
 //stats and shiiit
+	 TextRenderer *textRend = nullptr;
 	std::string name;
 	int hp = 100;
 	int max_hp = 100;
 	float speed = 3;
+
+	void initNameText(){
+		if (textRend != nullptr){
+			delete(textRend);
+		}
+		textRend = new TextRenderer(0, 0, name);
+		textRend->setPadding(0);
+
+	}
 public:
 	~Entity(){
 		delete (sprite);
+		if (textRend != nullptr){
+			delete(textRend);
+		}
 	}
 	Entity(SpriteSheet * sp){
 		sprite= new Sprite(sp);
@@ -58,14 +72,24 @@ public:
 	}
 
 
-
+	//should switch camera to a pointer
 	virtual void Draw(Camera cam){
+		
 		if (posx >= cam.getX() - imgw && posx <= cam.getX() + cam.getWidth() && posy >= cam.getY() - imgh && posy <= cam.getY() + cam.getHeight()){
-
+			DrawNameText(&cam);
 			sprite->Draw(posx - cam.getX(), posy - cam.getY(), width,height, imgx, imgy,imgw, imgh);
 		}
 
 
+	}
+	virtual void DrawNameText(Camera *cam){
+		if (textRend != nullptr){
+			float x = (posx - cam->getX())+(width/2)-(textRend->getWidth()/2);
+			float y = (posy - cam->getY())-textRend->getHeight()-3;
+			textRend->setX(x);
+			textRend->setY(y);
+			textRend->Draw();
+		}
 	}
 
 	virtual void Update(double dt){
@@ -185,6 +209,7 @@ public:
 	}
 	void setName(std::string _name){
 		name = _name;
+		initNameText();
 	}
 	int getSpeed(){
 		return speed;

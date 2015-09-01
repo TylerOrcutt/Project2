@@ -74,7 +74,7 @@ peon = new SpriteSheet("peon");
 
 	
 		Entity *ent = new Entity(peon,200,100,0,0,32,32);
-		ent->setName("Test");
+		ent->setName("Peon");
 		ent->setHP(50);
 		ent->resize(64,64);
 		entities.push_back(ent);
@@ -91,6 +91,8 @@ peon = new SpriteSheet("peon");
 	void Update(){
 		handleNetworkData(network->getData());
 		if (!network->isConnected() && !loginMenu){
+			gui.clearChat();
+			freePlayers();
 		std::cout << "Disconnected\n";
 		loginMenu = true;
 			gui.setMsgBox(new GUIMessagebox("Connection to server lost"));
@@ -294,7 +296,15 @@ if(key==GLFW_KEY_1){
 
 	}
 
+	void freePlayers(){
+		for (int i = 0; i < players.size(); i++){
+			delete(players[i]);
+		
+		}
+		players.clear();
+	}
 
+	
 	void sendMoving(){
 		std::stringstream ss;
 		if (player->isMoving()){
@@ -312,7 +322,7 @@ if(dict == nullptr){
 }
 if(loginMenu){
 	if(dict->getItem("Login")->value=="success"){
-		loginMenu=false;
+		loginMenu = false;
 		gui.setTyping(false);
 	}else{
 		//std::cout<<dict->getItem("Login")->value<<std::endl;
@@ -321,10 +331,28 @@ if(loginMenu){
 	}
 
 }
-
+if (dict->getItem("Disconnected") != nullptr){
+	std::string dc = dict->getItem("Disconnected")->value;
+	for (int i = 0; i < players.size(); i++){
+		if (players[i]->getName() == dc){
+			delete(players[i]);
+			players.erase(players.begin() + i);
+			break;
+		}
+	}
+	gui.addChatLogText(dc + " disconnected.");
+}
 if (dict->getItem("Chat") != nullptr){
 	std::cout << "chat msg revieved\n";
 	gui.addChatLogText(dict->getItem("Chat")->value);
+}
+if (dict->getItem("Stats") != nullptr){
+	DictionaryItem *position=nullptr;
+	if ((position = dict->getItem("Stats")->getItem("Position")) != nullptr){
+		player->setX(atof(position->getItem("X")->value.c_str()));
+		player->setY(atof(position->getItem("Y")->value.c_str()));
+		//loginMenu = false;
+	}
 }
 
 if (dict->getItem("Players") != nullptr){
