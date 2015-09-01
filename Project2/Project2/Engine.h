@@ -321,7 +321,17 @@ if(loginMenu){
 	}
 
 }
-
+if (dict->getItem("Disconnected") != nullptr){
+	std::string dc = dict->getItem("Disconnected")->value;
+	for (int i = 0; i < players.size(); i++){
+		if (players[i]->getName() == dc){
+			delete(players[i]);
+			players.erase(players.begin() + i);
+			break;
+		}
+	}
+	gui.addChatLogText(dc + " disconnected.");
+}
 if (dict->getItem("Chat") != nullptr){
 	std::cout << "chat msg revieved\n";
 	gui.addChatLogText(dict->getItem("Chat")->value);

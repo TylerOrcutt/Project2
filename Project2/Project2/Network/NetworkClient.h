@@ -111,7 +111,7 @@ public:
 			std::cout<<"Unable to connect.\n";
 			return false;
 		}
-std::cout<<"Atempting SSL Connection\n";
+//std::cout<<"Atempting SSL Connection\n";
 		ssl = SSL_new(ctx);
 		SSL_set_fd(ssl,con);
 		if ( SSL_connect(ssl)==-1){
