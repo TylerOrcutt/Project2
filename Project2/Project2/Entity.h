@@ -24,7 +24,9 @@ private:
 	int max_hp = 100;
 	float speed = 3;
 public:
-
+	~Entity(){
+		delete (sprite);
+	}
 	Entity(SpriteSheet * sp){
 		sprite= new Sprite(sp);
 	}

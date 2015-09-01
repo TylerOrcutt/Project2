@@ -20,23 +20,25 @@ class TextRenderer{
 private:
 	GLuint texture;
 	int width, height;
-	float x=0,y=0;
-	float objectWidth=32,objectHeight=32;
+	float x = 0, y = 0;
+	float objectWidth = 32, objectHeight = 32;
 	std::string text;
-	int fontSize=16;
-	int padding=0;
-	std::string font="arial";
+	int fontSize = 16;
+	int padding = 0;
+	std::string font = "arial";
 public:
-
+	~TextRenderer(){
+		glDeleteTextures(1, &texture);
+	}
 	TextRenderer(float posx,float posy,std::string text_str){
 		text=text_str;
 		x=posx;
 		y=posy;
 		initText();
 	}
-
+	
 	void initText(){
-		
+		glDeleteTextures(1, &texture);
 		std::string temp_text=text;
 		cairo_t *render_context;
 		cairo_surface_t *surface;

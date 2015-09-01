@@ -265,7 +265,7 @@ t.tv_sec = 0;
   //cout<<"data?\n";
 //std::cout<<"reading data\n";
   bytes=SSL_read(ssl,buffer,sizeof(buffer));
-  if (bytes == 0){
+  if (bytes<=0){
 	  con = -1;
 	  return nullptr;
   }
@@ -274,7 +274,7 @@ t.tv_sec = 0;
 
     std::stringstream ss;
     ss<<buffer;
-   std::cout<<ss.str()<<std::endl;
+  // std::cout<<ss.str()<<std::endl;
     dict = JSONParser::parseJson(ss.str());
   // dict->printDictionay();
   }/**/

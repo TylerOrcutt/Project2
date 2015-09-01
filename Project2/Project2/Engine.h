@@ -316,7 +316,8 @@ if(loginMenu){
 		gui.setTyping(false);
 	}else{
 		//std::cout<<dict->getItem("Login")->value<<std::endl;
-		gui.setMsgBox(new GUIMessagebox(dict->getItem("Login")->value));
+		//gui.setMsgBox(new GUIMessagebox(dict->getItem("Login")->value));
+		gui.createMessageBox(dict->getItem("Login")->value);
 	}
 
 }
