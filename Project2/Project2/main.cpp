@@ -241,8 +241,9 @@ engine = new Engine();
 
 	//	peon.Draw(0,192,0,0);
 
-		engine->Draw();
-
+	
+			engine->Draw();
+	
 
 	//	Te
 

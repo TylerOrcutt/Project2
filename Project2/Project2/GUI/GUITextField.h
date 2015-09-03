@@ -62,7 +62,7 @@ GUITextField(SpriteSheet * sp, float pos_x, float pos_y, float image_x, float im
 }
     void Update(){}
   void Draw(){
-
+	  updateText();
     GUIObject::Draw();
     if(textRenderer!=nullptr){
       textRenderer->Draw();

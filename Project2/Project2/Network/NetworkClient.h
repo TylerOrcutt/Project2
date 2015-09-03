@@ -11,7 +11,6 @@
 #include <errno.h>
 
 #include <malloc.h>
-#include <string.h>
 
 
 #ifdef __linux__
@@ -40,11 +39,12 @@
 #include <openssl/crypto.h>
 #include <vector>
 #include <openssl/sha.h>
-
+#include <thread>
+#include <future>
 #include "JSONParser.h"
 #include "Crypto.h"
+#define DEBUG
 #ifdef _WIN32
-//#define DEBUG
 #ifdef DEBUG
 #define remoteHost "10.0.0.3"
 #define remotePort "9898"
@@ -214,6 +214,7 @@ public:
 	}
 
 #endif
+
 	bool  sendData(std::string data){
 		if (con == -1){
 
@@ -244,7 +245,11 @@ public:
     return sendData(data);
     }
 
-
+	
+	static 	Dictionary * static_getData(NetworkClient *network){
+		Dictionary * dic = network->getData();
+		return dic;
+	}
 Dictionary * getData(){
 	if (con == -1){
 		return nullptr;

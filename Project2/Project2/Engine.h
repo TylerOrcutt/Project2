@@ -27,14 +27,19 @@
 #include <ctime>
 #include <sstream>
 #include <GLFW/glfw3.h>
+#include <thread>
+#include <future>
 //#include <unistd.h>
-
+#include <time.h>
 #include "Network/NetworkClient.h"
-
+#include<stdlib.h>
+#ifdef __linux__
+#include <sys/time.h>
+#endif
 class Engine{
 private:
 	NetworkClient * network;
-
+	
 	//TODO data struct, hash?
 	std::vector<Entity*> entities;
 
@@ -49,20 +54,24 @@ private:
 	 int WIDTH = 800, HEIGHT = 600;
 
    GameObject *pickup;
-	 GUI gui;
+	 GUI *gui;
 	TextRenderer *fpsText;
 	std::string fps_str;
 std::vector<GameItem *>inventory;
 Projectile *proj=nullptr;
+
+
+long lt;
 public:
 
 	Engine(){
 		loginMenu=true;
-	//	gui.setEngine(thiis);
+	//	gui->setEngine(thiis);
+		gui = new GUI();
 network = new NetworkClient();
 
-	gui.setNetworkClient(network);
-	gui.setInventory(&inventory);
+	gui->setNetworkClient(network);
+	gui->setInventory(&inventory);
 			 map = new Map("map001");
 peon = new SpriteSheet("peon");
 	  wedguy=new SpriteSheet("weddingguy02");
@@ -89,20 +98,34 @@ peon = new SpriteSheet("peon");
 	}
 
 	void Update(){
-		handleNetworkData(network->getData());
+		auto dict = std::async(&NetworkClient::static_getData, network);
+
+
+		//handleNetworkData(dict.get());
+		Dictionary * di = dict.get();
+		if (di!= nullptr){
+		//	std::thread t(&Engine::static_handleNetworkData, this, di);
+			//t.detach();
+			handleNetworkData(di);
+		}
+		//
+		//handleNetworkData(network->getData());
 		if (!network->isConnected() && !loginMenu){
-			gui.clearChat();
+			gui->clearChat();
 			freePlayers();
 		std::cout << "Disconnected\n";
 		loginMenu = true;
-			gui.setMsgBox(new GUIMessagebox("Connection to server lost"));
+			gui->setMsgBox(new GUIMessagebox("Connection to server lost"));
 		}
 		frames++;
 	//	time(&curtime);
 	lastUpdate=curtime;
 	curtime = glfwGetTime();
 
-double dt = (curtime-lastUpdate)*100;
+	long ct = getTime();
+	long dt = ct - lt;
+	dt /= 2;
+	lt = ct;
 		double elp = curtime - lastframe;
 if(proj != nullptr){
 	proj->Update(dt);
@@ -123,6 +146,12 @@ if(proj != nullptr){
 		}
 	//
 	//std::cout<<dt<<std::endl;
+	
+	//	gettimeofda
+	
+		//long dtt = difftime(ct, lt);
+	//	lt = ct;
+		//dtt *= 100;
 		player->Update(dt);
     pickup->Update(dt);
 
@@ -166,11 +195,13 @@ if (player->isMoving()){
 	//ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"]}";
 //	network->sendData(ss.str());
 }
+
+
 	}
 
 	void Draw(){
 		if(loginMenu){
-			gui.DrawLoginMenu();
+			gui->DrawLoginMenu();
 			fpsText->Draw();
 			return;
 		}
@@ -191,7 +222,7 @@ if (player->isMoving()){
 		}
 
 
-		gui.Draw(player);
+		gui->Draw(player);
 		fpsText->Draw();
 		//textrend.Draw();
 
@@ -237,7 +268,7 @@ if(key==GLFW_KEY_1){
       if(pickup->checkMouseClick(gMouseX,gMouseY)){
        pickup->setVisible(false);
 			 bool adNew=true;
-       gui.addChatLogText("You looted " + pickup->getName()+".");
+       gui->addChatLogText("You looted " + pickup->getName()+".");
 			 for(int i=0;i<inventory.size();i++){
 				 if(inventory[i]->getName()==pickup->getName()){
 					 if(inventory[i]->getStackCount()<inventory[i]->getMaxStack()){
@@ -258,7 +289,7 @@ if(key==GLFW_KEY_1){
 
 //left click
 		if (button == 0){
-			if(gui.checkMouseClick(MouseX, MouseY)){
+			if(gui->checkMouseClick(MouseX, MouseY)){
 			  return;
 			}
 		//	std::cout << "RightClick: X:" << MouseX << " Y:" << MouseY << "\n";
@@ -284,7 +315,7 @@ if(key==GLFW_KEY_1){
 		return map;
 	}
 	GUI* getGUI(){
-		return &gui;
+		return gui;
 	}
 	NetworkClient * getNetwork(){
 		return network;
@@ -316,18 +347,26 @@ if(key==GLFW_KEY_1){
 		network->sendData(ss.str());
 	}
 //Process network data
+	static void static_handleNetworkData(Engine * engine, Dictionary * dict){
+		engine->handleNetworkData(dict);
+	}
+
 void handleNetworkData(Dictionary * dict){
 if(dict == nullptr){
 	return;
 }
 if(loginMenu){
-	if(dict->getItem("Login")->value=="success"){
-		loginMenu = false;
-		gui.setTyping(false);
-	}else{
-		//std::cout<<dict->getItem("Login")->value<<std::endl;
-		//gui.setMsgBox(new GUIMessagebox(dict->getItem("Login")->value));
-		gui.createMessageBox(dict->getItem("Login")->value);
+	if (dict->getItem("Login") != nullptr){
+		if (dict->getItem("Login")->value == "success"){
+			loginMenu = false;
+			gui->setTyping(false);
+		}
+		else{
+			//std::cout<<dict->getItem("Login")->value<<std::endl;
+			//gui->setMsgBox(new GUIMessagebox(dict->getItem("Login")->value));
+			gui->createMessageBox(dict->getItem("Login")->value);
+		}
+
 	}
 
 }
@@ -340,18 +379,18 @@ if (dict->getItem("Disconnected") != nullptr){
 			break;
 		}
 	}
-	gui.addChatLogText(dc + " disconnected.");
+	gui->addChatLogText(dc + " disconnected.");
 }
 if (dict->getItem("Chat") != nullptr){
 	std::cout << "chat msg revieved\n";
-	gui.addChatLogText(dict->getItem("Chat")->value);
+	gui->addChatLogText(dict->getItem("Chat")->value);
 }
 if (dict->getItem("Stats") != nullptr){
 	DictionaryItem *position=nullptr;
 	if ((position = dict->getItem("Stats")->getItem("Position")) != nullptr){
 		player->setX(atof(position->getItem("X")->value.c_str()));
 		player->setY(atof(position->getItem("Y")->value.c_str()));
-		//loginMenu = false;
+	
 	}
 }
 
@@ -413,6 +452,21 @@ if (dict->getItem("Players") != nullptr){
 
 
 delete(dict);
+}
+
+
+long getTime(){
+#ifdef __linux__
+	timeval tm;
+	gettimeofday(&tm,NULL);
+	long cm=(tm.tv_sec*1000)+(tm.tv_usec/1000);
+	return cm;
+#else
+	SYSTEMTIME t;
+	GetSystemTime(&t);
+	long ctim = (t.wSecond * 1000)+ t.wMilliseconds;
+	return ctim;
+#endif
 }
 };
 

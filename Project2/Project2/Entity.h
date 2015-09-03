@@ -24,7 +24,7 @@ private:
 	std::string name;
 	int hp = 100;
 	int max_hp = 100;
-	float speed = 3;
+	float speed = 1;
 
 	void initNameText(){
 		if (textRend != nullptr){
@@ -92,7 +92,7 @@ public:
 		}
 	}
 
-	virtual void Update(double dt){
+	virtual void Update(long dt){
 		if(hp<=0){
 			//visible=false;
 		}

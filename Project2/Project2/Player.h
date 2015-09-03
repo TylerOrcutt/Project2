@@ -31,7 +31,7 @@ public:
 
 
 
-	void Update(double dt){
+	void Update(long dt){
 		if (Entity::isMoving()){
 
 
