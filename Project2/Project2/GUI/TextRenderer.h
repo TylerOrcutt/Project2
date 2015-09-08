@@ -28,7 +28,7 @@ private:
 	std::string font = "arial";
 public:
 	~TextRenderer(){
-		//glDeleteTextures(1, &texture);
+		glDeleteTextures(1, &texture);
 	}
 	TextRenderer(float posx,float posy,std::string text_str){
 		text=text_str;

@@ -36,23 +36,24 @@ public:
 
 
 			int dir = Entity::getDirection();
+			float distance = ((float)Entity::getSpeed()*dt)/1000;
 			if (dir == 0){
-				Entity::setY(Entity::getY() - (Entity::getSpeed()*dt));
+				Entity::setY(Entity::getY() - distance);
 				Entity::setImgY(192);
 			//	std::cout<<<<std::endl;
 			}
 
 			if (dir == 1){
-				Entity::setX(Entity::getX() +  (Entity::getSpeed()*dt));
+				Entity::setX(Entity::getX() + distance);
 				Entity::setImgY(128);
 			}
 			if (dir == 2){
-				Entity::setY(Entity::getY() +  (Entity::getSpeed()*dt));
+				Entity::setY(Entity::getY() + distance);
 				Entity::setImgY(0);
 
 			}
 			if (dir == 3){
-				Entity::setX(Entity::getX() -  (Entity::getSpeed()*dt));
+				Entity::setX(Entity::getX() - distance);
 				Entity::setImgY(64);
 
 			}
@@ -62,7 +63,7 @@ public:
 		//	 dt = dt- lastUpdate;
 		//	long dt =curtime-lastupdate;
 		//std::cout << dt << std::endl;
-			if ( (curtime-lastUpdate)> (20*Entity::getSpeed())){
+			if ( (curtime-lastUpdate)> (50)){
 
 			Entity::setImgX(Entity::getImgX()+32);
 				if (Entity::getImgX() >=128){

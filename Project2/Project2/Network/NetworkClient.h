@@ -46,7 +46,7 @@
 #define DEBUG
 #ifdef _WIN32
 #ifdef DEBUG
-#define remoteHost "10.0.0.3"
+#define remoteHost "10.0.0.2"
 #define remotePort "9898"
 #else
 #define remoteHost "ec2-52-88-129-161.us-west-2.compute.amazonaws.com"

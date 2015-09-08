@@ -6,6 +6,9 @@
 ****************************************/
 #ifndef __KAL_ENGINE_H_
 #define __KAL_ENGINE_H_
+
+//#define OFFLINEMODE
+
 #include "Entity.h"
 #include "Player.h"
 #include "SpriteSheet.h"
@@ -36,6 +39,8 @@
 #ifdef __linux__
 #include <sys/time.h>
 #endif
+
+
 class Engine{
 private:
 	NetworkClient * network;
@@ -62,10 +67,16 @@ Projectile *proj=nullptr;
 
 
 long lt;
+
+long ms;
+long mss;
+float pstartx,pstarty;
 public:
 
 	Engine(){
+#ifndef OFFLINEMODE
 		loginMenu=true;
+#endif
 	//	gui->setEngine(thiis);
 		gui = new GUI();
 network = new NetworkClient();
@@ -98,6 +109,7 @@ peon = new SpriteSheet("peon");
 	}
 
 	void Update(){
+#ifndef OFFLINEMODE
 		auto dict = std::async(&NetworkClient::static_getData, network);
 
 
@@ -117,6 +129,7 @@ peon = new SpriteSheet("peon");
 		loginMenu = true;
 			gui->setMsgBox(new GUIMessagebox("Connection to server lost"));
 		}
+#endif
 		frames++;
 	//	time(&curtime);
 	lastUpdate=curtime;
@@ -124,7 +137,7 @@ peon = new SpriteSheet("peon");
 
 	long ct = getTime();
 	long dt = ct - lt;
-	dt /= 2;
+	//dt /= 3;
 	lt = ct;
 		double elp = curtime - lastframe;
 if(proj != nullptr){
@@ -339,10 +352,41 @@ if(key==GLFW_KEY_1){
 	void sendMoving(){
 		std::stringstream ss;
 		if (player->isMoving()){
-			ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"],\"Moving\":[\"isMoving\":\"true\",\"Direction\":\"" << player->getDirection() << "\"]}";
+			ms = getTime();
+			//ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"],
+			ss<<"{\"Moving\":[\"isMoving\":\"true\",\"Direction\":\"" << player->getDirection() << "\"]}";
+		
+			pstartx = player->getX();
+			pstarty = player->getY();
+
 		}
 		else{
-			ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"],\"Moving\":[\"isMoving\":\"false\",\"Direction\":\"" << player->getDirection() << "\"]}";
+			//ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"],\"Moving\":[\"isMoving\":\"false\",\"Direction\":\"" << player->getDirection() << "\"]}";
+			ss << "{\"Moving\":[\"isMoving\":\"false\",\"Direction\":\"" << player->getDirection() << "\"]}";
+			long dms = getTime() - ms;
+			float distance = ((float)player->getSpeed()*dms)/1000 ;
+			std::cout << distance << std::endl;
+			
+			std::cout << "Start Location: X:" << pstartx << " Y:" << pstarty << std::endl;
+			switch (player->getDirection())
+			{
+			case 0 :
+				pstarty -= distance;
+				break;
+			case 1:
+				pstartx += distance;
+				break;
+			case 2:
+				pstarty += distance;
+				break;
+			case 3:
+				pstartx -= distance;
+				break;
+			}
+			std::cout << "Projected Location: X:" << pstartx << " Y:" << pstarty << std::endl;
+
+			std::cout << "Actual Location: X:"<<player->getX()<<" Y:"<<player->getY()<<std::endl;
+
 		}
 		network->sendData(ss.str());
 	}
@@ -390,6 +434,7 @@ if (dict->getItem("Stats") != nullptr){
 	if ((position = dict->getItem("Stats")->getItem("Position")) != nullptr){
 		player->setX(atof(position->getItem("X")->value.c_str()));
 		player->setY(atof(position->getItem("Y")->value.c_str()));
+	//	std::cout << "Updating position\n";
 	
 	}
 }

@@ -24,7 +24,7 @@ private:
 	std::string name;
 	int hp = 100;
 	int max_hp = 100;
-	float speed = 1;
+	float speed = 500;
 
 	void initNameText(){
 		if (textRend != nullptr){

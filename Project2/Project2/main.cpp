@@ -95,6 +95,14 @@ if(action==GLFW_PRESS){
 	return;
 }
 }
+
+if ((key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D) && action == GLFW_RELEASE){
+	engine->getPlayer()->setMoving(false);
+	engine->getCamera().setMoving(false);
+	engine->sendMoving();
+	return;
+}
+
 if (key == GLFW_KEY_W && action == GLFW_PRESS){
 		//engine->getCamera().setMoving(true);
 		engine->getCamera().setDirection(0);
@@ -102,6 +110,7 @@ if (key == GLFW_KEY_W && action == GLFW_PRESS){
 		engine->getPlayer()->setDirection(0);
 
 		engine->sendMoving();
+		return;
 	} else
 	if (key == GLFW_KEY_S && action == GLFW_PRESS){
 		//engine->getCamera().setMoving(true);
@@ -109,6 +118,7 @@ if (key == GLFW_KEY_W && action == GLFW_PRESS){
 		engine->getPlayer()->setMoving(true);
 		engine->getPlayer()->setDirection(2);
 		engine->sendMoving();
+		return;
 
 	} else
 
@@ -118,7 +128,7 @@ if (key == GLFW_KEY_W && action == GLFW_PRESS){
 		engine->getPlayer()->setMoving(true);
 		engine->getPlayer()->setDirection(3);
 		engine->sendMoving();
-
+		return;
 
 	}else
 	if (key == GLFW_KEY_D && action == GLFW_PRESS){
@@ -127,16 +137,13 @@ if (key == GLFW_KEY_W && action == GLFW_PRESS){
 		engine->getPlayer()->setMoving(true);
         engine->getPlayer()->setDirection(1);
 		engine->sendMoving();
+		return;
 	}
 if ((key == GLFW_KEY_1 || key == GLFW_KEY_2 ) && action == GLFW_PRESS){
 	engine->actionBarKey(key);
 }
 
-	if ((key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D) && action == GLFW_RELEASE){
-		engine->getPlayer()->setMoving(false);
-		engine->getCamera().setMoving(false);
-		engine->sendMoving();
-	}
+
 
 	if (key == GLFW_KEY_B && action == GLFW_PRESS){
 		engine->getGUI()->getBagWindow()->setVisible(!	engine->getGUI()->getBagWindow()->isVisible());
