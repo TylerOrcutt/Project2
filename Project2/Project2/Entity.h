@@ -24,7 +24,7 @@ private:
 	std::string name;
 	int hp = 100;
 	int max_hp = 100;
-	float speed = 500;
+	float speed = 300;
 
 	void initNameText(){
 		if (textRend != nullptr){
@@ -74,6 +74,7 @@ public:
 
 	//should switch camera to a pointer
 	virtual void Draw(Camera cam){
+		initNameText();
 		
 		if (posx >= cam.getX() - imgw && posx <= cam.getX() + cam.getWidth() && posy >= cam.getY() - imgh && posy <= cam.getY() + cam.getHeight()){
 			DrawNameText(&cam);

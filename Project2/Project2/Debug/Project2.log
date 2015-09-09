@@ -1,4 +1,4 @@
-﻿Build started 9/9/2015 12:56:12 AM.
+﻿Build started 9/9/2015 4:34:24 PM.
      1>Project "C:\Users\geforce\Documents\GitHub\Project2\Project2\Project2\Project2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\geforce\Desktop\Project2\Project2\Dependencies\Windows\x86\glew\include /I..\Dependencies\Windows\x86\openssl\include /I..\Dependencies\Windows\x86\cairo\include\cairo /I"..\Dependencies\Windows\x86\glib-2.34\lib\glib-2.0\include" /I"..\Dependencies\Windows\x86\glib-2.34\include" /I..\Dependencies\Windows\x86\pango\include /I..\Dependencies\Windows\x86\SOIL\include /I..\Dependencies\Windows\x86\glm\include /I..\Dependencies\Windows\x86\GFLW\include /I..\Dependencies\Windows\x86\glew\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
@@ -7,8 +7,8 @@
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\textrenderer.h(113): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\textrenderer.h(114): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\textrenderer.h(205): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\entity.h(215): warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\entity.h(218): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\entity.h(216): warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\entity.h(219): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\guibutton.h(27): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\guibutton.h(28): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\guibutton.h(29): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
@@ -87,4 +87,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.57
+Time Elapsed 00:00:03.18

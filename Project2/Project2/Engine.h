@@ -119,9 +119,9 @@ peon = new SpriteSheet("peon");
 		//handleNetworkData(dict.get());
 		Dictionary * di = dict.get();
 		if (di!= nullptr){
-		//	std::thread t(&Engine::static_handleNetworkData, this, di);
-			//t.detach();
-			handleNetworkData(di);
+			std::thread t(&Engine::static_handleNetworkData, this, di);
+			t.detach();
+			//.handleNetworkData(di);
 		}
 		//
 		//handleNetworkData(network->getData());
@@ -529,8 +529,15 @@ if (dict->getItem("GameObjects") != nullptr){
 	for (int i = 0; i < gm->items.size(); i++){
 		float px = atof(gm->items[i].getItem("x")->value.c_str());
 		float py = atof(gm->items[i].getItem("y")->value.c_str());
+		std::string pv = gm->items[i].getItem("isVisible")->value;
 		int resouceID = atoi(gm->items[i].getItem("resourceID")->value.c_str());
 		PickUp *p = new PickUp(getResouce(resouceID),px,py);
+		if (pv == "true"){
+			p->setVisible(true);
+		}
+		else{
+			p->setVisible(false);
+		}
 		gameObjects.push_back(p);
 
 	}

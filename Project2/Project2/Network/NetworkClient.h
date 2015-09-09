@@ -46,7 +46,7 @@
 #define DEBUG
 #ifdef _WIN32
 #ifdef DEBUG
-#define remoteHost "10.0.0.3"
+#define remoteHost "10.0.0.2"
 #define remotePort "9898"
 #else
 #define remoteHost "ec2-52-88-129-161.us-west-2.compute.amazonaws.com"
@@ -269,7 +269,7 @@ t.tv_sec = 0;
   }
 //std::cout<<"reading data 2\n";
    if(FD_ISSET(con,&read_fds)){//data to be red
-  char buffer[256];
+  char buffer[1024];
   int bytes;
   //cout<<"data?\n";
 //std::cout<<"reading data\n";
@@ -283,7 +283,7 @@ t.tv_sec = 0;
 
     std::stringstream ss;
     ss<<buffer;
- // std::cout<<ss.str()<<std::endl;
+  //std::cout<<ss.str()<<std::endl;
     dict = JSONParser::parseJson(ss.str());
   // dict->printDictionay();
   }/**/
