@@ -97,6 +97,7 @@
     <ClInclude Include="Network\NetworkClient.h" />
     <ClInclude Include="PickUp.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Resources.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteSheet.h" />

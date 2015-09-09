@@ -18,6 +18,7 @@
 #include "GUI/TextRenderer.h"
 
 //game Objects
+#include "Resources.h"
 #include "GameObject.h"
 #include "PickUp.h"
 
@@ -58,7 +59,7 @@ private:
 	 long frames=0;
 	 int WIDTH = 800, HEIGHT = 600;
 
-   GameObject *pickup;
+   std::vector<GameObject *>gameObjects;
 	 GUI *gui;
 	TextRenderer *fpsText;
 	std::string fps_str;
@@ -77,6 +78,9 @@ public:
 #ifndef OFFLINEMODE
 		loginMenu=true;
 #endif
+
+	loadResouces();
+
 	//	gui->setEngine(thiis);
 		gui = new GUI();
 network = new NetworkClient();
@@ -102,8 +106,7 @@ peon = new SpriteSheet("peon");
 		curtime=glfwGetTime();
 		lastframe=glfwGetTime();
 		//lastframe = clock();
-    pickup= new PickUp(new SpriteSheet("itemPickup"),200,200);
-    pickup->setName("Stuff");
+
 
 
 	}
@@ -136,8 +139,15 @@ peon = new SpriteSheet("peon");
 	curtime = glfwGetTime();
 
 	long ct = getTime();
-	long dt = ct - lt;
-	//dt /= 3;
+	long dt;
+	if (ct < lt){
+		dt = MAXLONG - lt - ct;
+	
+	}
+	else{
+		dt = ct - lt;
+
+	}//dt /= 3;
 	lt = ct;
 		double elp = curtime - lastframe;
 if(proj != nullptr){
@@ -166,7 +176,7 @@ if(proj != nullptr){
 	//	lt = ct;
 		//dtt *= 100;
 		player->Update(dt);
-    pickup->Update(dt);
+   
 
 	for (int i = 0; i < players.size(); i++){
 		players[i]->Update(dt);
@@ -220,7 +230,10 @@ if (player->isMoving()){
 		}
 
     map->Draw(camera);
-        pickup->Draw(&camera);
+
+	for (int i = 0; i < gameObjects.size(); i++){
+		gameObjects[i]->Draw(&camera);
+	}
 		for (unsigned int i = 0; i < entities.size(); i++){
 			entities[i]->Draw(camera);
 		}
@@ -272,13 +285,24 @@ if(key==GLFW_KEY_1){
 }
 }
 }
+
+void sendMouseClick(int button, double MouseX, double MouseY){
+	std::stringstream ss;
+	ss << "{\"MouseClick\":[";
+	ss << "\"Button\":\""<<button<<"\",";
+	ss << "\"X\":\"" << MouseX << "\",";
+	ss << "\"Y\":\"" << MouseY << "\"]}";
+	network->sendData(ss.str());
+
+}
 	void MouseClick(int button, double MouseX, double MouseY){
 	double	gMouseX = MouseX+camera.getX();
 	double	gMouseY = MouseY+camera.getY();
 		//std::cout << "MouseButton:" << button << "  X:" << MouseX << " Y:" << MouseY << "\n";
     //right click
     if(button==1){
-      if(pickup->checkMouseClick(gMouseX,gMouseY)){
+		sendMouseClick(button, gMouseX, gMouseY);
+/*      if(pickup->checkMouseClick(gMouseX,gMouseY)){
        pickup->setVisible(false);
 			 bool adNew=true;
        gui->addChatLogText("You looted " + pickup->getName()+".");
@@ -297,7 +321,7 @@ if(key==GLFW_KEY_1){
 				 	 inventory.push_back(temp);
 				 }
 
-      }
+      }*/
     }
 
 //left click
@@ -347,7 +371,13 @@ if(key==GLFW_KEY_1){
 		}
 		players.clear();
 	}
+	void freeGameObjects(){
+		for (int i = 0; i < gameObjects.size(); i++){
+			delete(gameObjects[i]);
 
+		}
+		gameObjects.clear();
+	}
 	
 	void sendMoving(){
 		std::stringstream ss;
@@ -493,7 +523,18 @@ if (dict->getItem("Players") != nullptr){
 	}
 
 }
-	// player = new Player(wedguy, 200, 200, 0, 0, 32, 64);
+if (dict->getItem("GameObjects") != nullptr){
+	DictionaryItem * gm = dict->getItem("GameObjects");
+	freeGameObjects();
+	for (int i = 0; i < gm->items.size(); i++){
+		float px = atof(gm->items[i].getItem("x")->value.c_str());
+		float py = atof(gm->items[i].getItem("y")->value.c_str());
+		int resouceID = atoi(gm->items[i].getItem("resourceID")->value.c_str());
+		PickUp *p = new PickUp(getResouce(resouceID),px,py);
+		gameObjects.push_back(p);
+
+	}
+}
 
 
 delete(dict);
