@@ -115,10 +115,13 @@ delete(actionBarItems[1]);
 
 			textfield = new GUITextField(textFieldBg);
 			textfield->setPadding(15);
+			
 			textArea = new GUITextField(textFieldBg);
 				textArea->setY(textArea->getY()-155);
 				textArea->setHeight(150);
 				textArea->setPadding(15);
+				textArea->setMultiLine(true);
+
 
 				textUser = new GUITextField(textFieldBg);
 	textUser->setWidth(200);

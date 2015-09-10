@@ -18,13 +18,16 @@ bool editable;
 bool multiline=false;
 TextRenderer *textRenderer = nullptr;
 std::string text;
+std::vector<std::string> text_multi;
+int maxStoredLines =50;
+int max_lines = 8;
 float padding=0;
 bool passwordText=false;
 void updateText(){
   if(textRenderer!=nullptr){
     delete(textRenderer);
   }
-  textRenderer = new TextRenderer(GUIObject::getX(),GUIObject::getY(),text);
+  textRenderer = new TextRenderer(GUIObject::getX(),GUIObject::getY(),"");
   textRenderer->setObjectWidth(GUIObject::getWidth());
   textRenderer->setObjectHeight(GUIObject::getHeight());
   textRenderer->setPadding(5);
@@ -35,7 +38,22 @@ void updateText(){
   textRenderer->setY(y);
   textRenderer->setPadding(padding);
   //std::cout<<GUIObject::getHeight()<<std::endl;
-  std::string temp = text;
+  std::string temp=text;
+  if (multiline){
+	  //really should use a linked list for this...
+	//  std::cout << "text arraysize: " << text_multi.size() << std::endl;
+	  temp = "";
+	  if (max_lines < text_multi.size()){
+		  for (int i = text_multi.size() - max_lines; i < text_multi.size(); i++){
+			  temp += text_multi[i];
+		  }
+	  }
+	  else{
+		  for (int i = 0; i < text_multi.size();i++){
+			  temp += text_multi[i];
+		  }
+	  }
+  } 
 if(passwordText){
   temp = "";
   for(int i=0;i<text.length();i++){
@@ -76,8 +94,17 @@ bool isEditable(){
   return editable;
 }
 void setText(std::string _text){
-  text=_text;
-  updateText();
+	if (!multiline){
+		text = _text;
+	}
+	else{
+		if (text_multi.size() >= maxStoredLines){
+			text_multi.erase(text_multi.begin());
+		}
+		text_multi.push_back(_text);
+		
+	}
+ //updateText();
 }
 void setMultiLine(bool _multiline){
   multiline=_multiline;

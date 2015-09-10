@@ -85,6 +85,9 @@ public:
 		gui = new GUI();
 network = new NetworkClient();
 
+//std::thread t(&Engine::networkThread, this);
+//t.detach();
+
 	gui->setNetworkClient(network);
 	gui->setInventory(&inventory);
 			 map = new Map("map001");
@@ -107,9 +110,11 @@ peon = new SpriteSheet("peon");
 		lastframe=glfwGetTime();
 		//lastframe = clock();
 
-
+	
 
 	}
+
+
 
 	void Update(){
 #ifndef OFFLINEMODE
@@ -119,8 +124,9 @@ peon = new SpriteSheet("peon");
 		//handleNetworkData(dict.get());
 		Dictionary * di = dict.get();
 		if (di!= nullptr){
-			std::thread t(&Engine::static_handleNetworkData, this, di);
-			t.detach();
+			std::async(&Engine::static_handleNetworkData, this, di);
+			//std::thread t(&Engine::static_handleNetworkData, this, di);
+			//t.detach();
 			//.handleNetworkData(di);
 		}
 		//
