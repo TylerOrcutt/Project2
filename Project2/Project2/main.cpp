@@ -45,6 +45,9 @@ Engine *engine;
 GLFWwindow* window;
 //NetworkClient * network;
 double mouseX, mouseY;
+
+
+
 static void error_callback(int error, const char* description)
 {
 	fputs(description, stderr);
@@ -191,6 +194,7 @@ std::string title=" v:";
 	glfwSwapInterval(1);
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetMouseButtonCallback(window, MouseClick_callback);
+	
 
 
 
@@ -201,7 +205,7 @@ engine = new Engine();
 	while (!glfwWindowShouldClose(window) && 	running )
 	{
 		glfwGetCursorPos(window, &mouseX, &mouseY);
-
+		engine->getGUI()->setMousePos(mouseX, mouseY);
 		engine->Update();
 
 		/*

@@ -118,22 +118,24 @@ peon = new SpriteSheet("peon");
 
 	void Update(){
 #ifndef OFFLINEMODE
-		auto dict = std::async(&NetworkClient::static_getData, network);
+		Dictionary* di = network->getData();
 
 
 		//handleNetworkData(dict.get());
-		Dictionary * di = dict.get();
+		//Dictionary * di = dict.get();
 		if (di!= nullptr){
-			std::async(&Engine::static_handleNetworkData, this, di);
+			//std::async(&Engine::static_handleNetworkData, this, di);
 			//std::thread t(&Engine::static_handleNetworkData, this, di);
 			//t.detach();
-			//.handleNetworkData(di);
+			handleNetworkData(di);
 		}
 		//
 		//handleNetworkData(network->getData());
 		if (!network->isConnected() && !loginMenu){
 			gui->clearChat();
 			freePlayers();
+			freeInventoryObjects();
+			freeGameObjects();
 		std::cout << "Disconnected\n";
 		loginMenu = true;
 			gui->setMsgBox(new GUIMessagebox("Connection to server lost"));
@@ -147,7 +149,7 @@ peon = new SpriteSheet("peon");
 	long ct = getTime();
 	long dt;
 	if (ct < lt){
-		dt = MAXLONG - lt - ct;
+		dt = LONG_MAX - lt - ct;
 	
 	}
 	else{
@@ -384,6 +386,13 @@ void sendMouseClick(int button, double MouseX, double MouseY){
 		}
 		gameObjects.clear();
 	}
+	void freeInventoryObjects(){
+		for (int i = 0; i < inventory.size(); i++){
+			delete(inventory[i]);
+
+		}
+		inventory.clear();
+	}
 	
 	void sendMoving(){
 		std::stringstream ss;
@@ -462,7 +471,7 @@ if (dict->getItem("Disconnected") != nullptr){
 	gui->addChatLogText(dc + " disconnected.");
 }
 if (dict->getItem("Chat") != nullptr){
-	std::cout << "chat msg revieved\n";
+	//std::cout << "chat msg revieved\n";
 	gui->addChatLogText(dict->getItem("Chat")->value);
 }
 if (dict->getItem("Stats") != nullptr){
@@ -548,7 +557,22 @@ if (dict->getItem("GameObjects") != nullptr){
 
 	}
 }
+if (dict->getItem("Inventory") != nullptr){
+	DictionaryItem * gm = dict->getItem("Inventory");
+	freeInventoryObjects();
+	for (int i = 0; i < gm->items.size(); i++){
+		float count = atoi(gm->items[i].getItem("count")->value.c_str());
 
+		int resouceID = atoi(gm->items[i].getItem("resourceID")->value.c_str());
+		GameItem *pv = new GameItem(getResouce(resouceID));
+		pv->setName(gm->items[i].key);
+		pv->setStackCount(count);
+		//std::cout << count << std::endl;
+
+		inventory.push_back(pv);
+
+	}
+}
 
 delete(dict);
 }

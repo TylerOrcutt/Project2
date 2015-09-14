@@ -64,6 +64,7 @@ GUIWindow * bagWindow,*actionBar;
 	GUITextField * focusText=nullptr;
 
 	GUIMessagebox *msgbox=nullptr;
+	double MouseX,MouseY;
 
 public:
 	 static void gameMenuExit_onClick (GUIButton *owner) {
@@ -121,6 +122,7 @@ delete(actionBarItems[1]);
 				textArea->setHeight(150);
 				textArea->setPadding(15);
 				textArea->setMultiLine(true);
+				textArea->setText("<span foreground=\"blue\" size=\"100\">Blue text</span>");
 
 
 				textUser = new GUITextField(textFieldBg);
@@ -164,6 +166,12 @@ if(bagWindow->isVisible()){
 			if(itemX+36 > bagWindow->getX()+bagWindow->getWidth()-10) {
 				itemX=startX;
 				itemY+=36;
+			}
+
+			(*inventory)[i]->setX(itemX);
+			(*inventory)[i]->setY(itemY);
+			if ((*inventory)[i]->checkMouseHover((float)MouseX, (float)MouseY)){
+				std::cout << "Hover :" << (*inventory)[i]->getName() << std::endl;
 			}
 			(*inventory)[i]->Draw(itemX,itemY);
 			itemX+=36;
@@ -252,7 +260,7 @@ void addChatLogText(std::string text){
 		textArea->setText(textArea->getText()+"\n"+text);
 }
 void clearChat(){
-	textArea->setText("");
+	textArea->clear();
 }
 void keyPressed(int key){
 //	textfield->setText((std::string)textfield->getText()+key);
@@ -343,6 +351,16 @@ void createMessageBox(std::string msg){
 }
 void setNetworkClient(NetworkClient * client){
 	network = client;
+}
+void setMouseX(double x){
+	MouseX = x;
+}
+void setMouseY(double y){
+	MouseY = y;
+}
+void setMousePos(double x, double y){
+	MouseY = y;
+	MouseX = x;
 }
 };
 

@@ -52,8 +52,9 @@ public:
 			pango_layout_set_width(layout,objectWidth*PANGO_SCALE);
 			pango_layout_set_wrap(layout,PANGO_WRAP_WORD);
 		}
+	
 		pango_layout_set_text(layout,temp_text.c_str(),-1);
-
+		pango_layout_set_markup(layout, temp_text.c_str(), strlen(temp_text.c_str()));
 		std::stringstream ssize;
 		ssize<<fontSize;
 		

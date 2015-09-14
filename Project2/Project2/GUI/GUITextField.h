@@ -106,6 +106,10 @@ void setText(std::string _text){
 	}
  //updateText();
 }
+void clear(){
+	text_multi.clear();
+	text = "";
+}
 void setMultiLine(bool _multiline){
   multiline=_multiline;
 }
