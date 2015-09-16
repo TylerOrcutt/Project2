@@ -93,7 +93,7 @@ public:
 		}
 	}
 
-	virtual void Update(long dt){
+	virtual void Update(unsigned long dt){
 		if(hp<=0){
 			//visible=false;
 		}

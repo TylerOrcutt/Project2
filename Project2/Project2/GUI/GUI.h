@@ -275,6 +275,11 @@ text= textfield->getText();
 if(key==257){
 	if(typing && text!=""){
 
+		for (int i = 0; i <= text.length(); i++){
+			if (text.substr(i, 1) == "\""){
+				text.replace(i, 1, "&qt;");
+			}
+		}
 	network->sendMessage(text);
 	if(focusText ==nullptr){
 	textfield->setText("");

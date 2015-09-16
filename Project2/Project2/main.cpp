@@ -97,6 +97,7 @@ if(action==GLFW_PRESS){
 	engine->getGUI()->keyPressed(key);
 	return;
 }
+return;
 }
 
 if ((key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D) && action == GLFW_RELEASE){
@@ -195,9 +196,16 @@ std::string title=" v:";
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetMouseButtonCallback(window, MouseClick_callback);
 	
-
-
-
+	glShadeModel(GL_SMOOTH);
+	/*
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_DEPTH_TEST);
+	GLfloat a[] = { 2.0, 2.0, 2.0, 0.0 };
+	GLfloat b[] = { 1.0, 1.0, 1.0, 0.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, a);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, b);
+	*/
 engine = new Engine();
 
 

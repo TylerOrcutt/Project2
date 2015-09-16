@@ -35,6 +35,7 @@
 #include <future>
 //#include <unistd.h>
 #include <time.h>
+#include <climits>
 #include "Network/NetworkClient.h"
 #include<stdlib.h>
 #ifdef __linux__
@@ -146,16 +147,8 @@ peon = new SpriteSheet("peon");
 	lastUpdate=curtime;
 	curtime = glfwGetTime();
 
-	long ct = getTime();
-	long dt;
-	if (ct < lt){
-		dt = LONG_MAX - lt - ct;
-	
-	}
-	else{
-		dt = ct - lt;
-
-	}//dt /= 3;
+	unsigned long ct = getTime();
+	unsigned long dt = CalcTimeDiff(ct, lt);
 	lt = ct;
 		double elp = curtime - lastframe;
 if(proj != nullptr){
@@ -408,7 +401,7 @@ void sendMouseClick(int button, double MouseX, double MouseY){
 		else{
 			//ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"],\"Moving\":[\"isMoving\":\"false\",\"Direction\":\"" << player->getDirection() << "\"]}";
 			ss << "{\"Moving\":[\"isMoving\":\"false\",\"Direction\":\"" << player->getDirection() << "\"]}";
-			long dms = getTime() - ms;
+			unsigned long dms = CalcTimeDiff(getTime(), ms);
 			float distance = ((float)player->getSpeed()*dms)/1000 ;
 			std::cout << distance << std::endl;
 			
@@ -444,6 +437,9 @@ void handleNetworkData(Dictionary * dict){
 if(dict == nullptr){
 	return;
 }
+if (dict->getItem("msgBox") != nullptr){
+	gui->createMessageBox(dict->getItem("msgBox")->value);
+}
 if(loginMenu){
 	if (dict->getItem("Login") != nullptr){
 		if (dict->getItem("Login")->value == "success"){
@@ -472,7 +468,13 @@ if (dict->getItem("Disconnected") != nullptr){
 }
 if (dict->getItem("Chat") != nullptr){
 	//std::cout << "chat msg revieved\n";
-	gui->addChatLogText(dict->getItem("Chat")->value);
+	std::string cline = dict->getItem("Chat")->value;
+	for (int i = 0; i <= cline.length(); i++){
+		if (cline.substr(i, 4) == "&qt;"){
+			cline.replace(i, 4, "\"");
+		}
+	}
+	gui->addChatLogText(cline);
 }
 if (dict->getItem("Stats") != nullptr){
 	DictionaryItem *position=nullptr;
@@ -578,19 +580,34 @@ delete(dict);
 }
 
 
-long getTime(){
+unsigned long getTime(){
 #ifdef __linux__
 	timeval tm;
 	gettimeofday(&tm,NULL);
-	long cm=(tm.tv_sec*1000)+(tm.tv_usec/1000);
+	unsigned long cm=(tm.tv_sec*1000)+(tm.tv_usec/1000);
 	return cm;
 #else
 	SYSTEMTIME t;
 	GetSystemTime(&t);
-	long ctim = (t.wSecond * 1000)+ t.wMilliseconds;
+	unsigned long ctim = (t.wSecond * 1000)+ t.wMilliseconds;
 	return ctim;
 #endif
 }
+
+unsigned long CalcTimeDiff(unsigned long curtime, unsigned long lasttime){
+	unsigned long dtt;
+	if (curtime < lasttime){
+		dtt =(ULONG_MAX - lasttime) + curtime;
+		std::cout << "Time lap\n";
+
+	}
+	else{
+		dtt = curtime - lasttime;
+
+	}
+	return dtt;
+}
+
 };
 
 
