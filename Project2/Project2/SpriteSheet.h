@@ -19,7 +19,7 @@ private:
 	int texture_width;
 public:
 	SpriteSheet(){
-	Load("peon");
+	//Load("peon");
     }
 	SpriteSheet(std::string file){
 		Load(file);
@@ -40,6 +40,10 @@ public:
 	GLuint getTexture(){
 		return texture;
 	}
+	/*not sure if this will end up calling the deconsturctor for param?  that would be bad*/
+	/*SpriteSheet* operator = (SpriteSheet *sp){
+		return sp;
+	}*/
 	int getWidth() { return texture_width; }
 	int getHeight() { return texture_height; }
 	~SpriteSheet(){

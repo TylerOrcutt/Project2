@@ -52,6 +52,24 @@ public:
       textRend->Draw();
     }
   }
+  virtual bool checkMouseClick(float mousex, float mousey){
+	//  if (visible){
+		  if (mousex >= posx && mousex <= posx + width && mousey >= posy && mousey <= posy + height){
+			  return true;
+		  }
+	  //}
+	  return false;
+
+  }
+  virtual bool checkMouseHover(float mousex, float mousey){
+	// if (visible){
+		  if (mousex >= posx && mousex <= posx + width && mousey >= posy && mousey <= posy + height){
+			  return true;
+		  }
+	 // }
+	  return false;
+
+  }
   void setName(std::string _name){
     name=_name;
   }
@@ -65,13 +83,28 @@ public:
   int getStackCount(){
     return stackCount;
   }
+  void setStackCount(int count){
+	  stackCount = count;
+	  initText();
+  }
   void incCount(){
     if(stackCount<maxStack){
     stackCount++;
     initText();
   }
   }
-
+  float getX(){
+	  return posx;
+  }
+  void setX(float _x){
+	  posx = _x;
+  }
+  float getY(){
+	  return posy;
+  }
+  void setY(float _y){
+	  posy = _y;
+  }
 
 };
 

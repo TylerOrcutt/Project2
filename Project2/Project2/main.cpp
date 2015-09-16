@@ -45,6 +45,9 @@ Engine *engine;
 GLFWwindow* window;
 //NetworkClient * network;
 double mouseX, mouseY;
+
+
+
 static void error_callback(int error, const char* description)
 {
 	fputs(description, stderr);
@@ -94,7 +97,16 @@ if(action==GLFW_PRESS){
 	engine->getGUI()->keyPressed(key);
 	return;
 }
+return;
 }
+
+if ((key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D) && action == GLFW_RELEASE){
+	engine->getPlayer()->setMoving(false);
+	engine->getCamera().setMoving(false);
+	engine->sendMoving();
+	return;
+}
+
 if (key == GLFW_KEY_W && action == GLFW_PRESS){
 		//engine->getCamera().setMoving(true);
 		engine->getCamera().setDirection(0);
@@ -102,6 +114,7 @@ if (key == GLFW_KEY_W && action == GLFW_PRESS){
 		engine->getPlayer()->setDirection(0);
 
 		engine->sendMoving();
+		return;
 	} else
 	if (key == GLFW_KEY_S && action == GLFW_PRESS){
 		//engine->getCamera().setMoving(true);
@@ -109,6 +122,7 @@ if (key == GLFW_KEY_W && action == GLFW_PRESS){
 		engine->getPlayer()->setMoving(true);
 		engine->getPlayer()->setDirection(2);
 		engine->sendMoving();
+		return;
 
 	} else
 
@@ -118,7 +132,7 @@ if (key == GLFW_KEY_W && action == GLFW_PRESS){
 		engine->getPlayer()->setMoving(true);
 		engine->getPlayer()->setDirection(3);
 		engine->sendMoving();
-
+		return;
 
 	}else
 	if (key == GLFW_KEY_D && action == GLFW_PRESS){
@@ -127,16 +141,13 @@ if (key == GLFW_KEY_W && action == GLFW_PRESS){
 		engine->getPlayer()->setMoving(true);
         engine->getPlayer()->setDirection(1);
 		engine->sendMoving();
+		return;
 	}
 if ((key == GLFW_KEY_1 || key == GLFW_KEY_2 ) && action == GLFW_PRESS){
 	engine->actionBarKey(key);
 }
 
-	if ((key == GLFW_KEY_W || key == GLFW_KEY_A || key == GLFW_KEY_S || key == GLFW_KEY_D) && action == GLFW_RELEASE){
-		engine->getPlayer()->setMoving(false);
-		engine->getCamera().setMoving(false);
-		engine->sendMoving();
-	}
+
 
 	if (key == GLFW_KEY_B && action == GLFW_PRESS){
 		engine->getGUI()->getBagWindow()->setVisible(!	engine->getGUI()->getBagWindow()->isVisible());
@@ -184,9 +195,17 @@ std::string title=" v:";
 	glfwSwapInterval(1);
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetMouseButtonCallback(window, MouseClick_callback);
-
-
-
+	
+	glShadeModel(GL_SMOOTH);
+	/*
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_DEPTH_TEST);
+	GLfloat a[] = { 2.0, 2.0, 2.0, 0.0 };
+	GLfloat b[] = { 1.0, 1.0, 1.0, 0.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, a);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, b);
+	*/
 engine = new Engine();
 
 
@@ -194,7 +213,7 @@ engine = new Engine();
 	while (!glfwWindowShouldClose(window) && 	running )
 	{
 		glfwGetCursorPos(window, &mouseX, &mouseY);
-
+		engine->getGUI()->setMousePos(mouseX, mouseY);
 		engine->Update();
 
 		/*
@@ -241,8 +260,9 @@ engine = new Engine();
 
 	//	peon.Draw(0,192,0,0);
 
-		engine->Draw();
-
+	
+			engine->Draw();
+	
 
 	//	Te
 

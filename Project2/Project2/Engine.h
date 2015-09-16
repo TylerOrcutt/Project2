@@ -6,6 +6,9 @@
 ****************************************/
 #ifndef __KAL_ENGINE_H_
 #define __KAL_ENGINE_H_
+
+//#define OFFLINEMODE
+
 #include "Entity.h"
 #include "Player.h"
 #include "SpriteSheet.h"
@@ -15,6 +18,7 @@
 #include "GUI/TextRenderer.h"
 
 //game Objects
+#include "Resources.h"
 #include "GameObject.h"
 #include "PickUp.h"
 
@@ -27,14 +31,22 @@
 #include <ctime>
 #include <sstream>
 #include <GLFW/glfw3.h>
+#include <thread>
+#include <future>
 //#include <unistd.h>
-
+#include <time.h>
+#include <climits>
 #include "Network/NetworkClient.h"
+#include<stdlib.h>
+#ifdef __linux__
+#include <sys/time.h>
+#endif
+
 
 class Engine{
 private:
 	NetworkClient * network;
-
+	
 	//TODO data struct, hash?
 	std::vector<Entity*> entities;
 
@@ -48,21 +60,37 @@ private:
 	 long frames=0;
 	 int WIDTH = 800, HEIGHT = 600;
 
-   GameObject *pickup;
-	 GUI gui;
+   std::vector<GameObject *>gameObjects;
+	 GUI *gui;
 	TextRenderer *fpsText;
 	std::string fps_str;
 std::vector<GameItem *>inventory;
 Projectile *proj=nullptr;
+
+
+long lt;
+
+long ms;
+long mss;
+float pstartx,pstarty;
 public:
 
 	Engine(){
+#ifndef OFFLINEMODE
 		loginMenu=true;
-	//	gui.setEngine(thiis);
+#endif
+
+	loadResouces();
+
+	//	gui->setEngine(thiis);
+		gui = new GUI();
 network = new NetworkClient();
 
-	gui.setNetworkClient(network);
-	gui.setInventory(&inventory);
+//std::thread t(&Engine::networkThread, this);
+//t.detach();
+
+	gui->setNetworkClient(network);
+	gui->setInventory(&inventory);
 			 map = new Map("map001");
 peon = new SpriteSheet("peon");
 	  wedguy=new SpriteSheet("weddingguy02");
@@ -82,27 +110,46 @@ peon = new SpriteSheet("peon");
 		curtime=glfwGetTime();
 		lastframe=glfwGetTime();
 		//lastframe = clock();
-    pickup= new PickUp(new SpriteSheet("itemPickup"),200,200);
-    pickup->setName("Stuff");
 
+	
 
 	}
 
+
+
 	void Update(){
-		handleNetworkData(network->getData());
+#ifndef OFFLINEMODE
+		Dictionary* di = network->getData();
+
+
+		//handleNetworkData(dict.get());
+		//Dictionary * di = dict.get();
+		if (di!= nullptr){
+			//std::async(&Engine::static_handleNetworkData, this, di);
+			//std::thread t(&Engine::static_handleNetworkData, this, di);
+			//t.detach();
+			handleNetworkData(di);
+		}
+		//
+		//handleNetworkData(network->getData());
 		if (!network->isConnected() && !loginMenu){
-			gui.clearChat();
+			gui->clearChat();
 			freePlayers();
+			freeInventoryObjects();
+			freeGameObjects();
 		std::cout << "Disconnected\n";
 		loginMenu = true;
-			gui.setMsgBox(new GUIMessagebox("Connection to server lost"));
+			gui->setMsgBox(new GUIMessagebox("Connection to server lost"));
 		}
+#endif
 		frames++;
 	//	time(&curtime);
 	lastUpdate=curtime;
 	curtime = glfwGetTime();
 
-double dt = (curtime-lastUpdate)*100;
+	unsigned long ct = getTime();
+	unsigned long dt = CalcTimeDiff(ct, lt);
+	lt = ct;
 		double elp = curtime - lastframe;
 if(proj != nullptr){
 	proj->Update(dt);
@@ -123,8 +170,14 @@ if(proj != nullptr){
 		}
 	//
 	//std::cout<<dt<<std::endl;
+	
+	//	gettimeofda
+	
+		//long dtt = difftime(ct, lt);
+	//	lt = ct;
+		//dtt *= 100;
 		player->Update(dt);
-    pickup->Update(dt);
+   
 
 	for (int i = 0; i < players.size(); i++){
 		players[i]->Update(dt);
@@ -166,17 +219,22 @@ if (player->isMoving()){
 	//ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"]}";
 //	network->sendData(ss.str());
 }
+
+
 	}
 
 	void Draw(){
 		if(loginMenu){
-			gui.DrawLoginMenu();
+			gui->DrawLoginMenu();
 			fpsText->Draw();
 			return;
 		}
 
     map->Draw(camera);
-        pickup->Draw(&camera);
+
+	for (int i = 0; i < gameObjects.size(); i++){
+		gameObjects[i]->Draw(&camera);
+	}
 		for (unsigned int i = 0; i < entities.size(); i++){
 			entities[i]->Draw(camera);
 		}
@@ -191,7 +249,7 @@ if (player->isMoving()){
 		}
 
 
-		gui.Draw(player);
+		gui->Draw(player);
 		fpsText->Draw();
 		//textrend.Draw();
 
@@ -228,16 +286,27 @@ if(key==GLFW_KEY_1){
 }
 }
 }
+
+void sendMouseClick(int button, double MouseX, double MouseY){
+	std::stringstream ss;
+	ss << "{\"MouseClick\":[";
+	ss << "\"Button\":\""<<button<<"\",";
+	ss << "\"X\":\"" << MouseX << "\",";
+	ss << "\"Y\":\"" << MouseY << "\"]}";
+	network->sendData(ss.str());
+
+}
 	void MouseClick(int button, double MouseX, double MouseY){
 	double	gMouseX = MouseX+camera.getX();
 	double	gMouseY = MouseY+camera.getY();
 		//std::cout << "MouseButton:" << button << "  X:" << MouseX << " Y:" << MouseY << "\n";
     //right click
     if(button==1){
-      if(pickup->checkMouseClick(gMouseX,gMouseY)){
+		sendMouseClick(button, gMouseX, gMouseY);
+/*      if(pickup->checkMouseClick(gMouseX,gMouseY)){
        pickup->setVisible(false);
 			 bool adNew=true;
-       gui.addChatLogText("You looted " + pickup->getName()+".");
+       gui->addChatLogText("You looted " + pickup->getName()+".");
 			 for(int i=0;i<inventory.size();i++){
 				 if(inventory[i]->getName()==pickup->getName()){
 					 if(inventory[i]->getStackCount()<inventory[i]->getMaxStack()){
@@ -253,12 +322,12 @@ if(key==GLFW_KEY_1){
 				 	 inventory.push_back(temp);
 				 }
 
-      }
+      }*/
     }
 
 //left click
 		if (button == 0){
-			if(gui.checkMouseClick(MouseX, MouseY)){
+			if(gui->checkMouseClick(MouseX, MouseY)){
 			  return;
 			}
 		//	std::cout << "RightClick: X:" << MouseX << " Y:" << MouseY << "\n";
@@ -284,7 +353,7 @@ if(key==GLFW_KEY_1){
 		return map;
 	}
 	GUI* getGUI(){
-		return &gui;
+		return gui;
 	}
 	NetworkClient * getNetwork(){
 		return network;
@@ -303,31 +372,86 @@ if(key==GLFW_KEY_1){
 		}
 		players.clear();
 	}
+	void freeGameObjects(){
+		for (int i = 0; i < gameObjects.size(); i++){
+			delete(gameObjects[i]);
 
+		}
+		gameObjects.clear();
+	}
+	void freeInventoryObjects(){
+		for (int i = 0; i < inventory.size(); i++){
+			delete(inventory[i]);
+
+		}
+		inventory.clear();
+	}
 	
 	void sendMoving(){
 		std::stringstream ss;
 		if (player->isMoving()){
-			ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"],\"Moving\":[\"isMoving\":\"true\",\"Direction\":\"" << player->getDirection() << "\"]}";
+			ms = getTime();
+			//ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"],
+			ss<<"{\"Moving\":[\"isMoving\":\"true\",\"Direction\":\"" << player->getDirection() << "\"]}";
+		
+			pstartx = player->getX();
+			pstarty = player->getY();
+
 		}
 		else{
-			ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"],\"Moving\":[\"isMoving\":\"false\",\"Direction\":\"" << player->getDirection() << "\"]}";
+			//ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"],\"Moving\":[\"isMoving\":\"false\",\"Direction\":\"" << player->getDirection() << "\"]}";
+			ss << "{\"Moving\":[\"isMoving\":\"false\",\"Direction\":\"" << player->getDirection() << "\"]}";
+			unsigned long dms = CalcTimeDiff(getTime(), ms);
+			float distance = ((float)player->getSpeed()*dms)/1000 ;
+			std::cout << distance << std::endl;
+			
+			std::cout << "Start Location: X:" << pstartx << " Y:" << pstarty << std::endl;
+			switch (player->getDirection())
+			{
+			case 0 :
+				pstarty -= distance;
+				break;
+			case 1:
+				pstartx += distance;
+				break;
+			case 2:
+				pstarty += distance;
+				break;
+			case 3:
+				pstartx -= distance;
+				break;
+			}
+			std::cout << "Projected Location: X:" << pstartx << " Y:" << pstarty << std::endl;
+
+			std::cout << "Actual Location: X:"<<player->getX()<<" Y:"<<player->getY()<<std::endl;
+
 		}
 		network->sendData(ss.str());
 	}
 //Process network data
+	static void static_handleNetworkData(Engine * engine, Dictionary * dict){
+		engine->handleNetworkData(dict);
+	}
+
 void handleNetworkData(Dictionary * dict){
 if(dict == nullptr){
 	return;
 }
+if (dict->getItem("msgBox") != nullptr){
+	gui->createMessageBox(dict->getItem("msgBox")->value);
+}
 if(loginMenu){
-	if(dict->getItem("Login")->value=="success"){
-		loginMenu = false;
-		gui.setTyping(false);
-	}else{
-		//std::cout<<dict->getItem("Login")->value<<std::endl;
-		//gui.setMsgBox(new GUIMessagebox(dict->getItem("Login")->value));
-		gui.createMessageBox(dict->getItem("Login")->value);
+	if (dict->getItem("Login") != nullptr){
+		if (dict->getItem("Login")->value == "success"){
+			loginMenu = false;
+			gui->setTyping(false);
+		}
+		else{
+			//std::cout<<dict->getItem("Login")->value<<std::endl;
+			//gui->setMsgBox(new GUIMessagebox(dict->getItem("Login")->value));
+			gui->createMessageBox(dict->getItem("Login")->value);
+		}
+
 	}
 
 }
@@ -340,18 +464,25 @@ if (dict->getItem("Disconnected") != nullptr){
 			break;
 		}
 	}
-	gui.addChatLogText(dc + " disconnected.");
+	gui->addChatLogText(dc + " disconnected.");
 }
 if (dict->getItem("Chat") != nullptr){
-	std::cout << "chat msg revieved\n";
-	gui.addChatLogText(dict->getItem("Chat")->value);
+	//std::cout << "chat msg revieved\n";
+	std::string cline = dict->getItem("Chat")->value;
+	for (int i = 0; i <= cline.length(); i++){
+		if (cline.substr(i, 4) == "&qt;"){
+			cline.replace(i, 4, "\"");
+		}
+	}
+	gui->addChatLogText(cline);
 }
 if (dict->getItem("Stats") != nullptr){
 	DictionaryItem *position=nullptr;
 	if ((position = dict->getItem("Stats")->getItem("Position")) != nullptr){
 		player->setX(atof(position->getItem("X")->value.c_str()));
 		player->setY(atof(position->getItem("Y")->value.c_str()));
-		//loginMenu = false;
+	//	std::cout << "Updating position\n";
+	
 	}
 }
 
@@ -409,11 +540,74 @@ if (dict->getItem("Players") != nullptr){
 	}
 
 }
-	// player = new Player(wedguy, 200, 200, 0, 0, 32, 64);
+if (dict->getItem("GameObjects") != nullptr){
+	DictionaryItem * gm = dict->getItem("GameObjects");
+	freeGameObjects();
+	for (int i = 0; i < gm->items.size(); i++){
+		float px = atof(gm->items[i].getItem("x")->value.c_str());
+		float py = atof(gm->items[i].getItem("y")->value.c_str());
+		std::string pv = gm->items[i].getItem("isVisible")->value;
+		int resouceID = atoi(gm->items[i].getItem("resourceID")->value.c_str());
+		PickUp *p = new PickUp(getResouce(resouceID),px,py);
+		if (pv == "true"){
+			p->setVisible(true);
+		}
+		else{
+			p->setVisible(false);
+		}
+		gameObjects.push_back(p);
 
+	}
+}
+if (dict->getItem("Inventory") != nullptr){
+	DictionaryItem * gm = dict->getItem("Inventory");
+	freeInventoryObjects();
+	for (int i = 0; i < gm->items.size(); i++){
+		float count = atoi(gm->items[i].getItem("count")->value.c_str());
+
+		int resouceID = atoi(gm->items[i].getItem("resourceID")->value.c_str());
+		GameItem *pv = new GameItem(getResouce(resouceID));
+		pv->setName(gm->items[i].key);
+		pv->setStackCount(count);
+		//std::cout << count << std::endl;
+
+		inventory.push_back(pv);
+
+	}
+}
 
 delete(dict);
 }
+
+
+unsigned long getTime(){
+#ifdef __linux__
+	timeval tm;
+	gettimeofday(&tm,NULL);
+	unsigned long cm=(tm.tv_sec*1000)+(tm.tv_usec/1000);
+	return cm;
+#else
+	SYSTEMTIME t;
+	GetSystemTime(&t);
+	unsigned long ctim = (t.wSecond * 1000)+ t.wMilliseconds;
+	return ctim;
+#endif
+}
+
+unsigned long CalcTimeDiff(unsigned long curtime, unsigned long lasttime){
+	unsigned long dtt;
+	if (curtime < lasttime){
+		dtt =(ULONG_MAX - lasttime) + curtime;
+		std::cout << "Time lap\n";
+
+	}
+	else{
+		dtt = curtime - lasttime;
+
+	}
+	return dtt;
+}
+
 };
 
 

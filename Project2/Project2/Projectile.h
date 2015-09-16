@@ -18,7 +18,7 @@ private:
   bool visible=true;
   float damage=10;
   float targetX=0,targetY=0;
-  float speed=5;
+  float speed=750;
   float maxDistance = 500;
   float distance=0;
   Entity * target=nullptr;
@@ -32,7 +32,7 @@ public:
     posy=y;
   }
 
-  virtual void Update( double dt){
+  virtual void Update( unsigned long dt){
     if(!visible){
       return;
     }
@@ -42,8 +42,8 @@ public:
     }
     float angle = atan2(target->getY()-posy,target->getX()-posx);
 
-    float incX=(cos(angle)*speed)*dt;
-    float incY=(sin(angle)*speed)*dt;
+    float incX=(cos(angle)*speed)*dt/1000;
+    float incY=(sin(angle)*speed)*dt/1000;
     posx+=incX;
     posy+= incY;
     distance+=abs(incX)+abs(incY);

@@ -11,7 +11,6 @@
 #include <errno.h>
 
 #include <malloc.h>
-#include <string.h>
 
 
 #ifdef __linux__
@@ -40,13 +39,14 @@
 #include <openssl/crypto.h>
 #include <vector>
 #include <openssl/sha.h>
-
+#include <thread>
+#include <future>
 #include "JSONParser.h"
 #include "Crypto.h"
+#define DEBUG
 #ifdef _WIN32
-//#define DEBUG
 #ifdef DEBUG
-#define remoteHost "10.0.0.3"
+#define remoteHost "10.0.0.2"
 #define remotePort "9898"
 #else
 #define remoteHost "ec2-52-88-129-161.us-west-2.compute.amazonaws.com"
@@ -55,7 +55,7 @@
 
 #else
 #ifdef DEBUG
-#define remoteHost "10.0.0.3"
+#define remoteHost "127.0.0.1"
 #define remotePort 9898
 #else
 #define remoteHost "ec2-52-88-129-161.us-west-2.compute.amazonaws.com"
@@ -214,6 +214,7 @@ public:
 	}
 
 #endif
+
 	bool  sendData(std::string data){
 		if (con == -1){
 
@@ -244,7 +245,11 @@ public:
     return sendData(data);
     }
 
-
+	
+	static 	Dictionary * static_getData(NetworkClient *network){
+		Dictionary * dic = network->getData();
+		return dic;
+	}
 Dictionary * getData(){
 	if (con == -1){
 		return nullptr;
@@ -264,7 +269,7 @@ t.tv_sec = 0;
   }
 //std::cout<<"reading data 2\n";
    if(FD_ISSET(con,&read_fds)){//data to be red
-  char buffer[256];
+  char buffer[1024];
   int bytes;
   //cout<<"data?\n";
 //std::cout<<"reading data\n";
