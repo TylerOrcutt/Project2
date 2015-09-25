@@ -16,6 +16,7 @@
 #include "TextRenderer.h"
 #include "GUIButton.h"
 #include "GUITextField.h"
+#include "GUILabel.h"
 #include "GUIMessagebox.h"
 #include "../GameItem.h"
 
@@ -33,11 +34,12 @@ NetworkClient * network;
 
 //login Stuff
 GUITextField *textUser,*textPass;
-GUIButton *loginBtn;
+GUIButton *loginBtn,*selectRealmBtn;
 GUIWindow * gmenu;
 GUIWindow * bagWindow,*actionBar;
 	GUIObject *hud;
 
+	GUILabel * selectedRealm=nullptr;
 	SpriteSheet *gmenu_sprite;
 	SpriteSheet *hud_sprite, *fireSprite, *teleSprite, *actionBarItemBlank, *textFieldBg, *test_button;
 
@@ -73,6 +75,7 @@ public:
 	}
 	GUI(){
 	//	msgbox = new GUIMessagebox("Login Failed");
+	
 		gmenu_sprite = new SpriteSheet("GUIWindow");
 
 		fireSprite= new SpriteSheet("fireball");
@@ -122,7 +125,7 @@ delete(actionBarItems[1]);
 				textArea->setHeight(150);
 				textArea->setPadding(15);
 				textArea->setMultiLine(true);
-				textArea->setText("<span foreground=\"blue\" size=\"100\">Blue text</span>");
+				
 
 
 				textUser = new GUITextField(textFieldBg);
@@ -135,6 +138,7 @@ delete(actionBarItems[1]);
 					textPass->setPosition((SCREEN_WIDTH/2)-(textPass->getWidth()/2),(SCREEN_HEIGHT/2)-(textPass->getHeight()/2)+20);
 textPass->setPasswordText(true);
 loginBtn = new GUIButton(test_button, "Login", NULL, 400, 500, 0, 0, 128, 32);
+selectRealmBtn = new GUIButton(test_button, "Select Realm", NULL, SCREEN_WIDTH-150,SCREEN_HEIGHT-36, 0, 0, 128, 32);
 	}
 
 
@@ -146,6 +150,10 @@ loginBtn = new GUIButton(test_button, "Login", NULL, 400, 500, 0, 0, 128, 32);
 		textUser->Draw();
 		textPass->Draw();
 		loginBtn->Draw();
+		selectRealmBtn->Draw();
+		if (selectedRealm != nullptr){
+			selectedRealm->Draw();
+		}
 		if(msgbox!=nullptr){
 			msgbox->Draw();
 		}
@@ -171,7 +179,7 @@ if(bagWindow->isVisible()){
 			(*inventory)[i]->setX(itemX);
 			(*inventory)[i]->setY(itemY);
 			if ((*inventory)[i]->checkMouseHover((float)MouseX, (float)MouseY)){
-				std::cout << "Hover :" << (*inventory)[i]->getName() << std::endl;
+				//std::cout << "Hover :" << (*inventory)[i]->getName() << std::endl;
 			}
 			(*inventory)[i]->Draw(itemX,itemY);
 			itemX+=36;
@@ -223,7 +231,24 @@ if(bagWindow->isVisible()){
 		 typing=true;
 		 return true;
 	 }
-	 if(loginBtn->checkMouseClick(mousex,mousey)){
+	 if (loginMenu && selectRealmBtn->checkMouseClick(mousex, mousey)){
+		 for (int i = 0; i < network->getRealms()->size(); i++){
+			 if (network->getRealm().name == (*network->getRealms())[i].name){
+			
+				 i++;
+				 if (i >= network->getRealms()->size()){
+					 break;
+				 }
+				 network->setRealm((*network->getRealms())[i]);
+				 selectedRealm->setText((*network->getRealms())[i].name);
+				 return true; 
+			 }
+		 }
+		 network->setRealm((*network->getRealms())[0]);
+		 selectedRealm->setText((*network->getRealms())[0].name);
+		 return true;
+	 }
+	 if (loginMenu && loginBtn->checkMouseClick(mousex, mousey)){
 		 std::cout<<"Login button click\n";
 		 focusText=nullptr;
 
@@ -366,6 +391,12 @@ void setMouseY(double y){
 void setMousePos(double x, double y){
 	MouseY = y;
 	MouseX = x;
+}
+void setSelectedRealm(std::string realm){
+	if (selectedRealm != nullptr){
+		delete(selectedRealm);
+	}
+	selectedRealm = new GUILabel(realm, SCREEN_WIDTH - (float)realm.length()*15, SCREEN_HEIGHT - 75);
 }
 };
 

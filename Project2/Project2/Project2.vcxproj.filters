@@ -24,6 +24,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Network\NetworkDataHandler.cpp">
+      <Filter>Header Files\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Network\Crypto.h">
@@ -106,6 +109,12 @@
     </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\ConnectionHandler.h">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\GUILabel.h">
+      <Filter>Header Files\GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

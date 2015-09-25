@@ -41,7 +41,9 @@ private:
 std::vector<DictionaryItem> nodes;
 public:
 Dictionary(){ }
-
+std::vector<DictionaryItem> * getNodes(){
+	return &nodes;
+}
 DictionaryItem & operator [](std::string pram){
 for(int i=0;i<nodes.size();i++ ){
   if(pram==nodes[i].key){

@@ -1,0 +1,10 @@
+﻿Build started 9/17/2015 12:32:49 AM.
+     1>Project "C:\Users\geforce\Documents\GitHub\Project2\Project2\Project2\Project2.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\geforce\Documents\GitHub\Project2\Project2\x64\Debug\Project2.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\Dependencies\Windows\x86\openssl\lib /LIBPATH:..\Dependencies\Windows\x86\openssl\lib\VC /LIBPATH:..\Dependencies\Windows\x86\cairo\lib /LIBPATH:"..\Dependencies\Windows\x86\glib-2.34\lib" /LIBPATH:..\Dependencies\Windows\x86\pango\lib /LIBPATH:..\Dependencies\Windows\x86\SOIL\lib /LIBPATH:C:\Users\geforce\Documents\GitHub\Project2\Project2\Dependencies\Windows\x86\GFLW\lib /LIBPATH:C:\Users\geforce\Documents\GitHub\Project2\Project2\Dependencies\Windows\x86\glew\lib\Release\x64 /LIBPATH:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\geforce\Documents\GitHub\Project2\Project2\x64\Debug\Project2.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\geforce\Documents\GitHub\Project2\Project2\x64\Debug\Project2.lib" /MACHINE:X64 x64\Debug\main.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64'
+     1>Done Building Project "C:\Users\geforce\Documents\GitHub\Project2\Project2\Project2\Project2.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.14

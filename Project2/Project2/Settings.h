@@ -6,6 +6,7 @@
 ****************************************/
 #ifndef __GAME_SETTINGS_H_
 #define __GAME_SETTINGS_H_
+#define GAME_VERSION "0.1.0"
 
 static bool running;
 

@@ -29,6 +29,10 @@ public:
 	GUIObject(){
 
 	}
+	GUIObject(float pos_x, float pos_y){
+		posx = pos_x;
+		posy = pos_y;
+	}
 	GUIObject(SpriteSheet * sp){
 		sprite = new Sprite(sp);
 	}

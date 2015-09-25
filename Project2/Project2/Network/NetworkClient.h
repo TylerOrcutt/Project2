@@ -42,29 +42,22 @@
 #include <thread>
 #include <future>
 #include "JSONParser.h"
+#include "ConnectionHandler.h"
 #include "Crypto.h"
-#define DEBUG
-#ifdef _WIN32
+//#define DEBUG
 #ifdef DEBUG
 #define remoteHost "10.0.0.2"
 #define remotePort "9898"
 #else
-#define remoteHost "ec2-52-88-129-161.us-west-2.compute.amazonaws.com"
+#define remoteHost "10.0.0.15"
 #define remotePort "9898"
 #endif
 
-#else
-#ifdef DEBUG
-#define remoteHost "127.0.0.1"
-#define remotePort 9898
-#else
-#define remoteHost "ec2-52-88-129-161.us-west-2.compute.amazonaws.com"
-#define remotePort 9898
-#endif
-#endif
+
 
 class NetworkClient {
 private:
+	Realm realm;
 	SSL_CTX * ctx;
 	SSL *ssl = nullptr;
 	fd_set master;
@@ -72,7 +65,7 @@ private:
 	timeval t;
 	int fdmax;
 
-
+	std::vector<Realm> realms;
 	struct addrinfo hints, *result, *ptr, *servinfo;
 
 
@@ -89,7 +82,7 @@ public:
 
 	NetworkClient(){
 		initCTX();
-	//	ssl = SSL_new(ctx);
+		//	ssl = SSL_new(ctx);
 	}
 #ifdef __linux__
 	bool Connect_LINUX(){
@@ -100,7 +93,7 @@ public:
 		int res;
 
 		//
-		if((res=getaddrinfo(remoteHost,"9898",&hints,&servinfo))!=0){
+		if((res=getaddrinfo(realm.ip.c_str(), realm.port.c_str(),&hints,&servinfo))!=0){
 			std::cout<<"host not found.\n";
 			return false;
 		}
@@ -111,11 +104,11 @@ public:
 			return false;
 		}
 		if(connect(con,servinfo->ai_addr,servinfo->ai_addrlen)==-1){
-		 	close(con);
+			close(con);
 			std::cout<<"Unable to connect.\n";
 			return false;
 		}
-//std::cout<<"Atempting SSL Connection\n";
+		//std::cout<<"Atempting SSL Connection\n";
 		ssl = SSL_new(ctx);
 		SSL_set_fd(ssl,con);
 		if ( SSL_connect(ssl)==-1){
@@ -155,7 +148,7 @@ public:
 		hints.ai_protocol = IPPROTO_TCP;
 
 		// Resolve the server address and port
-		iresult = getaddrinfo(remoteHost, remotePort, &hints, &result);
+		iresult = getaddrinfo(realm.ip.c_str(), realm.port.c_str(), &hints, &result);
 		if (iresult != 0) {
 			printf("getaddrinfo failed with error: %d\n", iresult);
 			WSACleanup();
@@ -192,7 +185,7 @@ public:
 			WSACleanup();
 			return false;
 		}
-	//	printf("connecting to server...\n");
+		//	printf("connecting to server...\n");
 		if (ssl != nullptr){
 			SSL_free(ssl);
 		}
@@ -209,7 +202,7 @@ public:
 		FD_SET(con, &master);
 		//	sendData("");
 		//  connected = true;
-	//	closesocket(con);
+		//	closesocket(con);
 		return true;
 	}
 
@@ -232,94 +225,108 @@ public:
 
 
 	bool sendMessage(std::string msg){
-		std::string data = "{\"Chat\":\""+msg+"\"}";
+		std::string data = "{\"Chat\":\"" + msg + "\"}";
 		return sendData(data);
 	}
 
-    bool sendLogin(std::string user, std::string pass){
+	bool sendLogin(std::string user, std::string pass){
 		if (con == -1 && !Connect()){
-		return false;
+			return false;
 		}
-      pass= encrypt_SHA1(pass);
-    std::string data = "{\"Login\":[\"username\":\""+user+"\",\"password\":\""+pass+"\"]}";
-    return sendData(data);
-    }
+		pass = encrypt_SHA1(pass);
+		std::string data = "{\"Login\":[\"username\":\"" + user + "\",\"password\":\"" + pass + "\"]}";
+		return sendData(data);
+	}
 
-	
+
 	static 	Dictionary * static_getData(NetworkClient *network){
 		Dictionary * dic = network->getData();
 		return dic;
 	}
-Dictionary * getData(){
-	if (con == -1){
-		return nullptr;
+	Dictionary * getData(){
+		if (con == -1){
+			return nullptr;
+		}
+		read_fds = master;
+		Dictionary * dict = nullptr;
+		read_fds = master;
+		FD_SET(con, &read_fds);
+		//std::cout<<"reading data\n";
+		t.tv_sec = 0;
+		t.tv_usec = 10;
+
+		if (select(con + 1, &read_fds, NULL, NULL, &t) == -1){
+			std::cout << "select error\n";
+			con = -1;
+			return nullptr;
+		}
+		//std::cout<<"reading data 2\n";
+		if (FD_ISSET(con, &read_fds)){//data to be red
+			char buffer[1024];
+			int bytes;
+			//cout<<"data?\n";
+			//std::cout<<"reading data\n";
+			bytes = SSL_read(ssl, buffer, sizeof(buffer));
+			if (bytes <= 0){
+				con = -1;
+				return nullptr;
+			}
+			buffer[bytes - 2] = '\0';
+			if (bytes > 0){
+
+				std::stringstream ss;
+				ss << buffer;
+				// std::cout<<ss.str()<<std::endl;
+				dict = JSONParser::parseJson(ss.str());
+				// dict->printDictionay();
+			}/**/
+		}
+		//}
+		return dict;
 	}
-  read_fds=master;
-	Dictionary * dict = nullptr;
-read_fds=master;
-            FD_SET(con, &read_fds);
-  //std::cout<<"reading data\n";
-t.tv_sec = 0;
-               t.tv_usec = 10;
-
-  if(select(con+1,&read_fds,NULL,NULL,&t)==-1){
-   std::cout<<"select error\n";
-   con = -1;
-    return nullptr;
-  }
-//std::cout<<"reading data 2\n";
-   if(FD_ISSET(con,&read_fds)){//data to be red
-  char buffer[1024];
-  int bytes;
-  //cout<<"data?\n";
-//std::cout<<"reading data\n";
-  bytes=SSL_read(ssl,buffer,sizeof(buffer));
-  if (bytes<=0){
-	  con = -1;
-	  return nullptr;
-  }
-  buffer[bytes-2]='\0';
-  if(bytes>0){
-
-    std::stringstream ss;
-    ss<<buffer;
- // std::cout<<ss.str()<<std::endl;
-    dict = JSONParser::parseJson(ss.str());
-  // dict->printDictionay();
-  }/**/
-}
-//}
-  return dict;
-}
 
 
-/*
-  void ShowCerts()
-{   X509 *cert;
-    char *line;
+	/*
+	  void ShowCerts()
+	  {   X509 *cert;
+	  char *line;
 
-    cert = SSL_get_peer_certificate(ssl);
-    if ( cert != NULL )
-    {
-        printf("Server certificates:\n");
-        line = X509_NAME_oneline(X509_get_subject_name(cert), 0, 0);
-        printf("Subject: %s\n", line);
-        delete(line);
-        line = X509_NAME_oneline(X509_get_issuer_name(cert), 0, 0);
-        printf("Issuer: %s\n", line);
-        delete(line);
-        X509_free(cert);
-    }
-    else
-        printf("No certificates.\n");
-}*/
-
-  bool isConnected(){
-	  if (con <= 0){
-		  return false;
+	  cert = SSL_get_peer_certificate(ssl);
+	  if ( cert != NULL )
+	  {
+	  printf("Server certificates:\n");
+	  line = X509_NAME_oneline(X509_get_subject_name(cert), 0, 0);
+	  printf("Subject: %s\n", line);
+	  delete(line);
+	  line = X509_NAME_oneline(X509_get_issuer_name(cert), 0, 0);
+	  printf("Issuer: %s\n", line);
+	  delete(line);
+	  X509_free(cert);
 	  }
-	  return true;
-  }
+	  else
+	  printf("No certificates.\n");
+	  }*/
+
+	bool isConnected(){
+		if (con <= 0){
+			return false;
+		}
+		return true;
+	}
+	void setRealm(Realm  _realm){
+		realm = _realm;
+
+	}
+	Realm getRealm(){
+		return realm;
+	}
+
+	std::vector<Realm> * getRealms(){
+		return &realms;
+}
+	void setRealms(std::vector<Realm> _realms){
+		realms = _realms;
+	}
 
 ~NetworkClient(){
 #ifdef _WIN32
@@ -344,6 +351,7 @@ void initCTX() {
     }
 
 }
+
 
 };
 

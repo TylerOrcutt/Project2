@@ -5,8 +5,6 @@
 *Copyright 2015 Tyler Orcutt
 ****************************************/
 
-#define GAME_VERSION "0.1.0"
-
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
@@ -155,11 +153,18 @@ if ((key == GLFW_KEY_1 || key == GLFW_KEY_2 ) && action == GLFW_PRESS){
 
 
 }
+
+
+#if  defined(_WIN32) && !defined(_DEBUG)
+	int WINAPI WinMain(
+		_In_  HINSTANCE hInstance,
+		_In_opt_  HINSTANCE hPrevInstance,
+		_In_  LPSTR lpCmdLine,
+		_In_  int nCmdShow
+		){
+#else
 int main(int args, char **argv)
 {
-
-#ifdef _WIN32
-	//  FreeConsole();
 #endif
 	mouseX = 0;
 	mouseY = 0;
