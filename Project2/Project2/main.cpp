@@ -213,8 +213,8 @@ std::string title=" v:";
 	glLightfv(GL_LIGHT0, GL_AMBIENT, b);
 	*/
 engine = new Engine();
-LUAManager::executeLUAFile("");
-
+//LUAManager lua;
+LUAManager::executeLUAFile("",engine->getGUI());
 
 	while (!glfwWindowShouldClose(window) && 	running )
 	{

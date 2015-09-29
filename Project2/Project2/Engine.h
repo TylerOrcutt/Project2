@@ -40,6 +40,7 @@
 #include "Network/NetworkClient.h"
 #include "Network/ConnectionHandler.h"
 #include<stdlib.h>
+
 #ifdef __linux__
 #include <sys/time.h>
 #endif
@@ -47,6 +48,7 @@
 
 class Engine{
 private:
+	
 	NetworkClient * network;
 	
 	//TODO data struct, hash?

@@ -75,7 +75,7 @@ public:
 	}
 	GUI(){
 	//	msgbox = new GUIMessagebox("Login Failed");
-	
+
 		gmenu_sprite = new SpriteSheet("GUIWindow");
 
 		fireSprite= new SpriteSheet("fireball");
