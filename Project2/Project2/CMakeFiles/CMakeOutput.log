@@ -1000,3 +1000,183 @@ Linking C executable cmTryCompileExec4288980250
 make[1]: Leaving directory `/home/twittumz/Desktop/git/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
 
 
+Determining if the function XOpenDisplay exists in the /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so passed with the following output:
+Change Dir: /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec4022385916/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec4022385916.dir/build.make CMakeFiles/cmTryCompileExec4022385916.dir/build
+make[1]: Entering directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec4022385916.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay   -o CMakeFiles/cmTryCompileExec4022385916.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec4022385916
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4022385916.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay    CMakeFiles/cmTryCompileExec4022385916.dir/CheckFunctionExists.c.o  -o cmTryCompileExec4022385916 -rdynamic -lX11 -lXext 
+make[1]: Leaving directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+
+
+Determining if the function gethostbyname exists passed with the following output:
+Change Dir: /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3138275810/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3138275810.dir/build.make CMakeFiles/cmTryCompileExec3138275810.dir/build
+make[1]: Entering directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3138275810.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=gethostbyname   -o CMakeFiles/cmTryCompileExec3138275810.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3138275810
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3138275810.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=gethostbyname    CMakeFiles/cmTryCompileExec3138275810.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3138275810 -rdynamic 
+make[1]: Leaving directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+
+
+Determining if the function connect exists passed with the following output:
+Change Dir: /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1599712225/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1599712225.dir/build.make CMakeFiles/cmTryCompileExec1599712225.dir/build
+make[1]: Entering directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1599712225.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=connect   -o CMakeFiles/cmTryCompileExec1599712225.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1599712225
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1599712225.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=connect    CMakeFiles/cmTryCompileExec1599712225.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1599712225 -rdynamic 
+make[1]: Leaving directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+
+
+Determining if the function remove exists passed with the following output:
+Change Dir: /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3764726369/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3764726369.dir/build.make CMakeFiles/cmTryCompileExec3764726369.dir/build
+make[1]: Entering directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3764726369.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=remove   -o CMakeFiles/cmTryCompileExec3764726369.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3764726369
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3764726369.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=remove    CMakeFiles/cmTryCompileExec3764726369.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3764726369 -rdynamic 
+make[1]: Leaving directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+
+
+Determining if the function shmat exists passed with the following output:
+Change Dir: /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1938256855/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1938256855.dir/build.make CMakeFiles/cmTryCompileExec1938256855.dir/build
+make[1]: Entering directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1938256855.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=shmat   -o CMakeFiles/cmTryCompileExec1938256855.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1938256855
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1938256855.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=shmat    CMakeFiles/cmTryCompileExec1938256855.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1938256855 -rdynamic 
+make[1]: Leaving directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+
+
+Determining if the function IceConnectionNumber exists in the ICE passed with the following output:
+Change Dir: /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2849260030/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2849260030.dir/build.make CMakeFiles/cmTryCompileExec2849260030.dir/build
+make[1]: Entering directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2849260030.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber   -o CMakeFiles/cmTryCompileExec2849260030.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec2849260030
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2849260030.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber    CMakeFiles/cmTryCompileExec2849260030.dir/CheckFunctionExists.c.o  -o cmTryCompileExec2849260030 -rdynamic -lICE 
+make[1]: Leaving directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+
+
+Determining if the function XOpenDisplay exists in the /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so passed with the following output:
+Change Dir: /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2627581911/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2627581911.dir/build.make CMakeFiles/cmTryCompileExec2627581911.dir/build
+make[1]: Entering directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2627581911.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay   -o CMakeFiles/cmTryCompileExec2627581911.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec2627581911
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2627581911.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay    CMakeFiles/cmTryCompileExec2627581911.dir/CheckFunctionExists.c.o  -o cmTryCompileExec2627581911 -rdynamic -lX11 -lXext 
+make[1]: Leaving directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+
+
+Determining if the function gethostbyname exists passed with the following output:
+Change Dir: /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3460328488/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3460328488.dir/build.make CMakeFiles/cmTryCompileExec3460328488.dir/build
+make[1]: Entering directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3460328488.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=gethostbyname   -o CMakeFiles/cmTryCompileExec3460328488.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3460328488
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3460328488.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=gethostbyname    CMakeFiles/cmTryCompileExec3460328488.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3460328488 -rdynamic 
+make[1]: Leaving directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+
+
+Determining if the function connect exists passed with the following output:
+Change Dir: /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec4203403040/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec4203403040.dir/build.make CMakeFiles/cmTryCompileExec4203403040.dir/build
+make[1]: Entering directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec4203403040.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=connect   -o CMakeFiles/cmTryCompileExec4203403040.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec4203403040
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4203403040.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=connect    CMakeFiles/cmTryCompileExec4203403040.dir/CheckFunctionExists.c.o  -o cmTryCompileExec4203403040 -rdynamic 
+make[1]: Leaving directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+
+
+Determining if the function remove exists passed with the following output:
+Change Dir: /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec210108590/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec210108590.dir/build.make CMakeFiles/cmTryCompileExec210108590.dir/build
+make[1]: Entering directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec210108590.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=remove   -o CMakeFiles/cmTryCompileExec210108590.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec210108590
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec210108590.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=remove    CMakeFiles/cmTryCompileExec210108590.dir/CheckFunctionExists.c.o  -o cmTryCompileExec210108590 -rdynamic 
+make[1]: Leaving directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+
+
+Determining if the function shmat exists passed with the following output:
+Change Dir: /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3755164077/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3755164077.dir/build.make CMakeFiles/cmTryCompileExec3755164077.dir/build
+make[1]: Entering directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3755164077.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=shmat   -o CMakeFiles/cmTryCompileExec3755164077.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3755164077
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3755164077.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=shmat    CMakeFiles/cmTryCompileExec3755164077.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3755164077 -rdynamic 
+make[1]: Leaving directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+
+
+Determining if the function IceConnectionNumber exists in the ICE passed with the following output:
+Change Dir: /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3217572391/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3217572391.dir/build.make CMakeFiles/cmTryCompileExec3217572391.dir/build
+make[1]: Entering directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3217572391.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber   -o CMakeFiles/cmTryCompileExec3217572391.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3217572391
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3217572391.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber    CMakeFiles/cmTryCompileExec3217572391.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3217572391 -rdynamic -lICE 
+make[1]: Leaving directory `/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/CMakeTmp'
+
+

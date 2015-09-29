@@ -6,6 +6,7 @@ CMakeFiles/kal.dir/main.cpp.o: Engine.h
 CMakeFiles/kal.dir/main.cpp.o: Entity.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/GUI.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/GUIButton.h
+CMakeFiles/kal.dir/main.cpp.o: GUI/GUILabel.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/GUIMessagebox.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/GUIObject.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/GUITextField.h
@@ -14,7 +15,9 @@ CMakeFiles/kal.dir/main.cpp.o: GUI/KeyMap.h
 CMakeFiles/kal.dir/main.cpp.o: GUI/TextRenderer.h
 CMakeFiles/kal.dir/main.cpp.o: GameItem.h
 CMakeFiles/kal.dir/main.cpp.o: GameObject.h
+CMakeFiles/kal.dir/main.cpp.o: LUA/LUAManager.h
 CMakeFiles/kal.dir/main.cpp.o: Map.h
+CMakeFiles/kal.dir/main.cpp.o: Network/ConnectionHandler.h
 CMakeFiles/kal.dir/main.cpp.o: Network/Crypto.h
 CMakeFiles/kal.dir/main.cpp.o: Network/Dictionary.h
 CMakeFiles/kal.dir/main.cpp.o: Network/JSONParser.h
@@ -22,6 +25,7 @@ CMakeFiles/kal.dir/main.cpp.o: Network/NetworkClient.h
 CMakeFiles/kal.dir/main.cpp.o: PickUp.h
 CMakeFiles/kal.dir/main.cpp.o: Player.h
 CMakeFiles/kal.dir/main.cpp.o: Projectile.h
+CMakeFiles/kal.dir/main.cpp.o: Resources.h
 CMakeFiles/kal.dir/main.cpp.o: Settings.h
 CMakeFiles/kal.dir/main.cpp.o: Sprite.h
 CMakeFiles/kal.dir/main.cpp.o: SpriteSheet.h
@@ -124,6 +128,10 @@ CMakeFiles/kal.dir/main.cpp.o: /usr/include/glib-2.0/gobject/gtypeplugin.h
 CMakeFiles/kal.dir/main.cpp.o: /usr/include/glib-2.0/gobject/gvalue.h
 CMakeFiles/kal.dir/main.cpp.o: /usr/include/glib-2.0/gobject/gvaluearray.h
 CMakeFiles/kal.dir/main.cpp.o: /usr/include/glib-2.0/gobject/gvaluetypes.h
+CMakeFiles/kal.dir/main.cpp.o: /usr/include/lua5.2/lauxlib.h
+CMakeFiles/kal.dir/main.cpp.o: /usr/include/lua5.2/lua.h
+CMakeFiles/kal.dir/main.cpp.o: /usr/include/lua5.2/luaconf.h
+CMakeFiles/kal.dir/main.cpp.o: /usr/include/lua5.2/lualib.h
 CMakeFiles/kal.dir/main.cpp.o: /usr/include/pango-1.0/pango/pango-attributes.h
 CMakeFiles/kal.dir/main.cpp.o: /usr/include/pango-1.0/pango/pango-bidi-type.h
 CMakeFiles/kal.dir/main.cpp.o: /usr/include/pango-1.0/pango/pango-break.h

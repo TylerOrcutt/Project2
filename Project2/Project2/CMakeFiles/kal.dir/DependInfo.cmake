@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/twittumz/Desktop/git/Project2/Project2/Project2/main.cpp" "/home/twittumz/Desktop/git/Project2/Project2/Project2/CMakeFiles/kal.dir/main.cpp.o"
+  "/home/twittumz/Desktop/Project2/Project2/Project2/main.cpp" "/home/twittumz/Desktop/Project2/Project2/Project2/CMakeFiles/kal.dir/main.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -30,6 +30,7 @@ SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/local/include"
   "/usr/include/libdrm"
   "kal"
+  "/usr/include/lua5.2"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
 SET(CMAKE_Fortran_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
