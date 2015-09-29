@@ -19,6 +19,12 @@
     <Filter Include="Header Files\GUI">
       <UniqueIdentifier>{bb9bc0f8-db4d-42cc-bc8d-7d4e70344e6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\LUA">
+      <UniqueIdentifier>{51348a9b-3f5a-46eb-9df4-b84bcae1e1e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Addons">
+      <UniqueIdentifier>{345a2f4f-7bf1-4dcd-b972-1d810312c2ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -116,5 +122,13 @@
     <ClInclude Include="GUI\GUILabel.h">
       <Filter>Header Files\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="LUA\LUAManager.h">
+      <Filter>Header Files\LUA</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Addons\average.lua">
+      <Filter>Resource Files\Addons</Filter>
+    </None>
   </ItemGroup>
 </Project>

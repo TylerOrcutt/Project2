@@ -39,6 +39,7 @@
 #include "Engine.h"
 #include "Network/NetworkClient.h"
 #include "Settings.h"
+#include "LUA/LUAManager.h"
 Engine *engine;
 GLFWwindow* window;
 //NetworkClient * network;
@@ -212,7 +213,7 @@ std::string title=" v:";
 	glLightfv(GL_LIGHT0, GL_AMBIENT, b);
 	*/
 engine = new Engine();
-
+LUAManager::executeLUAFile("");
 
 
 	while (!glfwWindowShouldClose(window) && 	running )
