@@ -113,11 +113,11 @@ peon = new SpriteSheet("peon");
 	  fpsText  = new TextRenderer(camera.getWidth()-50,10,"");
 
 	
-		Entity *ent = new Entity(peon,200,100,0,0,32,32);
+	/*	Entity *ent = new Entity(peon,200,100,0,0,32,32);
 		ent->setName("Peon");
 		ent->setHP(50);
 		ent->resize(64,64);
-		entities.push_back(ent);
+		entities.push_back(ent);*/
 		//curtime = clock();
 		curtime=glfwGetTime();
 		lastframe=glfwGetTime();
@@ -154,6 +154,7 @@ peon = new SpriteSheet("peon");
 			freePlayers();
 			freeInventoryObjects();
 			freeGameObjects();
+			freeEntities();
 		std::cout << "Disconnected\n";
 		loginMenu = true;
 			gui->setMsgBox(new GUIMessagebox("Connection to server lost"));
@@ -218,14 +219,14 @@ if(proj != nullptr){
 		}
 
 
-		for (unsigned int i = 0; i < entities.size(); i++){
+	/*	for (unsigned int i = 0; i < entities.size(); i++){
 			entities[i]->setX(entities[i]->getX()+1);
 			if(entities[i]->getX()>700){
 					entities[i]->setX(300);
 			}
 			entities[i]->Update(curtime);
 		}
-
+		*/
 
 dt *=10000;
 		//std::cout << dt << std::endl;
@@ -396,6 +397,13 @@ void sendMouseClick(int button, double MouseX, double MouseY){
 		}
 		gameObjects.clear();
 	}
+	void freeEntities(){
+		for (int i = 0; i < entities.size(); i++){
+			delete(entities[i]);
+
+		}
+		entities.clear();
+	}
 	void freeInventoryObjects(){
 		for (int i = 0; i < inventory.size(); i++){
 			delete(inventory[i]);
@@ -554,6 +562,63 @@ void sendMouseClick(int button, double MouseX, double MouseY){
 			}
 
 		}
+
+
+		if (dict->getItem("NPCS") != nullptr){
+			//dict->printDictionay();
+			for (int i = 0; i < dict->getItem("NPCS")->items.size(); i++){
+				bool found = false;
+				for (int p = 0; p < entities.size(); p++){
+					if (entities[p]->getName() == dict->getItem("NPCS")->items[i].key){
+						found = true;
+						if (dict->getItem("NPCS")->getItem(dict->getItem("NPCS")->items[i].key)->getItem("Position") != nullptr){
+							entities[p]->setX(atof(dict->getItem("NPCS")->getItem(dict->getItem("NPCS")->items[i].key)->getItem("Position")->getItem("x")->value.c_str()));
+							entities[p]->setY(atof(dict->getItem("NPCS")->getItem(dict->getItem("NPCS")->items[i].key)->getItem("Position")->getItem("y")->value.c_str()));
+							//std::cout << "Updating Player " << dict->getItem("Players")->items[i].key << std::endl;
+						}
+						if (dict->getItem("NPCS")->getItem(dict->getItem("NPCS")->items[i].key)->getItem("Moving") != nullptr){
+							if (dict->getItem("NPCS")->getItem(dict->getItem("NPCS")->items[i].key)->getItem("Moving")->getItem("isMoving")->value == "true"){
+								entities[p]->setMoving(true);
+							}
+							else{
+								entities[p]->setMoving(false);
+							}
+							entities[p]->setDirection(atoi(dict->getItem("NPCS")->getItem(dict->getItem("NPCS")->items[i].key)->getItem("Moving")->getItem("Direction")->value.c_str()));
+						}
+
+						break;
+					}
+
+				}
+
+				if (!found){
+					Entity *ply = new Entity(wedguy, 200, 200, 0, 0, 32, 64);
+					if (dict->getItem("NPCS")->getItem(dict->getItem("NPCS")->items[i].key)->getItem("Position") != nullptr){
+						float px = atof(dict->getItem("NPCS")->getItem(dict->getItem("NPCS")->items[i].key)->getItem("Position")->getItem("x")->value.c_str());
+						float py = atof(dict->getItem("NPCS")->getItem(dict->getItem("NPCS")->items[i].key)->getItem("Position")->getItem("y")->value.c_str());
+						ply->setX(px);
+						ply->setY(py);
+					}
+					if (dict->getItem("NPCS")->getItem(dict->getItem("NPCS")->items[i].key)->getItem("Moving") != nullptr){
+						if (dict->getItem("NPCS")->getItem(dict->getItem("NPCS")->items[i].key)->getItem("Moving")->getItem("isMoving")->value == "true"){
+							ply->setMoving(true);
+						}
+						else{
+							ply->setMoving(false);
+						}
+						ply->setDirection(atoi(dict->getItem("NPCS")->getItem(dict->getItem("NPCS")->items[i].key)->getItem("Moving")->getItem("Direction")->value.c_str()));
+					}
+
+					ply->setName(dict->getItem("NPCS")->items[i].key);
+					entities.push_back(ply);
+
+				}
+				//std::cout << "Adding Player " << dict->getItem("Players")->items[i].key << std::endl;
+
+			}
+
+		}
+
 		if (dict->getItem("GameObjects") != nullptr){
 			DictionaryItem * gm = dict->getItem("GameObjects");
 			freeGameObjects();

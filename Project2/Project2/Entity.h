@@ -94,10 +94,53 @@ public:
 	}
 
 	virtual void Update(unsigned long dt){
-		if(hp<=0){
-			//visible=false;
-		}
+		if (moving){
 
+
+			int dir = direction;
+			float distance = ((float)speed*dt) / 1000;
+			if (dir == 0){
+				posy = (posy - distance);
+				//Entity::setImgY(192);
+				//	std::cout<<<<std::endl;
+			}
+
+			if (dir == 1){
+				posx = (posx + distance);
+				//Entity::setImgY(128);
+			}
+			if (dir == 2){
+				posy = (posy + distance);
+				//Entity::setImgY(0);
+
+			}
+			if (dir == 3){
+				posx = (posx - distance);
+				//Entity::setImgY(64);
+
+			}
+
+			//	curtime = glfwGetTime();
+			//curtime *= 1000;
+			//	 dt = dt- lastUpdate;
+			//	long dt =curtime-lastupdate;
+			//std::cout << dt << std::endl;
+			/*	if ((curtime - lastUpdate)> (50)){
+
+					Entity::setImgX(Entity::getImgX() + 32);
+					if (Entity::getImgX() >= 128){
+					Entity::setImgX(0);
+					}
+					lastUpdate = curtime;
+					}
+
+					}
+					else{
+					Entity::setImgX(0);
+
+					}*/
+
+		}
 	}
 
 	bool checkMouseClick(double mousex, double mousey){

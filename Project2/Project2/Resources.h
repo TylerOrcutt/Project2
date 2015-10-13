@@ -10,6 +10,7 @@
 	 void loadResouces(){
 
 		spritesheets[0] = new SpriteSheet("itemPickup");
+		spritesheets[1] = new SpriteSheet("peon");
 	}
 	 SpriteSheet* getResouce(int index){
 		return spritesheets[index];

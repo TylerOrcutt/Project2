@@ -238,12 +238,12 @@ LUAManager::executeLUAFile("",engine->getGUI());
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		//glOrtho(-1, 1, -1.f, 1.f, 1.f, -1.f);
-		glOrtho(0.0f, width, height, 0.0f, 0.0f, 1.0f);
+		glOrtho(0.0f, 800, 600, 0.0f, 0.0f, 1.0f);
 		SCREEN_WIDTH = width;
 		SCREEN_HEIGHT=height;
 	// update camara
-		engine->getCamera().setWidth((float)width);
-		engine->getCamera().setHeight((float)height);
+		engine->getCamera().setWidth((float)800);
+		engine->getCamera().setHeight((float)600);
 
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();

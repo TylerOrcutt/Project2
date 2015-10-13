@@ -144,13 +144,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\Dependencies\Windows\x86\pango\include;..\Dependencies\Windows\x86\openssl\include;..\Dependencies\Windows\x86\glm\include;..\Dependencies\Windows\x86\glib-2.34\include;..\Dependencies\Windows\x86\cairo\include\cairo;..\Dependencies\Windows\x86\SOIL\include;..\Dependencies\Windows\x86\GFLW\include;..\Dependencies\Windows\x86\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Dependencies\Windows\x86\LUA\src;..\Dependencies\Windows\x86\pango\include;..\Dependencies\Windows\x86\openssl\include;..\Dependencies\Windows\x86\glm\include;..\Dependencies\Windows\x86\glib-2.34\include;..\Dependencies\Windows\x86\cairo\include\cairo;..\Dependencies\Windows\x86\SOIL\include;..\Dependencies\Windows\x86\GFLW\include;..\Dependencies\Windows\x86\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\Dependencies\Windows\x86\SOIL\lib;..\Dependencies\Windows\x86\pango\lib;..\Dependencies\Windows\x86\openssl\lib;..\Dependencies\Windows\x86\gtk+\lib;..\Dependencies\Windows\x86\glib-2.34\lib;..\Dependencies\Windows\x86\glew\lib\Release\Win32;..\Dependencies\Windows\x86\GFLW\lib;..\Dependencies\Windows\x86\cairo\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Dependencies\Windows\x86\LUA\lib;..\Dependencies\Windows\x86\SOIL\lib;..\Dependencies\Windows\x86\pango\lib;..\Dependencies\Windows\x86\openssl\lib;..\Dependencies\Windows\x86\gtk+\lib;..\Dependencies\Windows\x86\glib-2.34\lib;..\Dependencies\Windows\x86\glew\lib\Release\Win32;..\Dependencies\Windows\x86\GFLW\lib;..\Dependencies\Windows\x86\cairo\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -192,7 +192,6 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">C:\Users\geforce\Desktop\Project2\Project2\Dependencies\Windows\x86\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\geforce\Desktop\Project2\Project2\Dependencies\Windows\x86\glew\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="Network\NetworkDataHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -227,7 +226,9 @@
     <ClInclude Include="SpriteSheet.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Addons\average.lua" />
+    <None Include="Addons\average.lua">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

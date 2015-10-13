@@ -1,4 +1,4 @@
-﻿Build started 9/29/2015 12:26:11 PM.
+﻿Build started 10/13/2015 12:54:02 PM.
      1>Project "C:\Users\geforce\Documents\GitHub\Project2\Project2\Project2\Project2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\geforce\Desktop\Project2\Project2\Dependencies\Windows\x86\glew\include /I..\Dependencies\Windows\x86\LUA\src /I..\Dependencies\Windows\x86\openssl\include /I..\Dependencies\Windows\x86\cairo\include\cairo /I"..\Dependencies\Windows\x86\glib-2.34\lib\glib-2.0\include" /I"..\Dependencies\Windows\x86\glib-2.34\include" /I..\Dependencies\Windows\x86\pango\include /I..\Dependencies\Windows\x86\SOIL\include /I..\Dependencies\Windows\x86\glm\include /I..\Dependencies\Windows\x86\GFLW\include /I..\Dependencies\Windows\x86\glew\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
@@ -7,8 +7,8 @@
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\textrenderer.h(115): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\textrenderer.h(116): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\textrenderer.h(207): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\entity.h(216): warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\entity.h(219): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\entity.h(259): warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\entity.h(262): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\guibutton.h(27): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\guibutton.h(28): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\guibutton.h(29): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
@@ -70,37 +70,43 @@
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(303): warning C4018: '<=' : signed/unsigned mismatch
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(399): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\projectile.h(57): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(199): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(203): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(200): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(204): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(226): warning C4244: 'argument' : conversion from 'double' to 'unsigned long', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(252): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(259): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(386): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(393): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(400): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(474): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(486): warning C4018: '<=' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(496): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(497): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(505): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(507): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(511): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(512): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(533): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(534): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(560): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(561): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(562): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(579): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(580): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(585): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(205): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(253): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(260): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(387): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(394): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(401): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(408): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(482): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(494): warning C4018: '<=' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(504): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(505): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(513): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(515): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(519): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(520): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(541): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(542): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(569): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(571): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(575): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(576): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(597): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(598): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(625): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(626): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(627): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(644): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(645): warning C4244: 'initializing' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(650): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\geforce\Documents\GitHub\Project2\Project2\Debug\Project2.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\Dependencies\Windows\x86\LUA\lib /LIBPATH:..\Dependencies\Windows\x86\openssl\lib /LIBPATH:..\Dependencies\Windows\x86\openssl\lib\VC /LIBPATH:..\Dependencies\Windows\x86\cairo\lib /LIBPATH:"..\Dependencies\Windows\x86\glib-2.34\lib" /LIBPATH:..\Dependencies\Windows\x86\pango\lib /LIBPATH:..\Dependencies\Windows\x86\SOIL\lib /LIBPATH:..\Dependencies\Windows\x86\GFLW\lib /LIBPATH:..\Dependencies\Windows\x86\glew\lib\Release\Win32 /LIBPATH:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\geforce\Documents\GitHub\Project2\Project2\Debug\Project2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\geforce\Documents\GitHub\Project2\Project2\Debug\Project2.lib" /MACHINE:X86 Debug\main.obj
-         Debug\NetworkDataHandler.obj
+     1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
          Project2.vcxproj -> C:\Users\geforce\Documents\GitHub\Project2\Project2\Debug\Project2.exe
      1>Done Building Project "C:\Users\geforce\Documents\GitHub\Project2\Project2\Project2\Project2.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:04.23
+Time Elapsed 00:00:05.53
