@@ -1,3 +1,3 @@
 
 # Project2
-2d mmo porject 
+2d mmo project
