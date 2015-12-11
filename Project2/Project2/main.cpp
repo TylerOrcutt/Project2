@@ -258,6 +258,7 @@ LUAManager::executeLUAFile("",engine->getGUI());
 
 
 		glEnable(GL_BLEND);
+		glEnable(GL_ALPHA);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glDepthMask(GL_FALSE);
 		glDisable(GL_DEPTH_TEST);

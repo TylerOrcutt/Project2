@@ -277,12 +277,12 @@ public:
 		return dict;
 	}
 	bool retrieveRealmList(){
-		if (!Connect("10.0.0.15", "80", false)){
+		if (!Connect("10.0.0.19", "80", false)){
 			std::cout << "Could not retrieve Realmlist\n";
 			return false;
 		}
 		std::cout << "Connected to server sending HTTP request\n";
-		std::string data = "GET /realmlist HTTP/1.1\nHost:10.0.0.15\nConnection:close\n\n";
+		std::string data = "GET /realmlist HTTP/1.1\nHost:10.0.0.19\nConnection:close\n\n";
 		sendData(data);
 		Dictionary *dict =getData();
 

@@ -276,8 +276,15 @@ public:
 
 				std::stringstream ss;
 				ss << buffer;
-				// std::cout<<ss.str()<<std::endl;
-				dict = JSONParser::parseJson(ss.str());
+				if (ss.str()== "PING"){
+					sendData("PONG");
+					std::cout << "Sent PONG\n";
+				}
+				else{
+					dict = JSONParser::parseJson(ss.str());
+				}
+			//	std::cout<<"'"<<ss.str()<<"'"<<std::endl;
+			
 				// dict->printDictionay();
 			}/**/
 		}

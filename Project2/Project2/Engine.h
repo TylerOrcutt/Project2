@@ -426,7 +426,7 @@ void sendMouseClick(int button, double MouseX, double MouseY){
 		else{
 			//ss << "{\"Position\":[\"x\":\"" << player->getX() << "\",\"y\":\"" << player->getY() << "\"],\"Moving\":[\"isMoving\":\"false\",\"Direction\":\"" << player->getDirection() << "\"]}";
 			ss << "{\"Moving\":[\"isMoving\":\"false\",\"Direction\":\"" << player->getDirection() << "\"]}";
-			unsigned long dms = CalcTimeDiff(getTime(), ms);
+		/*	unsigned long dms = CalcTimeDiff(getTime(), ms);
 			float distance = ((float)player->getSpeed()*dms)/1000 ;
 			std::cout << distance << std::endl;
 			
@@ -446,10 +446,10 @@ void sendMouseClick(int button, double MouseX, double MouseY){
 				pstartx -= distance;
 				break;
 			}
-			std::cout << "Projected Location: X:" << pstartx << " Y:" << pstarty << std::endl;
+		//	std::cout << "Projected Location: X:" << pstartx << " Y:" << pstarty << std::endl;
 
-			std::cout << "Actual Location: X:"<<player->getX()<<" Y:"<<player->getY()<<std::endl;
-
+			//std::cout << "Actual Location: X:"<<player->getX()<<" Y:"<<player->getY()<<std::endl;
+			*/
 		}
 		network->sendData(ss.str());
 	}
