@@ -147,6 +147,7 @@ selectRealmBtn = new GUIButton(test_button, "Select Realm", NULL, SCREEN_WIDTH-1
 
 	}
 	void DrawLoginMenu(){
+		glDisable(GL_LIGHTING);
 		textUser->Draw();
 		textPass->Draw();
 		loginBtn->Draw();
@@ -157,34 +158,36 @@ selectRealmBtn = new GUIButton(test_button, "Select Realm", NULL, SCREEN_WIDTH-1
 		if(msgbox!=nullptr){
 			msgbox->Draw();
 		}
+		glEnable(GL_LIGHTING);
 	}
 
 	void Draw(Entity *player){
-
+		//glEnable(GL_LIGHT0);
+		glDisable(GL_LIGHTING);
 		gmenu->Draw();
 
-if(bagWindow->isVisible()){
-		bagWindow->Draw();
+		if (bagWindow->isVisible()){
+			bagWindow->Draw();
 
-			float startX = bagWindow->getX()+26;
-			float startY = bagWindow->getY()+20;
-			float itemX=startX;
-			float itemY=startY;
-		for(int i=0;i<inventory->size();i++){
-			if(itemX+36 > bagWindow->getX()+bagWindow->getWidth()-10) {
-				itemX=startX;
-				itemY+=36;
-			}
+			float startX = bagWindow->getX() + 26;
+			float startY = bagWindow->getY() + 20;
+			float itemX = startX;
+			float itemY = startY;
+			for (int i = 0; i<inventory->size(); i++){
+				if (itemX + 36 > bagWindow->getX() + bagWindow->getWidth() - 10) {
+					itemX = startX;
+					itemY += 36;
+				}
 
-			(*inventory)[i]->setX(itemX);
-			(*inventory)[i]->setY(itemY);
-			if ((*inventory)[i]->checkMouseHover((float)MouseX, (float)MouseY)){
-				//std::cout << "Hover :" << (*inventory)[i]->getName() << std::endl;
+				(*inventory)[i]->setX(itemX);
+				(*inventory)[i]->setY(itemY);
+				if ((*inventory)[i]->checkMouseHover((float)MouseX, (float)MouseY)){
+					//std::cout << "Hover :" << (*inventory)[i]->getName() << std::endl;
+				}
+				(*inventory)[i]->Draw(itemX, itemY);
+				itemX += 36;
 			}
-			(*inventory)[i]->Draw(itemX,itemY);
-			itemX+=36;
 		}
-	}
 
 		hud->Draw();
 		hpHud->Draw();
@@ -194,7 +197,7 @@ if(bagWindow->isVisible()){
 		float hp = (float)player->getHP() / (float)player->getMaxHP();
 
 
-		hpBar->getSprite()->Draw(40, 0, hp*maxbarlen,32,0, 64, 32, 32);
+		hpBar->getSprite()->Draw(40, 0, hp*maxbarlen, 32, 0, 64, 32, 32);
 
 		if (player->getTarget() != nullptr){
 
@@ -202,18 +205,19 @@ if(bagWindow->isVisible()){
 			maxbarlen = 153;
 
 			hp = (float)player->getTarget()->getHP() / (float)player->getTarget()->getMaxHP();
-			target_hpbar->getSprite()->Draw(304, 0, hp*maxbarlen,32,0,64,32, 32);
+			target_hpbar->getSprite()->Draw(304, 0, hp*maxbarlen, 32, 0, 64, 32, 32);
 
 
 		}
 
 		actionBar->Draw();
-		for(int i=0;i<actionBarItems.size();i++){
-			if(actionBarItems[i]!=nullptr){
-			actionBarItems[i]->Draw();
+		for (int i = 0; i < actionBarItems.size(); i++){
+			if (actionBarItems[i] != nullptr){
+				actionBarItems[i]->Draw();
+			}
 		}
-		}
-	//	hpBar->Draw();
+		//	hpBar->Draw();
+		glEnable(GL_LIGHTING);
 	}
 
 	bool checkMouseClick(double mousex, double mousey){

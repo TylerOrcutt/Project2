@@ -654,6 +654,78 @@ void sendMouseClick(int button, double MouseX, double MouseY){
 
 			}
 		}
+		if (dict->getItem("GameTime") != nullptr){
+			DictionaryItem * gm = dict->getItem("GameTime");
+			if (gm->getItem("Hours") != nullptr){
+				std::cout << "Game Hours:" << gm->getItem("Hours")->value<<std::endl;
+				std::cout << "Game Minutes:" << gm->getItem("Minutes")->value << std::endl;
+
+				int hours = atoi(gm->getItem("Hours")->value.c_str());
+				int minutes= atoi(gm->getItem("Minutes")->value.c_str());
+				if (hours == 21 && minutes < 30){
+					glDisable(GL_LIGHT0);
+					glEnable(GL_LIGHT1);
+				}
+				else
+				if (hours == 21 && minutes >= 30 && minutes <= 59){
+					glDisable(GL_LIGHT1);
+					glEnable(GL_LIGHT2);
+				}
+				else
+				if (hours == 22 && minutes < 30){
+					glDisable(GL_LIGHT2);
+					glEnable(GL_LIGHT3);
+				}
+				else
+				if (hours == 22 && minutes >= 30 && minutes <= 59){
+					glDisable(GL_LIGHT3);
+					glEnable(GL_LIGHT4);
+				}
+				else
+				if (hours == 23 && minutes < 30){
+					glEnable(GL_LIGHT5);
+					glDisable(GL_LIGHT4);
+				}
+				else
+				if (hours == 23 && minutes >= 30 && minutes <= 59){
+					glEnable(GL_LIGHT6);
+					glDisable(GL_LIGHT5);
+				}else
+				if (hours == 0 && minutes < 30){
+					glEnable(GL_LIGHT7);
+					glDisable(GL_LIGHT6);
+				}else
+				if (hours == 0 && minutes >= 30 && minutes<=59){
+					glEnable(GL_LIGHT6);
+					glDisable(GL_LIGHT7);
+				}else
+				if (hours == 1 && minutes  <30){
+					glEnable(GL_LIGHT5);
+					glDisable(GL_LIGHT6);
+				}else
+				if (hours == 1 && minutes >= 30 && minutes <= 59){
+					glEnable(GL_LIGHT4);
+					glDisable(GL_LIGHT5);
+				}else
+				if (hours == 2 && minutes  <30){
+					glEnable(GL_LIGHT3);
+					glDisable(GL_LIGHT4);
+				}else
+				if (hours == 2 && minutes >= 30 && minutes <= 59){
+					glEnable(GL_LIGHT2);
+					glDisable(GL_LIGHT3);
+				}else
+				if (hours == 3 && minutes  <30){
+					glEnable(GL_LIGHT1);
+					glDisable(GL_LIGHT2);
+				}
+				else {
+					glDisable(GL_LIGHT1);
+					glEnable(GL_LIGHT0);
+				}
+
+			}
+		}
 
 		delete(dict);
 	}
@@ -676,6 +748,7 @@ unsigned long CalcTimeDiff(unsigned long curtime, unsigned long lasttime){
 	if (curtime < lasttime){
 		dtt =(ULONG_MAX - lasttime) + curtime;
 		std::cout << "Time lap\n";
+		dtt = 0;
 
 	}
 	else{

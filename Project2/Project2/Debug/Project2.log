@@ -1,4 +1,4 @@
-﻿Build started 12/10/2015 9:38:59 PM.
+﻿Build started 12/12/2015 12:00:47 AM.
      1>Project "C:\Users\geforce\Documents\GitHub\Project2\Project2\Project2\Project2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\geforce\Desktop\Project2\Project2\Dependencies\Windows\x86\glew\include /I..\Dependencies\Windows\x86\LUA\src /I..\Dependencies\Windows\x86\openssl\include /I..\Dependencies\Windows\x86\cairo\include\cairo /I"..\Dependencies\Windows\x86\glib-2.34\lib\glib-2.0\include" /I"..\Dependencies\Windows\x86\glib-2.34\include" /I..\Dependencies\Windows\x86\pango\include /I..\Dependencies\Windows\x86\SOIL\include /I..\Dependencies\Windows\x86\glm\include /I..\Dependencies\Windows\x86\GFLW\include /I..\Dependencies\Windows\x86\glew\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
@@ -59,16 +59,16 @@
      1>c:\users\geforce\documents\github\project2\project2\project2\network\connectionhandler.h(291): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\geforce\documents\github\project2\project2\project2\network\connectionhandler.h(294): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(141): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(173): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(211): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(224): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(229): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(234): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(235): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(239): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(251): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(303): warning C4018: '<=' : signed/unsigned mismatch
-     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(399): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(176): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(214): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(228): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(233): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(238): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(239): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(243): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(255): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(307): warning C4018: '<=' : signed/unsigned mismatch
+     1>c:\users\geforce\documents\github\project2\project2\project2\gui\gui.h(403): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\projectile.h(57): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(200): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(204): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
@@ -103,10 +103,9 @@
      1>c:\users\geforce\documents\github\project2\project2\project2\engine.h(650): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\geforce\Documents\GitHub\Project2\Project2\Debug\Project2.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\Dependencies\Windows\x86\LUA\lib /LIBPATH:..\Dependencies\Windows\x86\openssl\lib /LIBPATH:..\Dependencies\Windows\x86\openssl\lib\VC /LIBPATH:..\Dependencies\Windows\x86\cairo\lib /LIBPATH:"..\Dependencies\Windows\x86\glib-2.34\lib" /LIBPATH:..\Dependencies\Windows\x86\pango\lib /LIBPATH:..\Dependencies\Windows\x86\SOIL\lib /LIBPATH:..\Dependencies\Windows\x86\GFLW\lib /LIBPATH:..\Dependencies\Windows\x86\glew\lib\Release\Win32 /LIBPATH:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\geforce\Documents\GitHub\Project2\Project2\Debug\Project2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\geforce\Documents\GitHub\Project2\Project2\Debug\Project2.lib" /MACHINE:X86 Debug\main.obj
-     1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
          Project2.vcxproj -> C:\Users\geforce\Documents\GitHub\Project2\Project2\Debug\Project2.exe
      1>Done Building Project "C:\Users\geforce\Documents\GitHub\Project2\Project2\Project2\Project2.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.51
+Time Elapsed 00:00:03.24

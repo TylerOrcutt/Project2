@@ -203,6 +203,10 @@ std::string title=" v:";
 	glfwSetMouseButtonCallback(window, MouseClick_callback);
 	
 	glShadeModel(GL_SMOOTH);
+
+	glEnable(GL_LIGHTING);
+	//glDisable(GL_LIGHT1);
+	//glEnable(GL_LIGHT7);
 	/*
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
