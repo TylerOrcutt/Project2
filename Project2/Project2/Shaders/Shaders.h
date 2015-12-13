@@ -12,7 +12,7 @@ public:
 	GLuint prog;
 	 void compileShaders(){
 		std::cout << "Building shader programs\n";
-		GLuint vertextShader, fragmentShader;
+		/*GLuint vertextShader, fragmentShader;
 		prog = glCreateProgram();
     	vertextShader = glCreateShader(GL_VERTEX_SHADER_ARB);
      	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER_ARB);
@@ -25,16 +25,16 @@ public:
 		glAttachObjectARB(prog, fragmentShader);
 		glBindAttribLocation(prog, COLOR_ATTRIB, "color");
 		glLinkProgramARB(prog);
-		glUseProgramObjectARB(prog);
+		glUseProgramObjectARB(prog);*/
 	
 		
 	}
 	 void disableShaders(){
-		 glUseProgramObjectARB(0);
+		/* glUseProgramObjectARB(0);*/
 
 	 }
 	 void enableShaders(){
-		 glUseProgramObjectARB(prog);
+		/* glUseProgramObjectARB(prog);*/
 
 	 }
 	 GLuint getProgram(){

@@ -11,7 +11,7 @@
 
 #include <GL/glew.h>
 // Include GLFW
-#define GLFW_NO_GLU
+
 #define GLFW_INCLUDE_GL3
 #include <GLFW/glfw3.h>
 // Include GLM
@@ -41,7 +41,7 @@
 #include "Network/NetworkClient.h"
 #include "Settings.h"
 #include "LUA/LUAManager.h"
-#include "Shaders\Shaders.h"
+#include "Shaders/Shaders.h"
 Engine *engine;
 GLFWwindow* window;
 //NetworkClient * network;
@@ -203,7 +203,7 @@ std::string title=" v:";
 	glfwSwapInterval(1);
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetMouseButtonCallback(window, MouseClick_callback);
-	GLint GlewInitResult = glewInit();
+	//GLint GlewInitResult = glewInit();
 	//glShadeModel(GL_SMOOTH);
 
 	glEnable(GL_LIGHTING);

@@ -27,6 +27,7 @@ CMakeFiles/kal.dir/main.cpp.o: Player.h
 CMakeFiles/kal.dir/main.cpp.o: Projectile.h
 CMakeFiles/kal.dir/main.cpp.o: Resources.h
 CMakeFiles/kal.dir/main.cpp.o: Settings.h
+CMakeFiles/kal.dir/main.cpp.o: Shaders/Shaders.h
 CMakeFiles/kal.dir/main.cpp.o: Sprite.h
 CMakeFiles/kal.dir/main.cpp.o: SpriteSheet.h
 CMakeFiles/kal.dir/main.cpp.o: main.cpp
