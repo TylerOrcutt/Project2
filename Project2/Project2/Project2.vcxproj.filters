@@ -25,6 +25,9 @@
     <Filter Include="Resource Files\Addons">
       <UniqueIdentifier>{345a2f4f-7bf1-4dcd-b972-1d810312c2ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Shaders">
+      <UniqueIdentifier>{512983e6-3bc0-41cb-a213-a24a6245bec1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="LUA\LUAManager.h">
       <Filter>Header Files\LUA</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders\Shaders.h">
+      <Filter>Header Files\Shaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

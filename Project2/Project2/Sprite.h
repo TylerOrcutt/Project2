@@ -1,4 +1,4 @@
-/**************************************
+﻿/**************************************
 *Sprite.h
 *Created by Tyler Orcutt
 *
@@ -14,7 +14,7 @@ class Sprite{
 private:
 
 	SpriteSheet* sprite;
-
+	
 public:
 	/*
 	Sprite(){
@@ -23,6 +23,7 @@ public:
 	}*/
 	Sprite(SpriteSheet *sp){
 		sprite = sp;
+
 		//init();
 	}
 	~Sprite(){
@@ -34,8 +35,10 @@ public:
 	}
 	void Draw(float posx, float posy, float w,float h, float x, float y){
 	//	float w = 32.f, h = 32.f;
-		glBindTexture(GL_TEXTURE_2D, sprite->getTexture());
-
+//		int my_sampler_uniform_location = glGetUniformLocationARB(shader, sprite->getTexture());
+	  glBindTexture(GL_TEXTURE_2D, sprite->getTexture());
+	//	glUniform1iARB(my_sampler_uniform_location, 1);
+//		glUniform1i(glGetUniformLocation(shader, sprite->getTexture()), 0);
 		glBegin(GL_QUADS);
 
 

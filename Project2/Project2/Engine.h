@@ -40,6 +40,7 @@
 #include "Network/NetworkClient.h"
 #include "Network/ConnectionHandler.h"
 #include<stdlib.h>
+#include "Shaders/Shaders.h"
 
 #ifdef __linux__
 #include <sys/time.h>
@@ -70,7 +71,7 @@ private:
 	std::string fps_str;
 std::vector<GameItem *>inventory;
 Projectile *proj=nullptr;
-
+Shaders * shaderprogram;
 
 long lt;
 
@@ -87,7 +88,8 @@ public:
 
 
 	/**/
-	Engine(){
+	Engine(Shaders* shaders){
+		shaderprogram = shaders;
 #ifndef OFFLINEMODE
 		loginMenu=true;
 #endif
@@ -243,11 +245,13 @@ if (player->isMoving()){
 
 	void Draw(){
 		if(loginMenu){
+			shaderprogram->disableShaders();
 			gui->DrawLoginMenu();
 			fpsText->Draw();
 			return;
 		}
-
+		
+		shaderprogram->enableShaders();
     map->Draw(camera);
 
 	for (int i = 0; i < gameObjects.size(); i++){
@@ -266,7 +270,7 @@ if (player->isMoving()){
 			proj->Draw(&camera);
 		}
 
-
+		shaderprogram->disableShaders();
 		gui->Draw(player);
 		fpsText->Draw();
 		//textrend.Draw();
@@ -659,71 +663,56 @@ void sendMouseClick(int button, double MouseX, double MouseY){
 			if (gm->getItem("Hours") != nullptr){
 				std::cout << "Game Hours:" << gm->getItem("Hours")->value<<std::endl;
 				std::cout << "Game Minutes:" << gm->getItem("Minutes")->value << std::endl;
-
+				std::cout << "Game Days:" << gm->getItem("Days")->value << std::endl;
 				int hours = atoi(gm->getItem("Hours")->value.c_str());
-				int minutes= atoi(gm->getItem("Minutes")->value.c_str());
-				if (hours == 21 && minutes < 30){
-					glDisable(GL_LIGHT0);
-					glEnable(GL_LIGHT1);
+				int minutes = atoi(gm->getItem("Minutes")->value.c_str());
+			
+			
+				
+				if (hours == 21){
+					GLfloat ambient[] = { 3.0f, 3.0f, 3.0f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 				}
+				
+			
 				else
-				if (hours == 21 && minutes >= 30 && minutes <= 59){
-					glDisable(GL_LIGHT1);
-					glEnable(GL_LIGHT2);
+				if (hours == 22){
+					GLfloat ambient[] = { 1.0f, 1.0f, 1.0f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 				}
+			
 				else
-				if (hours == 22 && minutes < 30){
-					glDisable(GL_LIGHT2);
-					glEnable(GL_LIGHT3);
-				}
-				else
-				if (hours == 22 && minutes >= 30 && minutes <= 59){
-					glDisable(GL_LIGHT3);
-					glEnable(GL_LIGHT4);
-				}
-				else
-				if (hours == 23 && minutes < 30){
-					glEnable(GL_LIGHT5);
-					glDisable(GL_LIGHT4);
-				}
-				else
-				if (hours == 23 && minutes >= 30 && minutes <= 59){
-					glEnable(GL_LIGHT6);
-					glDisable(GL_LIGHT5);
+				if (hours == 23 ){
+					GLfloat ambient[] = { 0.5f, 0.5f, 0.5f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 				}else
-				if (hours == 0 && minutes < 30){
-					glEnable(GL_LIGHT7);
-					glDisable(GL_LIGHT6);
+		
+				if (hours == 0 ){
+					GLfloat ambient[] = { 0.25f, 0.25f, 0.25f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 				}else
-				if (hours == 0 && minutes >= 30 && minutes<=59){
-					glEnable(GL_LIGHT6);
-					glDisable(GL_LIGHT7);
+				
+				if (hours == 1){
+					GLfloat ambient[] = { 0.5f, 0.5f, 0.5f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 				}else
-				if (hours == 1 && minutes  <30){
-					glEnable(GL_LIGHT5);
-					glDisable(GL_LIGHT6);
+				if (hours ==2){
+					GLfloat ambient[] = { 1.0f, 1.0f, 1.0f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 				}else
-				if (hours == 1 && minutes >= 30 && minutes <= 59){
-					glEnable(GL_LIGHT4);
-					glDisable(GL_LIGHT5);
+				if (hours == 3){
+					GLfloat ambient[] = { 2.0f, 2.0f,2.0f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 				}else
-				if (hours == 2 && minutes  <30){
-					glEnable(GL_LIGHT3);
-					glDisable(GL_LIGHT4);
-				}else
-				if (hours == 2 && minutes >= 30 && minutes <= 59){
-					glEnable(GL_LIGHT2);
-					glDisable(GL_LIGHT3);
-				}else
-				if (hours == 3 && minutes  <30){
-					glEnable(GL_LIGHT1);
-					glDisable(GL_LIGHT2);
+				if (hours == 4 ){
+					GLfloat ambient[] = { 3.f, 3.f, 3.f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 				}
 				else {
-					glDisable(GL_LIGHT1);
-					glEnable(GL_LIGHT0);
+					GLfloat ambient[] = { 4.0f,4.0f, 4.0f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 				}
-
+				
 			}
 		}
 

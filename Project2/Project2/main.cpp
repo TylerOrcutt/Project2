@@ -11,7 +11,8 @@
 
 #include <GL/glew.h>
 // Include GLFW
-#define GLFW_INCLUDE_GLU
+#define GLFW_NO_GLU
+#define GLFW_INCLUDE_GL3
 #include <GLFW/glfw3.h>
 // Include GLM
 #include <glm/glm.hpp>
@@ -40,6 +41,7 @@
 #include "Network/NetworkClient.h"
 #include "Settings.h"
 #include "LUA/LUAManager.h"
+#include "Shaders\Shaders.h"
 Engine *engine;
 GLFWwindow* window;
 //NetworkClient * network;
@@ -201,12 +203,20 @@ std::string title=" v:";
 	glfwSwapInterval(1);
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetMouseButtonCallback(window, MouseClick_callback);
-	
-	glShadeModel(GL_SMOOTH);
+	GLint GlewInitResult = glewInit();
+	//glShadeModel(GL_SMOOTH);
 
 	glEnable(GL_LIGHTING);
-	//glDisable(GL_LIGHT1);
-	//glEnable(GL_LIGHT7);
+
+	Shaders shaders;
+	shaders.compileShaders();
+	glEnable(GL_LIGHT0);
+	
+	GLfloat position[] = { 0.f, 0.f, 0.f, -1.f };
+	glLightfv(GL_LIGHT0, GL_POSITION, position);
+	GLfloat ambient[] = { 0.5f,0.5f, 0.5f, 1.f };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+	
 	/*
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
@@ -216,7 +226,8 @@ std::string title=" v:";
 	glLightfv(GL_LIGHT0, GL_POSITION, a);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, b);
 	*/
-engine = new Engine();
+	
+	engine = new Engine(&shaders);
 //LUAManager lua;
 LUAManager::executeLUAFile("",engine->getGUI());
 
@@ -262,6 +273,7 @@ LUAManager::executeLUAFile("",engine->getGUI());
 
 
 		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		glEnable(GL_ALPHA);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glDepthMask(GL_FALSE);
