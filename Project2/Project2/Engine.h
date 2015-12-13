@@ -670,47 +670,93 @@ void sendMouseClick(int button, double MouseX, double MouseY){
 			
 				
 				if (hours == 21){
+#if  defined(_WIN32)
 					GLfloat ambient[] = { 3.0f, 3.0f, 3.0f, 1.f };
 					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#else
+                                        GLfloat ambient[] = { 3.75f, 3.75f, 3.75f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#endif 
+	
 				}
 				
 			
 				else
 				if (hours == 22){
+#if  defined(_WIN32)
 					GLfloat ambient[] = { 1.0f, 1.0f, 1.0f, 1.f };
 					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#else
+                                        GLfloat ambient[] = { 1.75f, 1.75f, 1.75f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#endif 
 				}
 			
 				else
 				if (hours == 23 ){
-					GLfloat ambient[] = { 0.5f, 0.5f, 0.5f, 1.f };
+#if  defined(_WIN32)
+					GLfloat ambient[] = { 0.25f, 0.25f, 0.25f, 1.f };
 					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#else
+                                        GLfloat ambient[] = { 1.f, 1.f, 1.f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#endif 
 				}else
 		
 				if (hours == 0 ){
+#if  defined(_WIN32)
 					GLfloat ambient[] = { 0.25f, 0.25f, 0.25f, 1.f };
 					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#else
+                                        GLfloat ambient[] = { 1.f, 1.f, 1.f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#endif 
 				}else
 				
 				if (hours == 1){
+#if  defined(_WIN32)
 					GLfloat ambient[] = { 0.5f, 0.5f, 0.5f, 1.f };
 					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#else
+                                        GLfloat ambient[] = { 1.f, 1.f, 1.f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#endif 
 				}else
 				if (hours ==2){
+#if  defined(_WIN32)
 					GLfloat ambient[] = { 1.0f, 1.0f, 1.0f, 1.f };
 					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#else
+                                        GLfloat ambient[] = { 1.75f, 1.75f, 1.75f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#endif 
 				}else
 				if (hours == 3){
+#if  defined(_WIN32)
 					GLfloat ambient[] = { 2.0f, 2.0f,2.0f, 1.f };
 					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#else
+                                        GLfloat ambient[] = { 2.75f, 2.75f, 2.75f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#endif 
 				}else
 				if (hours == 4 ){
+#if  defined(_WIN32)
 					GLfloat ambient[] = { 3.f, 3.f, 3.f, 1.f };
 					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#else
+                                        GLfloat ambient[] = { 3.75f, 3.75f, 3.75f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#endif
 				}
 				else {
+#if  defined(_WIN32)
 					GLfloat ambient[] = { 4.0f,4.0f, 4.0f, 1.f };
 					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#else
+                                        GLfloat ambient[] = { 4.75f, 4.75f, 4.75f, 1.f };
+					glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+#endif
 				}
 				
 			}
